@@ -3155,7 +3155,7 @@ __UART1_H	..\..\inc\uart1.h	22;"	macro
 _stext	..\..\inc\stm8s_it.h	34;"	prototype	signature:(void)
 _vectab	..\..\src\stm8_interrupt_vector.c	32;"	variable
 assert_failed	..\..\inc\stm8s_conf.h	96;"	prototype	signature:(uint8_t* file, uint32_t line)
-assert_failed	..\..\src\main.c	149;"	function	signature:(u8* file, u32 line)
+assert_failed	..\..\src\main.c	152;"	function	signature:(u8* file, u32 line)
 assert_param	..\..\inc\stm8s_conf.h	94;"	macro
 assert_param	..\..\inc\stm8s_conf.h	98;"	macro
 bool	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	210;"	typedef	typeref:enum:__anon1

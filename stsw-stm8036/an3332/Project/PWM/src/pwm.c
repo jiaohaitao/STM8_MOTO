@@ -14,8 +14,8 @@ void Pwm_Init()
   /* TIM2 Peripheral Configuration */ 
   TIM2_DeInit();
 
-  /* Set TIM2 Frequency to 2Mhz */ 
-  TIM2_TimeBaseInit(TIM2_PRESCALER_8, 999);
+  /* Hsi 16MHZ,Set TIM2 Frequency to 2Mhz */ 
+  TIM2_TimeBaseInit(TIM2_PRESCALER_8, 99);//999->2K 99->20K  
 
  
 	/* Channel 1 PWM configuration */ 
@@ -42,7 +42,7 @@ void Pwm_Init()
 void Set_Pwm_Channel1(unsigned char pwm)
 {
 		/* Channel 1 PWM configuration */ 
-  TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW ); 
+  TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm, TIM2_OCPOLARITY_LOW ); 
   TIM2_OC1PreloadConfig(ENABLE);
 }
 //----------------------------------------------------------------
@@ -53,7 +53,7 @@ void Set_Pwm_Channel1(unsigned char pwm)
 void Set_Pwm_Channel2(unsigned char pwm)
 {
 	/* Channel 2 PWM configuration */
-  TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW );
+  TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm, TIM2_OCPOLARITY_LOW );
   TIM2_OC2PreloadConfig(ENABLE);
 }
 //----------------------------------------------------------------
@@ -64,7 +64,7 @@ void Set_Pwm_Channel2(unsigned char pwm)
 void Set_Pwm_Channel3(unsigned char pwm)
 {
 	/* Channel 3 PWM configuration */
-	TIM2_OC3Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW );
+	TIM2_OC3Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm, TIM2_OCPOLARITY_LOW );
   TIM2_OC3PreloadConfig(ENABLE);
 }
 //----------------------------------------------------------------
