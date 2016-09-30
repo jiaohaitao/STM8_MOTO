@@ -27,6 +27,7 @@
 #include "tim1.h"
 #include "I2c_slave_interrupt.h"
 #include "adc.h"
+#include "uart1.h"
 
 extern u8 u8_My_Buffer[MAX_BUFFER];
 __IO u8 Last_I2c_Buffer[MAX_BUFFER]={0};
@@ -77,13 +78,17 @@ void main(void)
 	Tim1_Init();	
 	Pwm_Init(); //channel1->PD4 channel2->PD3 channel3->PA3
 	ADC_Init();// ADC1 Channel2 PC4
+	Uart1_Init();//PD5->Uart1 Tx   PD6->Uart1 Rx
 	
 	SetLedOFF(); /* ÈÃËùÓÐµÆÃð */
 
 	/* Initialise I2C for communication */
 	Init_I2C();//PB4-SCL PB5->SDA
 	
-	enableInterrupts(); 
+
+	
+	UART1_SendString("Stm8 Pwm Test....\r\n");
+		enableInterrupts(); 
 		
   while (1)
 	{
@@ -115,6 +120,10 @@ void main(void)
 		{
 			Sys_200ms_Flag=0;
 			AdcValue=OneChannelGetADValue(ADC1_CHANNEL_2,ADC1_SCHMITTTRIG_CHANNEL2);
+			//UART1_SendString("\r\nThe Adc Value:");
+			UART1_SendByte((unsigned char)(AdcValue>>8));
+			UART1_SendByte((unsigned char)AdcValue);
+			UART1_SendByte(0);
 		}
 		
 		if(Sys_500ms_Flag==1)

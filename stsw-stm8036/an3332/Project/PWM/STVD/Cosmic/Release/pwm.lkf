@@ -56,6 +56,7 @@ Release\stm8s_flash.o
 Release\stm8s_gpio.o
 Release\stm8s_tim1.o
 Release\stm8s_tim2.o
+Release\stm8s_uart1.o
 Release\adc.o
 Release\i2c_slave_interrupt.o
 Release\led.o
@@ -64,6 +65,7 @@ Release\pwm.o
 Release\stm8s_it.o
 Release\sysclock.o
 Release\tim1.o
+Release\uart1.o
 #<END OBJECT_FILES>
 
 
