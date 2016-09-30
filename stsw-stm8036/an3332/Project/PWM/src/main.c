@@ -26,6 +26,7 @@
 #include "led.h"
 #include "tim1.h"
 #include "I2c_slave_interrupt.h"
+#include "adc.h"
 
 extern u8 u8_My_Buffer[MAX_BUFFER];
 __IO u8 Last_I2c_Buffer[MAX_BUFFER]={0};
@@ -69,11 +70,13 @@ u8 Check_I2c_Data(void)
 void main(void)
 {
 	unsigned char pwm=0;
+	static uint16_t AdcValue=0;
 	
 	SystemClock_Init(HSI_Clock);
 	LED_Init();//led3->PC3 led2->PD3 led1->PD3
 	Tim1_Init();	
 	Pwm_Init(); //channel1->PD4 channel2->PD3 channel3->PA3
+	ADC_Init();// ADC1 Channel2 PC4
 	
 	SetLedOFF(); /* ÈÃËùÓÐµÆÃð */
 
@@ -111,6 +114,7 @@ void main(void)
 		if(Sys_200ms_Flag==1)
 		{
 			Sys_200ms_Flag=0;
+			AdcValue=OneChannelGetADValue(ADC1_CHANNEL_2,ADC1_SCHMITTTRIG_CHANNEL2);
 		}
 		
 		if(Sys_500ms_Flag==1)
