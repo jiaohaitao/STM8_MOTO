@@ -30,8 +30,8 @@
 
 /* 自定义常量宏和表达式宏 */
 /* LED 灯所接的GPIO端口定义 */
-#define LED_PORTC	GPIOB	/* 定义LED外设所接GPIO端口 */
-#define LED_PORTD	GPIOB	
+#define LED_PORTC	GPIOC	/* 定义LED外设所接GPIO端口 */
+#define LED_PORTD	GPIOD	
 
 /* LED灯所接的GPIO引脚定义 */
 #define LED_1     	GPIO_PIN_1

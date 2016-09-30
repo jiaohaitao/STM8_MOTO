@@ -55,6 +55,7 @@ Release\stm8s_flash.o
 Release\stm8s_gpio.o
 Release\stm8s_tim1.o
 Release\stm8s_tim2.o
+Release\i2c_slave_interrupt.o
 Release\led.o
 Release\main.o
 Release\pwm.o

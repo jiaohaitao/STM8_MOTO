@@ -68,8 +68,8 @@
  104  0051 00            	dc.b	page(f_UART1_RX_IRQHandler)
  105  0052 0000          	dc.w	f_UART1_RX_IRQHandler
  106  0054 82            	dc.b	130
- 108  0055 00            	dc.b	page(f_I2C_IRQHandler)
- 109  0056 0000          	dc.w	f_I2C_IRQHandler
+ 108  0055 00            	dc.b	page(f_I2C_Slave_check_event)
+ 109  0056 0000          	dc.w	f_I2C_Slave_check_event
  110  0058 82            	dc.b	130
  112  0059 00            	dc.b	page(f_NonHandledInterrupt)
  113  005a 0000          	dc.w	f_NonHandledInterrupt
@@ -101,10 +101,10 @@
  148  007d 00            	dc.b	page(f_NonHandledInterrupt)
  149  007e 0000          	dc.w	f_NonHandledInterrupt
  209                     	xdef	__vectab
- 210                     	xref	f_EEPROM_EEC_IRQHandler
- 211                     	xref	f_TIM4_UPD_OVF_IRQHandler
- 212                     	xref	f_ADC1_IRQHandler
- 213                     	xref	f_I2C_IRQHandler
+ 210                     	xref	f_I2C_Slave_check_event
+ 211                     	xref	f_EEPROM_EEC_IRQHandler
+ 212                     	xref	f_TIM4_UPD_OVF_IRQHandler
+ 213                     	xref	f_ADC1_IRQHandler
  214                     	xref	f_UART1_RX_IRQHandler
  215                     	xref	f_UART1_TX_IRQHandler
  216                     	xref	f_TIM2_CAP_COM_IRQHandler

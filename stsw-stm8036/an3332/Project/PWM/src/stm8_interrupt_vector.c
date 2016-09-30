@@ -20,6 +20,7 @@
   */
 
 #include "stm8s_it.h"
+#include "I2c_slave_interrupt.h"
 
 typedef void @far (*interrupt_handler_t)(void);
 
@@ -78,8 +79,8 @@ struct interrupt_vector const _vectab[] = {
 	{0x82, (interrupt_handler_t)UART1_TX_IRQHandler}, /* irq17 - UART1 Tx complete interrupt */
 	{0x82, (interrupt_handler_t)UART1_RX_IRQHandler}, /* irq18 - UART1 Rx interrupt */
 #endif /*STM8S105 or STM8AF626x */
-	{0x82, (interrupt_handler_t)I2C_IRQHandler}, /* irq19 - I2C interrupt */
-
+	//{0x82, (interrupt_handler_t)I2C_IRQHandler}, /* irq19 - I2C interrupt */
+	{0x82, (interrupt_handler_t)I2C_Slave_check_event}, /* irq19 - I2C interrupt */
 #if defined(STM8S208) || defined(STM8S207) || defined(STM8AF52Ax) || defined(STM8AF62Ax)
 
 	{0x82, (interrupt_handler_t)UART3_TX_IRQHandler}, /* irq20 - UART3 Tx interrupt */

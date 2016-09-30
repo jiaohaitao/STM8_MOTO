@@ -25,6 +25,17 @@
 #include "sysclock.h"
 #include "led.h"
 #include "tim1.h"
+#include "I2c_slave_interrupt.h"
+
+extern u8 u8_My_Buffer[MAX_BUFFER];
+__IO u8 Last_I2c_Buffer[MAX_BUFFER]={0};
+
+extern __IO u8 Sys_20ms_Flag;
+extern __IO u8 Sys_50ms_Flag;
+extern __IO u8 Sys_100ms_Flag;
+extern __IO u8 Sys_200ms_Flag;
+extern __IO u8 Sys_500ms_Flag;
+extern __IO u8 Sys_1000ms_Flag;
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -34,6 +45,19 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
+u8 Check_I2c_Data(void)
+{
+	u8 i=0;
+	/*
+	for(i=0;i<MAX_BUFFER;i++){
+		if(Last_I2c_Buffer[i]!=u8_My_Buffer[i]){
+		
+		}
+	}
+	*/
+	// deal iic data buf
+	return 0;
+}
 
 /**
   * @brief Example firmware main entry point.
@@ -47,25 +71,58 @@ void main(void)
 	unsigned char pwm=0;
 	
 	SystemClock_Init(HSI_Clock);
-	LED_Init();
+	LED_Init();//led3->PC3 led2->PD3 led1->PD3
 	Tim1_Init();	
-	Pwm_Init(); 
+	Pwm_Init(); //channel1->PD4 channel2->PD3 channel3->PA3
 	
 	SetLedOFF(); /* ÈÃËùÓÐµÆÃð */
+
+	/* Initialise I2C for communication */
+	Init_I2C();//PB4-SCL PB5->SDA
+	
 	enableInterrupts(); 
 		
   while (1)
 	{
-		pwm+=10;
-		if(pwm>100)
-		pwm=0;
+		if(Sys_20ms_Flag==1)
+		{
+			Sys_20ms_Flag=0;
+		}
 		
-		Set_Pwm_Channel1(pwm);
-		Set_Pwm_Channel2(pwm);
-		Set_Pwm_Channel3(pwm);
+		if(Sys_50ms_Flag==1)
+		{
+			Sys_50ms_Flag=0;
+			
+			Check_I2c_Data();
+		}
 		
-		LED_Reverse(LED_2);
-		delay_ms(100);
+		if(Sys_100ms_Flag==1)
+		{
+			Sys_100ms_Flag=0;
+			pwm+=10;
+			if(pwm>100)
+			pwm=0;
+		
+			Set_Pwm_Channel1(pwm);
+			Set_Pwm_Channel2(pwm);
+			Set_Pwm_Channel3(pwm);
+		}
+
+		if(Sys_200ms_Flag==1)
+		{
+			Sys_200ms_Flag=0;
+		}
+		
+		if(Sys_500ms_Flag==1)
+		{
+			Sys_500ms_Flag=0;
+		}
+		
+		if(Sys_1000ms_Flag==1)
+		{
+			Sys_1000ms_Flag=0;
+			LED_Reverse(LED_3);
+		}		
 	}
 }
 

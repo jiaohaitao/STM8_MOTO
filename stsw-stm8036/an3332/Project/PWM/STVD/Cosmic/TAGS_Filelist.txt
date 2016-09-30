@@ -6,6 +6,7 @@
 ..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_gpio.c
 ..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim1.c
 ..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim2.c
+..\..\src\i2c_slave_interrupt.c
 ..\..\src\led.c
 ..\..\src\main.c
 ..\..\src\pwm.c
@@ -13,10 +14,12 @@
 ..\..\src\stm8s_it.c
 ..\..\src\sysclock.c
 ..\..\src\tim1.c
+..\..\inc\i2c_slave_interrupt.h
 ..\..\inc\led.h
 ..\..\inc\pwm.h
 ..\..\inc\stm8s_conf.h
 ..\..\inc\stm8s_it.h
+..\..\inc\stm8s_type.h
 ..\..\inc\sysclock.h
 ..\..\inc\tim1.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_adc1.h

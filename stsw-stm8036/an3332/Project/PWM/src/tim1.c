@@ -30,6 +30,13 @@
 /* 全局变量定义 */
 u16 TimingDelay; 
 
+__IO u8 Sys_20ms_Flag=0;
+__IO u8 Sys_50ms_Flag=0;
+__IO u8 Sys_100ms_Flag=0;
+__IO u8 Sys_200ms_Flag=0;
+__IO u8 Sys_500ms_Flag=0;
+__IO u8 Sys_1000ms_Flag=0;
+
 /*******************************************************************************
  * 名称: Tim1_Init
  * 功能: TIM1初始化操作
@@ -56,7 +63,54 @@ void Tim1_Init(void)
  ******************************************************************************/
 void TimingDelay_Decrement(void)
 {
+	static u16 sys_20ms_cnt=0;
+	static u16 sys_50ms_cnt=0;
+	static u16 sys_100ms_cnt=0;
+	static u16 sys_200ms_cnt=0;
+	static u16 sys_500ms_cnt=0;
+	static u16 sys_1000ms_cnt=0;
+	
+//--------for delay 1ms--	
 	TimingDelay--;
+	
+//-----------sys 1ms cnt------	
+	sys_20ms_cnt++;
+	sys_50ms_cnt++;
+	sys_100ms_cnt++;
+	sys_200ms_cnt++;
+	sys_500ms_cnt++;
+	sys_1000ms_cnt++;
+	//for 20ms cyc
+	if(sys_20ms_cnt>20){
+		sys_20ms_cnt=0;
+		Sys_20ms_Flag=1;
+	}
+	//for 50ms cyc
+	if(sys_50ms_cnt>50){
+		sys_50ms_cnt=0;
+		Sys_50ms_Flag=1;
+	}
+	//for 100ms cyc
+	if(sys_100ms_cnt>100){
+		sys_100ms_cnt=0;
+		Sys_100ms_Flag=1;
+	}
+	//for 200ms cyc 
+	if(sys_200ms_cnt>200){
+		sys_200ms_cnt=0;
+		Sys_200ms_Flag=1;
+	}
+	//for 500ms cyc
+	if(sys_500ms_cnt>500){
+		sys_500ms_cnt=0;
+		Sys_500ms_Flag=1;
+	}
+	//for 1000ms cyc
+	if(sys_1000ms_cnt>1000){
+		sys_1000ms_cnt=0;
+		Sys_1000ms_Flag=1;
+	}
+
 }
 /*******************************************************************************
  * 名称: delay_ms

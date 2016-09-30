@@ -55,6 +55,7 @@ Debug\stm8s_flash.o
 Debug\stm8s_gpio.o
 Debug\stm8s_tim1.o
 Debug\stm8s_tim2.o
+Debug\i2c_slave_interrupt.o
 Debug\led.o
 Debug\main.o
 Debug\pwm.o
