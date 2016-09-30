@@ -21,18 +21,21 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
-
+#include "pwm.h"
 
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
-#define CCR1_Val  ((u16)500) // Configure channel 1 Pulse Width
-#define CCR2_Val  ((u16)250) // Configure channel 2 Pulse Width
-#define CCR3_Val  ((u16)750) // Configure channel 3 Pulse Width
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/ 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+void Delay_Ms(unsigned int x)
+{
+	unsigned int i,j;
+	for(i=0;i<x;i++)
+	for(j=0;j<1000;j++);
+}
 /* Public functions ----------------------------------------------------------*/
 
 /**
@@ -44,34 +47,21 @@
   */
 void main(void)
 {
-
-  /* TIM2 Peripheral Configuration */ 
-  TIM2_DeInit();
-
-  /* Set TIM2 Frequency to 2Mhz */ 
-  TIM2_TimeBaseInit(TIM2_PRESCALER_1, 999);
-
-  
-	/* Channel 1 PWM configuration */ 
-  TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR1_Val, TIM2_OCPOLARITY_LOW ); 
-  TIM2_OC1PreloadConfig(ENABLE);
-  
-	/* Channel 2 PWM configuration */
-  TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR2_Val, TIM2_OCPOLARITY_LOW );
-  TIM2_OC2PreloadConfig(ENABLE);
+	unsigned char pwm=0;
+	Pwm_Init(); 
 	
-	/* Channel 3 PWM configuration */
-	TIM2_OC3Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR3_Val, TIM2_OCPOLARITY_LOW );
-  TIM2_OC3PreloadConfig(ENABLE);
-  
-	/* Enables TIM2 peripheral Preload register on ARR */
-	TIM2_ARRPreloadConfig(ENABLE);
 	
-  /* Enable TIM2 */
-  TIM2_Cmd(ENABLE);
-
-  
-  while (1); 
+  while (1)
+	{
+		pwm+=10;
+		if(pwm>100)
+		pwm=0;
+		
+		Set_Pwm_Channel1(pwm);
+		Set_Pwm_Channel2(pwm);
+		Set_Pwm_Channel3(pwm);
+		Delay_Ms(100);
+	}
 }
 
 #ifdef USE_FULL_ASSERT

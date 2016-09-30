@@ -53,6 +53,7 @@ crtsi0.sm8
 Debug\stm8s_gpio.o
 Debug\stm8s_tim2.o
 Debug\main.o
+Debug\pwm.o
 Debug\stm8s_it.o
 #<END OBJECT_FILES>
 
