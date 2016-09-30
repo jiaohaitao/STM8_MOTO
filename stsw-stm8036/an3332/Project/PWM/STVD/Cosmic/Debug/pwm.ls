@@ -2,129 +2,129 @@
    2                     ; Parser V4.8.32 - 23 Mar 2010
    3                     ; Generator V4.3.4 - 23 Mar 2010
    4                     ; Optimizer V4.3.3 - 10 Feb 2010
-  57                     ; 12 void Pwm_Init()
-  57                     ; 13 {
-  59                     	switch	.text
-  60  0000               _Pwm_Init:
-  64                     ; 15   TIM2_DeInit();
-  66  0000 cd0000        	call	_TIM2_DeInit
-  68                     ; 18   TIM2_TimeBaseInit(TIM2_PRESCALER_1, 999);
-  70  0003 ae03e7        	ldw	x,#999
-  71  0006 89            	pushw	x
-  72  0007 4f            	clr	a
-  73  0008 cd0000        	call	_TIM2_TimeBaseInit
-  75  000b 85            	popw	x
-  76                     ; 22   TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR1_Val, TIM2_OCPOLARITY_LOW ); 
-  78  000c 4b22          	push	#34
-  79  000e 5f            	clrw	x
-  80  000f 89            	pushw	x
-  81  0010 ad34          	call	LC001
-  82  0012 cd0000        	call	_TIM2_OC1Init
-  84  0015 5b03          	addw	sp,#3
-  85                     ; 23   TIM2_OC1PreloadConfig(ENABLE);
-  87  0017 a601          	ld	a,#1
-  88  0019 cd0000        	call	_TIM2_OC1PreloadConfig
-  90                     ; 26   TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR2_Val, TIM2_OCPOLARITY_LOW );
-  92  001c 4b22          	push	#34
-  93  001e 5f            	clrw	x
-  94  001f 89            	pushw	x
-  95  0020 ad24          	call	LC001
-  96  0022 cd0000        	call	_TIM2_OC2Init
-  98  0025 5b03          	addw	sp,#3
-  99                     ; 27   TIM2_OC2PreloadConfig(ENABLE);
- 101  0027 a601          	ld	a,#1
- 102  0029 cd0000        	call	_TIM2_OC2PreloadConfig
- 104                     ; 30 	TIM2_OC3Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR3_Val, TIM2_OCPOLARITY_LOW );
- 106  002c 4b22          	push	#34
- 107  002e 5f            	clrw	x
- 108  002f 89            	pushw	x
- 109  0030 ad14          	call	LC001
- 110  0032 cd0000        	call	_TIM2_OC3Init
- 112  0035 5b03          	addw	sp,#3
- 113                     ; 31   TIM2_OC3PreloadConfig(ENABLE);
- 115  0037 a601          	ld	a,#1
- 116  0039 cd0000        	call	_TIM2_OC3PreloadConfig
- 118                     ; 34 	TIM2_ARRPreloadConfig(ENABLE);
- 120  003c a601          	ld	a,#1
- 121  003e cd0000        	call	_TIM2_ARRPreloadConfig
- 123                     ; 37   TIM2_Cmd(ENABLE);
- 125  0041 a601          	ld	a,#1
- 127                     ; 38 }
- 130  0043 cc0000        	jp	_TIM2_Cmd
- 131  0046               LC001:
- 132  0046 ae0011        	ldw	x,#17
- 133  0049 a670          	ld	a,#112
- 134  004b 95            	ld	xh,a
- 135  004c 81            	ret	
- 171                     ; 42 void Set_Pwm_Channel1(unsigned char pwm)
- 171                     ; 43 {
- 172                     	switch	.text
- 173  004d               _Set_Pwm_Channel1:
- 177                     ; 45   TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW ); 
- 179  004d 4b22          	push	#34
- 180  004f 97            	ld	xl,a
- 181  0050 a60a          	ld	a,#10
- 182  0052 42            	mul	x,a
- 183  0053 89            	pushw	x
- 184  0054 ae0011        	ldw	x,#17
- 185  0057 a670          	ld	a,#112
- 186  0059 95            	ld	xh,a
- 187  005a cd0000        	call	_TIM2_OC1Init
- 189  005d 5b03          	addw	sp,#3
- 190                     ; 46   TIM2_OC1PreloadConfig(ENABLE);
- 192  005f a601          	ld	a,#1
- 194                     ; 47 }
- 197  0061 cc0000        	jp	_TIM2_OC1PreloadConfig
- 233                     ; 53 void Set_Pwm_Channel2(unsigned char pwm)
- 233                     ; 54 {
- 234                     	switch	.text
- 235  0064               _Set_Pwm_Channel2:
- 239                     ; 56   TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW );
- 241  0064 4b22          	push	#34
- 242  0066 97            	ld	xl,a
- 243  0067 a60a          	ld	a,#10
- 244  0069 42            	mul	x,a
- 245  006a 89            	pushw	x
- 246  006b ae0011        	ldw	x,#17
- 247  006e a670          	ld	a,#112
- 248  0070 95            	ld	xh,a
- 249  0071 cd0000        	call	_TIM2_OC2Init
- 251  0074 5b03          	addw	sp,#3
- 252                     ; 57   TIM2_OC2PreloadConfig(ENABLE);
- 254  0076 a601          	ld	a,#1
- 256                     ; 58 }
- 259  0078 cc0000        	jp	_TIM2_OC2PreloadConfig
- 295                     ; 64 void Set_Pwm_Channel3(unsigned char pwm)
- 295                     ; 65 {
- 296                     	switch	.text
- 297  007b               _Set_Pwm_Channel3:
- 301                     ; 67 	TIM2_OC3Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW );
- 303  007b 4b22          	push	#34
- 304  007d 97            	ld	xl,a
- 305  007e a60a          	ld	a,#10
- 306  0080 42            	mul	x,a
- 307  0081 89            	pushw	x
- 308  0082 ae0011        	ldw	x,#17
- 309  0085 a670          	ld	a,#112
- 310  0087 95            	ld	xh,a
- 311  0088 cd0000        	call	_TIM2_OC3Init
- 313  008b 5b03          	addw	sp,#3
- 314                     ; 68   TIM2_OC3PreloadConfig(ENABLE);
- 316  008d a601          	ld	a,#1
- 318                     ; 69 }
- 321  008f cc0000        	jp	_TIM2_OC3PreloadConfig
- 334                     	xdef	_Set_Pwm_Channel3
- 335                     	xdef	_Set_Pwm_Channel2
- 336                     	xdef	_Set_Pwm_Channel1
- 337                     	xdef	_Pwm_Init
- 338                     	xref	_TIM2_OC3PreloadConfig
- 339                     	xref	_TIM2_OC2PreloadConfig
- 340                     	xref	_TIM2_OC1PreloadConfig
- 341                     	xref	_TIM2_ARRPreloadConfig
- 342                     	xref	_TIM2_Cmd
- 343                     	xref	_TIM2_OC3Init
- 344                     	xref	_TIM2_OC2Init
- 345                     	xref	_TIM2_OC1Init
- 346                     	xref	_TIM2_TimeBaseInit
- 347                     	xref	_TIM2_DeInit
- 366                     	end
+  58                     ; 12 void Pwm_Init()
+  58                     ; 13 {
+  60                     .text:	section	.text,new
+  61  0000               _Pwm_Init:
+  65                     ; 15   TIM2_DeInit();
+  67  0000 cd0000        	call	_TIM2_DeInit
+  69                     ; 18   TIM2_TimeBaseInit(TIM2_PRESCALER_8, 999);
+  71  0003 ae03e7        	ldw	x,#999
+  72  0006 89            	pushw	x
+  73  0007 a603          	ld	a,#3
+  74  0009 cd0000        	call	_TIM2_TimeBaseInit
+  76  000c 85            	popw	x
+  77                     ; 22   TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR1_Val, TIM2_OCPOLARITY_LOW ); 
+  79  000d 4b22          	push	#34
+  80  000f 5f            	clrw	x
+  81  0010 89            	pushw	x
+  82  0011 ad34          	call	LC001
+  83  0013 cd0000        	call	_TIM2_OC1Init
+  85  0016 5b03          	addw	sp,#3
+  86                     ; 23   TIM2_OC1PreloadConfig(ENABLE);
+  88  0018 a601          	ld	a,#1
+  89  001a cd0000        	call	_TIM2_OC1PreloadConfig
+  91                     ; 26   TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR2_Val, TIM2_OCPOLARITY_LOW );
+  93  001d 4b22          	push	#34
+  94  001f 5f            	clrw	x
+  95  0020 89            	pushw	x
+  96  0021 ad24          	call	LC001
+  97  0023 cd0000        	call	_TIM2_OC2Init
+  99  0026 5b03          	addw	sp,#3
+ 100                     ; 27   TIM2_OC2PreloadConfig(ENABLE);
+ 102  0028 a601          	ld	a,#1
+ 103  002a cd0000        	call	_TIM2_OC2PreloadConfig
+ 105                     ; 30 	TIM2_OC3Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR3_Val, TIM2_OCPOLARITY_LOW );
+ 107  002d 4b22          	push	#34
+ 108  002f 5f            	clrw	x
+ 109  0030 89            	pushw	x
+ 110  0031 ad14          	call	LC001
+ 111  0033 cd0000        	call	_TIM2_OC3Init
+ 113  0036 5b03          	addw	sp,#3
+ 114                     ; 31   TIM2_OC3PreloadConfig(ENABLE);
+ 116  0038 a601          	ld	a,#1
+ 117  003a cd0000        	call	_TIM2_OC3PreloadConfig
+ 119                     ; 34 	TIM2_ARRPreloadConfig(ENABLE);
+ 121  003d a601          	ld	a,#1
+ 122  003f cd0000        	call	_TIM2_ARRPreloadConfig
+ 124                     ; 37   TIM2_Cmd(ENABLE);
+ 126  0042 a601          	ld	a,#1
+ 128                     ; 38 }
+ 131  0044 cc0000        	jp	_TIM2_Cmd
+ 132  0047               LC001:
+ 133  0047 ae0011        	ldw	x,#17
+ 134  004a a670          	ld	a,#112
+ 135  004c 95            	ld	xh,a
+ 136  004d 81            	ret	
+ 172                     ; 42 void Set_Pwm_Channel1(unsigned char pwm)
+ 172                     ; 43 {
+ 173                     .text:	section	.text,new
+ 174  0000               _Set_Pwm_Channel1:
+ 178                     ; 45   TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW ); 
+ 180  0000 4b22          	push	#34
+ 181  0002 97            	ld	xl,a
+ 182  0003 a60a          	ld	a,#10
+ 183  0005 42            	mul	x,a
+ 184  0006 89            	pushw	x
+ 185  0007 ae0011        	ldw	x,#17
+ 186  000a a670          	ld	a,#112
+ 187  000c 95            	ld	xh,a
+ 188  000d cd0000        	call	_TIM2_OC1Init
+ 190  0010 5b03          	addw	sp,#3
+ 191                     ; 46   TIM2_OC1PreloadConfig(ENABLE);
+ 193  0012 a601          	ld	a,#1
+ 195                     ; 47 }
+ 198  0014 cc0000        	jp	_TIM2_OC1PreloadConfig
+ 234                     ; 53 void Set_Pwm_Channel2(unsigned char pwm)
+ 234                     ; 54 {
+ 235                     .text:	section	.text,new
+ 236  0000               _Set_Pwm_Channel2:
+ 240                     ; 56   TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW );
+ 242  0000 4b22          	push	#34
+ 243  0002 97            	ld	xl,a
+ 244  0003 a60a          	ld	a,#10
+ 245  0005 42            	mul	x,a
+ 246  0006 89            	pushw	x
+ 247  0007 ae0011        	ldw	x,#17
+ 248  000a a670          	ld	a,#112
+ 249  000c 95            	ld	xh,a
+ 250  000d cd0000        	call	_TIM2_OC2Init
+ 252  0010 5b03          	addw	sp,#3
+ 253                     ; 57   TIM2_OC2PreloadConfig(ENABLE);
+ 255  0012 a601          	ld	a,#1
+ 257                     ; 58 }
+ 260  0014 cc0000        	jp	_TIM2_OC2PreloadConfig
+ 296                     ; 64 void Set_Pwm_Channel3(unsigned char pwm)
+ 296                     ; 65 {
+ 297                     .text:	section	.text,new
+ 298  0000               _Set_Pwm_Channel3:
+ 302                     ; 67 	TIM2_OC3Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm*10, TIM2_OCPOLARITY_LOW );
+ 304  0000 4b22          	push	#34
+ 305  0002 97            	ld	xl,a
+ 306  0003 a60a          	ld	a,#10
+ 307  0005 42            	mul	x,a
+ 308  0006 89            	pushw	x
+ 309  0007 ae0011        	ldw	x,#17
+ 310  000a a670          	ld	a,#112
+ 311  000c 95            	ld	xh,a
+ 312  000d cd0000        	call	_TIM2_OC3Init
+ 314  0010 5b03          	addw	sp,#3
+ 315                     ; 68   TIM2_OC3PreloadConfig(ENABLE);
+ 317  0012 a601          	ld	a,#1
+ 319                     ; 69 }
+ 322  0014 cc0000        	jp	_TIM2_OC3PreloadConfig
+ 335                     	xdef	_Set_Pwm_Channel3
+ 336                     	xdef	_Set_Pwm_Channel2
+ 337                     	xdef	_Set_Pwm_Channel1
+ 338                     	xdef	_Pwm_Init
+ 339                     	xref	_TIM2_OC3PreloadConfig
+ 340                     	xref	_TIM2_OC2PreloadConfig
+ 341                     	xref	_TIM2_OC1PreloadConfig
+ 342                     	xref	_TIM2_ARRPreloadConfig
+ 343                     	xref	_TIM2_Cmd
+ 344                     	xref	_TIM2_OC3Init
+ 345                     	xref	_TIM2_OC2Init
+ 346                     	xref	_TIM2_OC1Init
+ 347                     	xref	_TIM2_TimeBaseInit
+ 348                     	xref	_TIM2_DeInit
+ 367                     	end

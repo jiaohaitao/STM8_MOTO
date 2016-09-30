@@ -15,7 +15,7 @@ void Pwm_Init()
   TIM2_DeInit();
 
   /* Set TIM2 Frequency to 2Mhz */ 
-  TIM2_TimeBaseInit(TIM2_PRESCALER_1, 999);
+  TIM2_TimeBaseInit(TIM2_PRESCALER_8, 999);
 
  
 	/* Channel 1 PWM configuration */ 

@@ -21,6 +21,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s_it.h"
+#include "led.h"
+#include "tim1.h"
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -216,6 +219,9 @@ INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_BRK_IRQHandler, 11)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+	TimingDelay_Decrement();
+	
+	TIM1_ClearITPendingBit(TIM1_IT_UPDATE);  	
 }
 
 /**

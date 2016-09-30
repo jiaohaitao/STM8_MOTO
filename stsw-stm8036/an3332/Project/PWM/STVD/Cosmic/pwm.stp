@@ -83,10 +83,10 @@ String.100.0=STM8S103F3P
 
 [Root.Config.0.Settings.3]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customDebCompat -customOpt+compact -customC-pp -customLst -l -i..\..\..\..\libraries\stm8s_stdperiph_driver\inc -i..\..\inc -i..\..\..\includes -i..\..\..\..\stm8sfwlib\fwlib\library\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
+String.3.0=cxstm8 +mods0 -customDebCompat -customOpt +compact +split -customC-pp -customLst -l -i..\..\..\..\libraries\stm8s_stdperiph_driver\inc -i..\..\inc -i..\..\..\includes -i..\..\..\..\stm8sfwlib\fwlib\library\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2011,3,15,10,48,18
+String.6.0=2016,9,30,13,50,34
 
 [Root.Config.0.Settings.4]
 String.2.0=Assembling $(InputFile)...
@@ -244,10 +244,10 @@ Int.1=0
 
 [Root.STM8S_StdPeriph_Lib.Config.0.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customDebCompat -customOpt+compact -customC-pp -customLst -l -i..\..\..\..\libraries\stm8s_stdperiph_driver\inc -i..\..\inc -i..\..\..\includes -i..\..\..\..\stm8sfwlib\fwlib\library\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
+String.3.0=cxstm8 +mods0 -customDebCompat -customOpt +compact +split -customC-pp -customLst -l -i..\..\..\..\libraries\stm8s_stdperiph_driver\inc -i..\..\inc -i..\..\..\includes -i..\..\..\..\stm8sfwlib\fwlib\library\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2011,3,15,10,48,18
+String.6.0=2016,9,30,13,50,34
 
 [Root.STM8S_StdPeriph_Lib.Config.0.Settings.2]
 String.2.0=Assembling $(InputFile)...
@@ -313,11 +313,26 @@ PathName=..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_tim2.h
 [Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src]
 ElemType=Folder
 PathName=STM8S_StdPeriph_Lib\src
-Child=Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_gpio.c
+Child=Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_clk.c
+
+[Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_clk.c]
+ElemType=File
+PathName=..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_clk.c
+Next=Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_flash.c
+
+[Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_flash.c]
+ElemType=File
+PathName=..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_flash.c
+Next=Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_gpio.c
 
 [Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_gpio.c]
 ElemType=File
 PathName=..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_gpio.c
+Next=Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim1.c
+
+[Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim1.c]
+ElemType=File
+PathName=..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim1.c
 Next=Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim2.c
 
 [Root.STM8S_StdPeriph_Lib.STM8S_StdPeriph_Lib\src...\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim2.c]
@@ -327,7 +342,7 @@ PathName=..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim2.c
 [Root.Source Files]
 ElemType=Folder
 PathName=Source Files
-Child=Root.Source Files...\..\src\main.c
+Child=Root.Source Files...\..\src\led.c
 Next=Root.Include Files
 Config.0=Root.Source Files.Config.0
 Config.1=Root.Source Files.Config.1
@@ -352,10 +367,10 @@ Int.1=0
 
 [Root.Source Files.Config.0.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customDebCompat -customOpt+compact -customC-pp -customLst -l -i..\..\..\..\libraries\stm8s_stdperiph_driver\inc -i..\..\inc -i..\..\..\includes -i..\..\..\..\stm8sfwlib\fwlib\library\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
+String.3.0=cxstm8 +mods0 -customDebCompat -customOpt +compact +split -customC-pp -customLst -l -i..\..\..\..\libraries\stm8s_stdperiph_driver\inc -i..\..\inc -i..\..\..\includes -i..\..\..\..\stm8sfwlib\fwlib\library\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2011,3,15,10,48,18
+String.6.0=2016,9,30,13,50,34
 
 [Root.Source Files.Config.0.Settings.2]
 String.2.0=Assembling $(InputFile)...
@@ -398,6 +413,11 @@ String.4.0=
 String.5.0=
 String.6.0=2009,10,29,10,15,40
 
+[Root.Source Files...\..\src\led.c]
+ElemType=File
+PathName=..\..\src\led.c
+Next=Root.Source Files...\..\src\main.c
+
 [Root.Source Files...\..\src\main.c]
 ElemType=File
 PathName=..\..\src\main.c
@@ -416,11 +436,21 @@ Next=Root.Source Files...\..\src\stm8s_it.c
 [Root.Source Files...\..\src\stm8s_it.c]
 ElemType=File
 PathName=..\..\src\stm8s_it.c
+Next=Root.Source Files...\..\src\sysclock.c
+
+[Root.Source Files...\..\src\sysclock.c]
+ElemType=File
+PathName=..\..\src\sysclock.c
+Next=Root.Source Files...\..\src\tim1.c
+
+[Root.Source Files...\..\src\tim1.c]
+ElemType=File
+PathName=..\..\src\tim1.c
 
 [Root.Include Files]
 ElemType=Folder
 PathName=Include Files
-Child=Root.Include Files...\..\inc\pwm.h
+Child=Root.Include Files...\..\inc\led.h
 Config.0=Root.Include Files.Config.0
 Config.1=Root.Include Files.Config.1
 
@@ -444,10 +474,10 @@ Int.1=0
 
 [Root.Include Files.Config.0.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customDebCompat -customOpt+compact -customC-pp -customLst -l -i..\..\..\..\libraries\stm8s_stdperiph_driver\inc -i..\..\inc -i..\..\..\includes -i..\..\..\..\stm8sfwlib\fwlib\library\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
+String.3.0=cxstm8 +mods0 -customDebCompat -customOpt +compact +split -customC-pp -customLst -l -i..\..\..\..\libraries\stm8s_stdperiph_driver\inc -i..\..\inc -i..\..\..\includes -i..\..\..\..\stm8sfwlib\fwlib\library\inc $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile)
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
-String.6.0=2011,3,15,10,48,18
+String.6.0=2016,9,30,13,50,34
 
 [Root.Include Files.Config.0.Settings.2]
 String.2.0=Assembling $(InputFile)...
@@ -490,6 +520,11 @@ String.4.0=
 String.5.0=
 String.6.0=2009,10,29,10,15,40
 
+[Root.Include Files...\..\inc\led.h]
+ElemType=File
+PathName=..\..\inc\led.h
+Next=Root.Include Files...\..\inc\pwm.h
+
 [Root.Include Files...\..\inc\pwm.h]
 ElemType=File
 PathName=..\..\inc\pwm.h
@@ -503,3 +538,13 @@ Next=Root.Include Files...\..\inc\stm8s_it.h
 [Root.Include Files...\..\inc\stm8s_it.h]
 ElemType=File
 PathName=..\..\inc\stm8s_it.h
+Next=Root.Include Files...\..\inc\sysclock.h
+
+[Root.Include Files...\..\inc\sysclock.h]
+ElemType=File
+PathName=..\..\inc\sysclock.h
+Next=Root.Include Files...\..\inc\tim1.h
+
+[Root.Include Files...\..\inc\tim1.h]
+ElemType=File
+PathName=..\..\inc\tim1.h

@@ -22,6 +22,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
 #include "pwm.h"
+#include "sysclock.h"
+#include "led.h"
+#include "tim1.h"
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -30,12 +33,6 @@
 /* Private variables ---------------------------------------------------------*/ 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-void Delay_Ms(unsigned int x)
-{
-	unsigned int i,j;
-	for(i=0;i<x;i++)
-	for(j=0;j<1000;j++);
-}
 /* Public functions ----------------------------------------------------------*/
 
 /**
@@ -48,9 +45,15 @@ void Delay_Ms(unsigned int x)
 void main(void)
 {
 	unsigned char pwm=0;
+	
+	SystemClock_Init(HSI_Clock);
+	LED_Init();
+	Tim1_Init();	
 	Pwm_Init(); 
 	
-	
+	SetLedOFF(); /* ÈÃËùÓÐµÆÃð */
+	enableInterrupts(); 
+		
   while (1)
 	{
 		pwm+=10;
@@ -60,7 +63,9 @@ void main(void)
 		Set_Pwm_Channel1(pwm);
 		Set_Pwm_Channel2(pwm);
 		Set_Pwm_Channel3(pwm);
-		Delay_Ms(100);
+		
+		LED_Reverse(LED_2);
+		delay_ms(100);
 	}
 }
 

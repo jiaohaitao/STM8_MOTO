@@ -2,1213 +2,1213 @@
    2                     ; Parser V4.8.32 - 23 Mar 2010
    3                     ; Generator V4.3.4 - 23 Mar 2010
    4                     ; Optimizer V4.3.3 - 10 Feb 2010
-  47                     ; 46 void TIM2_DeInit(void)
-  47                     ; 47 {
-  49                     	switch	.text
-  50  0000               _TIM2_DeInit:
-  54                     ; 49     TIM2->CR1 = (uint8_t)TIM2_CR1_RESET_VALUE;
-  56  0000 725f5300      	clr	21248
-  57                     ; 50     TIM2->IER = (uint8_t)TIM2_IER_RESET_VALUE;
-  59  0004 725f5303      	clr	21251
-  60                     ; 51     TIM2->SR2 = (uint8_t)TIM2_SR2_RESET_VALUE;
-  62  0008 725f5305      	clr	21253
-  63                     ; 54     TIM2->CCER1 = (uint8_t)TIM2_CCER1_RESET_VALUE;
-  65  000c 725f530a      	clr	21258
-  66                     ; 55     TIM2->CCER2 = (uint8_t)TIM2_CCER2_RESET_VALUE;
-  68  0010 725f530b      	clr	21259
-  69                     ; 59     TIM2->CCER1 = (uint8_t)TIM2_CCER1_RESET_VALUE;
-  71  0014 725f530a      	clr	21258
-  72                     ; 60     TIM2->CCER2 = (uint8_t)TIM2_CCER2_RESET_VALUE;
-  74  0018 725f530b      	clr	21259
-  75                     ; 61     TIM2->CCMR1 = (uint8_t)TIM2_CCMR1_RESET_VALUE;
-  77  001c 725f5307      	clr	21255
-  78                     ; 62     TIM2->CCMR2 = (uint8_t)TIM2_CCMR2_RESET_VALUE;
-  80  0020 725f5308      	clr	21256
-  81                     ; 63     TIM2->CCMR3 = (uint8_t)TIM2_CCMR3_RESET_VALUE;
-  83  0024 725f5309      	clr	21257
-  84                     ; 64     TIM2->CNTRH = (uint8_t)TIM2_CNTRH_RESET_VALUE;
-  86  0028 725f530c      	clr	21260
-  87                     ; 65     TIM2->CNTRL = (uint8_t)TIM2_CNTRL_RESET_VALUE;
-  89  002c 725f530d      	clr	21261
-  90                     ; 66     TIM2->PSCR = (uint8_t)TIM2_PSCR_RESET_VALUE;
-  92  0030 725f530e      	clr	21262
-  93                     ; 67     TIM2->ARRH  = (uint8_t)TIM2_ARRH_RESET_VALUE;
-  95  0034 35ff530f      	mov	21263,#255
-  96                     ; 68     TIM2->ARRL  = (uint8_t)TIM2_ARRL_RESET_VALUE;
-  98  0038 35ff5310      	mov	21264,#255
-  99                     ; 69     TIM2->CCR1H = (uint8_t)TIM2_CCR1H_RESET_VALUE;
- 101  003c 725f5311      	clr	21265
- 102                     ; 70     TIM2->CCR1L = (uint8_t)TIM2_CCR1L_RESET_VALUE;
- 104  0040 725f5312      	clr	21266
- 105                     ; 71     TIM2->CCR2H = (uint8_t)TIM2_CCR2H_RESET_VALUE;
- 107  0044 725f5313      	clr	21267
- 108                     ; 72     TIM2->CCR2L = (uint8_t)TIM2_CCR2L_RESET_VALUE;
- 110  0048 725f5314      	clr	21268
- 111                     ; 73     TIM2->CCR3H = (uint8_t)TIM2_CCR3H_RESET_VALUE;
- 113  004c 725f5315      	clr	21269
- 114                     ; 74     TIM2->CCR3L = (uint8_t)TIM2_CCR3L_RESET_VALUE;
- 116  0050 725f5316      	clr	21270
- 117                     ; 75     TIM2->SR1 = (uint8_t)TIM2_SR1_RESET_VALUE;
- 119  0054 725f5304      	clr	21252
- 120                     ; 76 }
- 123  0058 81            	ret	
- 291                     ; 85 void TIM2_TimeBaseInit( TIM2_Prescaler_TypeDef TIM2_Prescaler,
- 291                     ; 86                         uint16_t TIM2_Period)
- 291                     ; 87 {
- 292                     	switch	.text
- 293  0059               _TIM2_TimeBaseInit:
- 295       00000000      OFST:	set	0
- 298                     ; 89     TIM2->PSCR = (uint8_t)(TIM2_Prescaler);
- 300  0059 c7530e        	ld	21262,a
- 301  005c 88            	push	a
- 302                     ; 91     TIM2->ARRH = (uint8_t)(TIM2_Period >> 8);
- 304  005d 7b04          	ld	a,(OFST+4,sp)
- 305  005f c7530f        	ld	21263,a
- 306                     ; 92     TIM2->ARRL = (uint8_t)(TIM2_Period);
- 308  0062 7b05          	ld	a,(OFST+5,sp)
- 309  0064 c75310        	ld	21264,a
- 310                     ; 93 }
- 313  0067 84            	pop	a
- 314  0068 81            	ret	
- 471                     ; 104 void TIM2_OC1Init(TIM2_OCMode_TypeDef TIM2_OCMode,
- 471                     ; 105                   TIM2_OutputState_TypeDef TIM2_OutputState,
- 471                     ; 106                   uint16_t TIM2_Pulse,
- 471                     ; 107                   TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
- 471                     ; 108 {
- 472                     	switch	.text
- 473  0069               _TIM2_OC1Init:
- 475  0069 89            	pushw	x
- 476  006a 88            	push	a
- 477       00000001      OFST:	set	1
- 480                     ; 110     assert_param(IS_TIM2_OC_MODE_OK(TIM2_OCMode));
- 482                     ; 111     assert_param(IS_TIM2_OUTPUT_STATE_OK(TIM2_OutputState));
- 484                     ; 112     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
- 486                     ; 115     TIM2->CCER1 &= (uint8_t)(~( TIM2_CCER1_CC1E | TIM2_CCER1_CC1P));
- 488  006b c6530a        	ld	a,21258
- 489  006e a4fc          	and	a,#252
- 490  0070 c7530a        	ld	21258,a
- 491                     ; 117     TIM2->CCER1 |= (uint8_t)((uint8_t)(TIM2_OutputState & TIM2_CCER1_CC1E ) | 
- 491                     ; 118                              (uint8_t)(TIM2_OCPolarity & TIM2_CCER1_CC1P));
- 493  0073 7b08          	ld	a,(OFST+7,sp)
- 494  0075 a402          	and	a,#2
- 495  0077 6b01          	ld	(OFST+0,sp),a
- 496  0079 9f            	ld	a,xl
- 497  007a a401          	and	a,#1
- 498  007c 1a01          	or	a,(OFST+0,sp)
- 499  007e ca530a        	or	a,21258
- 500  0081 c7530a        	ld	21258,a
- 501                     ; 121     TIM2->CCMR1 = (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~TIM2_CCMR_OCM)) |
- 501                     ; 122                             (uint8_t)TIM2_OCMode);
- 503  0084 c65307        	ld	a,21255
- 504  0087 a48f          	and	a,#143
- 505  0089 1a02          	or	a,(OFST+1,sp)
- 506  008b c75307        	ld	21255,a
- 507                     ; 125     TIM2->CCR1H = (uint8_t)(TIM2_Pulse >> 8);
- 509  008e 7b06          	ld	a,(OFST+5,sp)
- 510  0090 c75311        	ld	21265,a
- 511                     ; 126     TIM2->CCR1L = (uint8_t)(TIM2_Pulse);
- 513  0093 7b07          	ld	a,(OFST+6,sp)
- 514  0095 c75312        	ld	21266,a
- 515                     ; 127 }
- 518  0098 5b03          	addw	sp,#3
- 519  009a 81            	ret	
- 583                     ; 138 void TIM2_OC2Init(TIM2_OCMode_TypeDef TIM2_OCMode,
- 583                     ; 139                   TIM2_OutputState_TypeDef TIM2_OutputState,
- 583                     ; 140                   uint16_t TIM2_Pulse,
- 583                     ; 141                   TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
- 583                     ; 142 {
- 584                     	switch	.text
- 585  009b               _TIM2_OC2Init:
- 587  009b 89            	pushw	x
- 588  009c 88            	push	a
- 589       00000001      OFST:	set	1
- 592                     ; 144     assert_param(IS_TIM2_OC_MODE_OK(TIM2_OCMode));
- 594                     ; 145     assert_param(IS_TIM2_OUTPUT_STATE_OK(TIM2_OutputState));
- 596                     ; 146     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
- 598                     ; 150     TIM2->CCER1 &= (uint8_t)(~( TIM2_CCER1_CC2E |  TIM2_CCER1_CC2P ));
- 600  009d c6530a        	ld	a,21258
- 601  00a0 a4cf          	and	a,#207
- 602  00a2 c7530a        	ld	21258,a
- 603                     ; 152     TIM2->CCER1 |= (uint8_t)((uint8_t)(TIM2_OutputState  & TIM2_CCER1_CC2E ) |
- 603                     ; 153                         (uint8_t)(TIM2_OCPolarity & TIM2_CCER1_CC2P));
- 605  00a5 7b08          	ld	a,(OFST+7,sp)
- 606  00a7 a420          	and	a,#32
- 607  00a9 6b01          	ld	(OFST+0,sp),a
- 608  00ab 9f            	ld	a,xl
- 609  00ac a410          	and	a,#16
- 610  00ae 1a01          	or	a,(OFST+0,sp)
- 611  00b0 ca530a        	or	a,21258
- 612  00b3 c7530a        	ld	21258,a
- 613                     ; 157     TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~TIM2_CCMR_OCM)) | 
- 613                     ; 158                             (uint8_t)TIM2_OCMode);
- 615  00b6 c65308        	ld	a,21256
- 616  00b9 a48f          	and	a,#143
- 617  00bb 1a02          	or	a,(OFST+1,sp)
- 618  00bd c75308        	ld	21256,a
- 619                     ; 162     TIM2->CCR2H = (uint8_t)(TIM2_Pulse >> 8);
- 621  00c0 7b06          	ld	a,(OFST+5,sp)
- 622  00c2 c75313        	ld	21267,a
- 623                     ; 163     TIM2->CCR2L = (uint8_t)(TIM2_Pulse);
- 625  00c5 7b07          	ld	a,(OFST+6,sp)
- 626  00c7 c75314        	ld	21268,a
- 627                     ; 164 }
- 630  00ca 5b03          	addw	sp,#3
- 631  00cc 81            	ret	
- 695                     ; 175 void TIM2_OC3Init(TIM2_OCMode_TypeDef TIM2_OCMode,
- 695                     ; 176                   TIM2_OutputState_TypeDef TIM2_OutputState,
- 695                     ; 177                   uint16_t TIM2_Pulse,
- 695                     ; 178                   TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
- 695                     ; 179 {
- 696                     	switch	.text
- 697  00cd               _TIM2_OC3Init:
- 699  00cd 89            	pushw	x
- 700  00ce 88            	push	a
- 701       00000001      OFST:	set	1
- 704                     ; 181     assert_param(IS_TIM2_OC_MODE_OK(TIM2_OCMode));
- 706                     ; 182     assert_param(IS_TIM2_OUTPUT_STATE_OK(TIM2_OutputState));
- 708                     ; 183     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
- 710                     ; 185     TIM2->CCER2 &= (uint8_t)(~( TIM2_CCER2_CC3E  | TIM2_CCER2_CC3P));
- 712  00cf c6530b        	ld	a,21259
- 713  00d2 a4fc          	and	a,#252
- 714  00d4 c7530b        	ld	21259,a
- 715                     ; 187     TIM2->CCER2 |= (uint8_t)((uint8_t)(TIM2_OutputState & TIM2_CCER2_CC3E) |  
- 715                     ; 188                              (uint8_t)(TIM2_OCPolarity & TIM2_CCER2_CC3P));
- 717  00d7 7b08          	ld	a,(OFST+7,sp)
- 718  00d9 a402          	and	a,#2
- 719  00db 6b01          	ld	(OFST+0,sp),a
- 720  00dd 9f            	ld	a,xl
- 721  00de a401          	and	a,#1
- 722  00e0 1a01          	or	a,(OFST+0,sp)
- 723  00e2 ca530b        	or	a,21259
- 724  00e5 c7530b        	ld	21259,a
- 725                     ; 191     TIM2->CCMR3 = (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~TIM2_CCMR_OCM)) |
- 725                     ; 192                             (uint8_t)TIM2_OCMode);
- 727  00e8 c65309        	ld	a,21257
- 728  00eb a48f          	and	a,#143
- 729  00ed 1a02          	or	a,(OFST+1,sp)
- 730  00ef c75309        	ld	21257,a
- 731                     ; 195     TIM2->CCR3H = (uint8_t)(TIM2_Pulse >> 8);
- 733  00f2 7b06          	ld	a,(OFST+5,sp)
- 734  00f4 c75315        	ld	21269,a
- 735                     ; 196     TIM2->CCR3L = (uint8_t)(TIM2_Pulse);
- 737  00f7 7b07          	ld	a,(OFST+6,sp)
- 738  00f9 c75316        	ld	21270,a
- 739                     ; 198 }
- 742  00fc 5b03          	addw	sp,#3
- 743  00fe 81            	ret	
- 936                     ; 210 void TIM2_ICInit(TIM2_Channel_TypeDef TIM2_Channel,
- 936                     ; 211                  TIM2_ICPolarity_TypeDef TIM2_ICPolarity,
- 936                     ; 212                  TIM2_ICSelection_TypeDef TIM2_ICSelection,
- 936                     ; 213                  TIM2_ICPSC_TypeDef TIM2_ICPrescaler,
- 936                     ; 214                  uint8_t TIM2_ICFilter)
- 936                     ; 215 {
- 937                     	switch	.text
- 938  00ff               _TIM2_ICInit:
- 940  00ff 89            	pushw	x
- 941       00000000      OFST:	set	0
- 944                     ; 217     assert_param(IS_TIM2_CHANNEL_OK(TIM2_Channel));
- 946                     ; 218     assert_param(IS_TIM2_IC_POLARITY_OK(TIM2_ICPolarity));
- 948                     ; 219     assert_param(IS_TIM2_IC_SELECTION_OK(TIM2_ICSelection));
- 950                     ; 220     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_ICPrescaler));
- 952                     ; 221     assert_param(IS_TIM2_IC_FILTER_OK(TIM2_ICFilter));
- 954                     ; 223     if (TIM2_Channel == TIM2_CHANNEL_1)
- 956  0100 9e            	ld	a,xh
- 957  0101 4d            	tnz	a
- 958  0102 2614          	jrne	L104
- 959                     ; 226         TI1_Config((uint8_t)TIM2_ICPolarity,
- 959                     ; 227                    (uint8_t)TIM2_ICSelection,
- 959                     ; 228                    (uint8_t)TIM2_ICFilter);
- 961  0104 7b07          	ld	a,(OFST+7,sp)
- 962  0106 88            	push	a
- 963  0107 7b06          	ld	a,(OFST+6,sp)
- 964  0109 97            	ld	xl,a
- 965  010a 7b03          	ld	a,(OFST+3,sp)
- 966  010c 95            	ld	xh,a
- 967  010d cd040b        	call	L3_TI1_Config
- 969  0110 84            	pop	a
- 970                     ; 231         TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
- 972  0111 7b06          	ld	a,(OFST+6,sp)
- 973  0113 cd032c        	call	_TIM2_SetIC1Prescaler
- 976  0116 202b          	jra	L304
- 977  0118               L104:
- 978                     ; 233     else if (TIM2_Channel == TIM2_CHANNEL_2)
- 980  0118 7b01          	ld	a,(OFST+1,sp)
- 981  011a 4a            	dec	a
- 982  011b 2614          	jrne	L504
- 983                     ; 236         TI2_Config((uint8_t)TIM2_ICPolarity,
- 983                     ; 237                    (uint8_t)TIM2_ICSelection,
- 983                     ; 238                    (uint8_t)TIM2_ICFilter);
- 985  011d 7b07          	ld	a,(OFST+7,sp)
- 986  011f 88            	push	a
- 987  0120 7b06          	ld	a,(OFST+6,sp)
- 988  0122 97            	ld	xl,a
- 989  0123 7b03          	ld	a,(OFST+3,sp)
- 990  0125 95            	ld	xh,a
- 991  0126 cd043b        	call	L5_TI2_Config
- 993  0129 84            	pop	a
- 994                     ; 241         TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
- 996  012a 7b06          	ld	a,(OFST+6,sp)
- 997  012c cd0339        	call	_TIM2_SetIC2Prescaler
-1000  012f 2012          	jra	L304
-1001  0131               L504:
-1002                     ; 246         TI3_Config((uint8_t)TIM2_ICPolarity,
-1002                     ; 247                    (uint8_t)TIM2_ICSelection,
-1002                     ; 248                    (uint8_t)TIM2_ICFilter);
-1004  0131 7b07          	ld	a,(OFST+7,sp)
-1005  0133 88            	push	a
-1006  0134 7b06          	ld	a,(OFST+6,sp)
-1007  0136 97            	ld	xl,a
-1008  0137 7b03          	ld	a,(OFST+3,sp)
-1009  0139 95            	ld	xh,a
-1010  013a cd046b        	call	L7_TI3_Config
-1012  013d 84            	pop	a
-1013                     ; 251         TIM2_SetIC3Prescaler(TIM2_ICPrescaler);
-1015  013e 7b06          	ld	a,(OFST+6,sp)
-1016  0140 cd0346        	call	_TIM2_SetIC3Prescaler
-1018  0143               L304:
-1019                     ; 253 }
-1022  0143 85            	popw	x
-1023  0144 81            	ret	
-1119                     ; 265 void TIM2_PWMIConfig(TIM2_Channel_TypeDef TIM2_Channel,
-1119                     ; 266                      TIM2_ICPolarity_TypeDef TIM2_ICPolarity,
-1119                     ; 267                      TIM2_ICSelection_TypeDef TIM2_ICSelection,
-1119                     ; 268                      TIM2_ICPSC_TypeDef TIM2_ICPrescaler,
-1119                     ; 269                      uint8_t TIM2_ICFilter)
-1119                     ; 270 {
-1120                     	switch	.text
-1121  0145               _TIM2_PWMIConfig:
-1123  0145 89            	pushw	x
-1124  0146 89            	pushw	x
-1125       00000002      OFST:	set	2
-1128                     ; 271     uint8_t icpolarity = (uint8_t)TIM2_ICPOLARITY_RISING;
-1130                     ; 272     uint8_t icselection = (uint8_t)TIM2_ICSELECTION_DIRECTTI;
-1132                     ; 275     assert_param(IS_TIM2_PWMI_CHANNEL_OK(TIM2_Channel));
-1134                     ; 276     assert_param(IS_TIM2_IC_POLARITY_OK(TIM2_ICPolarity));
-1136                     ; 277     assert_param(IS_TIM2_IC_SELECTION_OK(TIM2_ICSelection));
-1138                     ; 278     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_ICPrescaler));
-1140                     ; 281     if (TIM2_ICPolarity != TIM2_ICPOLARITY_FALLING)
-1142  0147 9f            	ld	a,xl
-1143  0148 a144          	cp	a,#68
-1144  014a 2706          	jreq	L754
-1145                     ; 283         icpolarity = (uint8_t)TIM2_ICPOLARITY_FALLING;
-1147  014c a644          	ld	a,#68
-1148  014e 6b01          	ld	(OFST-1,sp),a
-1150  0150 2002          	jra	L164
-1151  0152               L754:
-1152                     ; 287         icpolarity = (uint8_t)TIM2_ICPOLARITY_RISING;
-1154  0152 0f01          	clr	(OFST-1,sp)
-1155  0154               L164:
-1156                     ; 291     if (TIM2_ICSelection == TIM2_ICSELECTION_DIRECTTI)
-1158  0154 7b07          	ld	a,(OFST+5,sp)
-1159  0156 4a            	dec	a
-1160  0157 2604          	jrne	L364
-1161                     ; 293         icselection = (uint8_t)TIM2_ICSELECTION_INDIRECTTI;
-1163  0159 a602          	ld	a,#2
-1165  015b 2002          	jra	L564
-1166  015d               L364:
-1167                     ; 297         icselection = (uint8_t)TIM2_ICSELECTION_DIRECTTI;
-1169  015d a601          	ld	a,#1
-1170  015f               L564:
-1171  015f 6b02          	ld	(OFST+0,sp),a
-1172                     ; 300     if (TIM2_Channel == TIM2_CHANNEL_1)
-1174  0161 7b03          	ld	a,(OFST+1,sp)
-1175  0163 2626          	jrne	L764
-1176                     ; 303         TI1_Config((uint8_t)TIM2_ICPolarity, (uint8_t)TIM2_ICSelection,
-1176                     ; 304                    (uint8_t)TIM2_ICFilter);
-1178  0165 7b09          	ld	a,(OFST+7,sp)
-1179  0167 88            	push	a
-1180  0168 7b08          	ld	a,(OFST+6,sp)
-1181  016a 97            	ld	xl,a
-1182  016b 7b05          	ld	a,(OFST+3,sp)
-1183  016d 95            	ld	xh,a
-1184  016e cd040b        	call	L3_TI1_Config
-1186  0171 84            	pop	a
-1187                     ; 307         TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
-1189  0172 7b08          	ld	a,(OFST+6,sp)
-1190  0174 cd032c        	call	_TIM2_SetIC1Prescaler
-1192                     ; 310         TI2_Config(icpolarity, icselection, TIM2_ICFilter);
-1194  0177 7b09          	ld	a,(OFST+7,sp)
-1195  0179 88            	push	a
-1196  017a 7b03          	ld	a,(OFST+1,sp)
-1197  017c 97            	ld	xl,a
-1198  017d 7b02          	ld	a,(OFST+0,sp)
-1199  017f 95            	ld	xh,a
-1200  0180 cd043b        	call	L5_TI2_Config
-1202  0183 84            	pop	a
-1203                     ; 313         TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
-1205  0184 7b08          	ld	a,(OFST+6,sp)
-1206  0186 cd0339        	call	_TIM2_SetIC2Prescaler
-1209  0189 2024          	jra	L174
-1210  018b               L764:
-1211                     ; 318         TI2_Config((uint8_t)TIM2_ICPolarity, (uint8_t)TIM2_ICSelection,
-1211                     ; 319                    (uint8_t)TIM2_ICFilter);
-1213  018b 7b09          	ld	a,(OFST+7,sp)
-1214  018d 88            	push	a
-1215  018e 7b08          	ld	a,(OFST+6,sp)
-1216  0190 97            	ld	xl,a
-1217  0191 7b05          	ld	a,(OFST+3,sp)
-1218  0193 95            	ld	xh,a
-1219  0194 cd043b        	call	L5_TI2_Config
-1221  0197 84            	pop	a
-1222                     ; 322         TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
-1224  0198 7b08          	ld	a,(OFST+6,sp)
-1225  019a cd0339        	call	_TIM2_SetIC2Prescaler
-1227                     ; 325         TI1_Config((uint8_t)icpolarity, icselection, (uint8_t)TIM2_ICFilter);
-1229  019d 7b09          	ld	a,(OFST+7,sp)
-1230  019f 88            	push	a
-1231  01a0 7b03          	ld	a,(OFST+1,sp)
-1232  01a2 97            	ld	xl,a
-1233  01a3 7b02          	ld	a,(OFST+0,sp)
-1234  01a5 95            	ld	xh,a
-1235  01a6 cd040b        	call	L3_TI1_Config
-1237  01a9 84            	pop	a
-1238                     ; 328         TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
-1240  01aa 7b08          	ld	a,(OFST+6,sp)
-1241  01ac cd032c        	call	_TIM2_SetIC1Prescaler
-1243  01af               L174:
-1244                     ; 330 }
-1247  01af 5b04          	addw	sp,#4
-1248  01b1 81            	ret	
-1303                     ; 339 void TIM2_Cmd(FunctionalState NewState)
-1303                     ; 340 {
-1304                     	switch	.text
-1305  01b2               _TIM2_Cmd:
-1309                     ; 342     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-1311                     ; 345     if (NewState != DISABLE)
-1313  01b2 4d            	tnz	a
-1314  01b3 2705          	jreq	L125
-1315                     ; 347         TIM2->CR1 |= (uint8_t)TIM2_CR1_CEN;
-1317  01b5 72105300      	bset	21248,#0
-1320  01b9 81            	ret	
-1321  01ba               L125:
-1322                     ; 351         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_CEN);
-1324  01ba 72115300      	bres	21248,#0
-1325                     ; 353 }
-1328  01be 81            	ret	
-1407                     ; 369 void TIM2_ITConfig(TIM2_IT_TypeDef TIM2_IT, FunctionalState NewState)
-1407                     ; 370 {
-1408                     	switch	.text
-1409  01bf               _TIM2_ITConfig:
-1411  01bf 89            	pushw	x
-1412       00000000      OFST:	set	0
-1415                     ; 372     assert_param(IS_TIM2_IT_OK(TIM2_IT));
-1417                     ; 373     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-1419                     ; 375     if (NewState != DISABLE)
-1421  01c0 9f            	ld	a,xl
-1422  01c1 4d            	tnz	a
-1423  01c2 2706          	jreq	L365
-1424                     ; 378         TIM2->IER |= (uint8_t)TIM2_IT;
-1426  01c4 9e            	ld	a,xh
-1427  01c5 ca5303        	or	a,21251
-1429  01c8 2006          	jra	L565
-1430  01ca               L365:
-1431                     ; 383         TIM2->IER &= (uint8_t)(~TIM2_IT);
-1433  01ca 7b01          	ld	a,(OFST+1,sp)
-1434  01cc 43            	cpl	a
-1435  01cd c45303        	and	a,21251
-1436  01d0               L565:
-1437  01d0 c75303        	ld	21251,a
-1438                     ; 385 }
-1441  01d3 85            	popw	x
-1442  01d4 81            	ret	
-1478                     ; 394 void TIM2_UpdateDisableConfig(FunctionalState NewState)
-1478                     ; 395 {
-1479                     	switch	.text
-1480  01d5               _TIM2_UpdateDisableConfig:
-1484                     ; 397     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-1486                     ; 400     if (NewState != DISABLE)
-1488  01d5 4d            	tnz	a
-1489  01d6 2705          	jreq	L506
-1490                     ; 402         TIM2->CR1 |= (uint8_t)TIM2_CR1_UDIS;
-1492  01d8 72125300      	bset	21248,#1
-1495  01dc 81            	ret	
-1496  01dd               L506:
-1497                     ; 406         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_UDIS);
-1499  01dd 72135300      	bres	21248,#1
-1500                     ; 408 }
-1503  01e1 81            	ret	
-1561                     ; 418 void TIM2_UpdateRequestConfig(TIM2_UpdateSource_TypeDef TIM2_UpdateSource)
-1561                     ; 419 {
-1562                     	switch	.text
-1563  01e2               _TIM2_UpdateRequestConfig:
-1567                     ; 421     assert_param(IS_TIM2_UPDATE_SOURCE_OK(TIM2_UpdateSource));
-1569                     ; 424     if (TIM2_UpdateSource != TIM2_UPDATESOURCE_GLOBAL)
-1571  01e2 4d            	tnz	a
-1572  01e3 2705          	jreq	L736
-1573                     ; 426         TIM2->CR1 |= (uint8_t)TIM2_CR1_URS;
-1575  01e5 72145300      	bset	21248,#2
-1578  01e9 81            	ret	
-1579  01ea               L736:
-1580                     ; 430         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_URS);
-1582  01ea 72155300      	bres	21248,#2
-1583                     ; 432 }
-1586  01ee 81            	ret	
-1643                     ; 443 void TIM2_SelectOnePulseMode(TIM2_OPMode_TypeDef TIM2_OPMode)
-1643                     ; 444 {
-1644                     	switch	.text
-1645  01ef               _TIM2_SelectOnePulseMode:
-1649                     ; 446     assert_param(IS_TIM2_OPM_MODE_OK(TIM2_OPMode));
-1651                     ; 449     if (TIM2_OPMode != TIM2_OPMODE_REPETITIVE)
-1653  01ef 4d            	tnz	a
-1654  01f0 2705          	jreq	L176
-1655                     ; 451         TIM2->CR1 |= (uint8_t)TIM2_CR1_OPM;
-1657  01f2 72165300      	bset	21248,#3
-1660  01f6 81            	ret	
-1661  01f7               L176:
-1662                     ; 455         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_OPM);
-1664  01f7 72175300      	bres	21248,#3
-1665                     ; 458 }
-1668  01fb 81            	ret	
-1736                     ; 489 void TIM2_PrescalerConfig(TIM2_Prescaler_TypeDef Prescaler,
-1736                     ; 490                           TIM2_PSCReloadMode_TypeDef TIM2_PSCReloadMode)
-1736                     ; 491 {
-1737                     	switch	.text
-1738  01fc               _TIM2_PrescalerConfig:
-1742                     ; 493     assert_param(IS_TIM2_PRESCALER_RELOAD_OK(TIM2_PSCReloadMode));
-1744                     ; 494     assert_param(IS_TIM2_PRESCALER_OK(Prescaler));
-1746                     ; 497     TIM2->PSCR = (uint8_t)Prescaler;
-1748  01fc 9e            	ld	a,xh
-1749  01fd c7530e        	ld	21262,a
-1750                     ; 500     TIM2->EGR = (uint8_t)TIM2_PSCReloadMode;
-1752  0200 9f            	ld	a,xl
-1753  0201 c75306        	ld	21254,a
-1754                     ; 501 }
-1757  0204 81            	ret	
-1815                     ; 512 void TIM2_ForcedOC1Config(TIM2_ForcedAction_TypeDef TIM2_ForcedAction)
-1815                     ; 513 {
-1816                     	switch	.text
-1817  0205               _TIM2_ForcedOC1Config:
-1819  0205 88            	push	a
-1820       00000000      OFST:	set	0
-1823                     ; 515     assert_param(IS_TIM2_FORCED_ACTION_OK(TIM2_ForcedAction));
-1825                     ; 518     TIM2->CCMR1  =  (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~TIM2_CCMR_OCM))  
-1825                     ; 519                               | (uint8_t)TIM2_ForcedAction);
-1827  0206 c65307        	ld	a,21255
-1828  0209 a48f          	and	a,#143
-1829  020b 1a01          	or	a,(OFST+1,sp)
-1830  020d c75307        	ld	21255,a
-1831                     ; 520 }
-1834  0210 84            	pop	a
-1835  0211 81            	ret	
-1871                     ; 531 void TIM2_ForcedOC2Config(TIM2_ForcedAction_TypeDef TIM2_ForcedAction)
-1871                     ; 532 {
-1872                     	switch	.text
-1873  0212               _TIM2_ForcedOC2Config:
-1875  0212 88            	push	a
-1876       00000000      OFST:	set	0
-1879                     ; 534     assert_param(IS_TIM2_FORCED_ACTION_OK(TIM2_ForcedAction));
-1881                     ; 537     TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~TIM2_CCMR_OCM))  
-1881                     ; 538                             | (uint8_t)TIM2_ForcedAction);
-1883  0213 c65308        	ld	a,21256
-1884  0216 a48f          	and	a,#143
-1885  0218 1a01          	or	a,(OFST+1,sp)
-1886  021a c75308        	ld	21256,a
-1887                     ; 539 }
-1890  021d 84            	pop	a
-1891  021e 81            	ret	
-1927                     ; 550 void TIM2_ForcedOC3Config(TIM2_ForcedAction_TypeDef TIM2_ForcedAction)
-1927                     ; 551 {
-1928                     	switch	.text
-1929  021f               _TIM2_ForcedOC3Config:
-1931  021f 88            	push	a
-1932       00000000      OFST:	set	0
-1935                     ; 553     assert_param(IS_TIM2_FORCED_ACTION_OK(TIM2_ForcedAction));
-1937                     ; 556     TIM2->CCMR3  =  (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~TIM2_CCMR_OCM))
-1937                     ; 557                               | (uint8_t)TIM2_ForcedAction);
-1939  0220 c65309        	ld	a,21257
-1940  0223 a48f          	and	a,#143
-1941  0225 1a01          	or	a,(OFST+1,sp)
-1942  0227 c75309        	ld	21257,a
-1943                     ; 558 }
-1946  022a 84            	pop	a
-1947  022b 81            	ret	
-1983                     ; 567 void TIM2_ARRPreloadConfig(FunctionalState NewState)
-1983                     ; 568 {
-1984                     	switch	.text
-1985  022c               _TIM2_ARRPreloadConfig:
-1989                     ; 570     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-1991                     ; 573     if (NewState != DISABLE)
-1993  022c 4d            	tnz	a
-1994  022d 2705          	jreq	L7201
-1995                     ; 575         TIM2->CR1 |= (uint8_t)TIM2_CR1_ARPE;
-1997  022f 721e5300      	bset	21248,#7
-2000  0233 81            	ret	
-2001  0234               L7201:
-2002                     ; 579         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_ARPE);
-2004  0234 721f5300      	bres	21248,#7
-2005                     ; 581 }
-2008  0238 81            	ret	
-2044                     ; 590 void TIM2_OC1PreloadConfig(FunctionalState NewState)
-2044                     ; 591 {
-2045                     	switch	.text
-2046  0239               _TIM2_OC1PreloadConfig:
-2050                     ; 593     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-2052                     ; 596     if (NewState != DISABLE)
-2054  0239 4d            	tnz	a
-2055  023a 2705          	jreq	L1501
-2056                     ; 598         TIM2->CCMR1 |= (uint8_t)TIM2_CCMR_OCxPE;
-2058  023c 72165307      	bset	21255,#3
-2061  0240 81            	ret	
-2062  0241               L1501:
-2063                     ; 602         TIM2->CCMR1 &= (uint8_t)(~TIM2_CCMR_OCxPE);
-2065  0241 72175307      	bres	21255,#3
-2066                     ; 604 }
-2069  0245 81            	ret	
-2105                     ; 613 void TIM2_OC2PreloadConfig(FunctionalState NewState)
-2105                     ; 614 {
-2106                     	switch	.text
-2107  0246               _TIM2_OC2PreloadConfig:
-2111                     ; 616     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-2113                     ; 619     if (NewState != DISABLE)
-2115  0246 4d            	tnz	a
-2116  0247 2705          	jreq	L3701
-2117                     ; 621         TIM2->CCMR2 |= (uint8_t)TIM2_CCMR_OCxPE;
-2119  0249 72165308      	bset	21256,#3
-2122  024d 81            	ret	
-2123  024e               L3701:
-2124                     ; 625         TIM2->CCMR2 &= (uint8_t)(~TIM2_CCMR_OCxPE);
-2126  024e 72175308      	bres	21256,#3
-2127                     ; 627 }
-2130  0252 81            	ret	
-2166                     ; 636 void TIM2_OC3PreloadConfig(FunctionalState NewState)
-2166                     ; 637 {
-2167                     	switch	.text
-2168  0253               _TIM2_OC3PreloadConfig:
-2172                     ; 639     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-2174                     ; 642     if (NewState != DISABLE)
-2176  0253 4d            	tnz	a
-2177  0254 2705          	jreq	L5111
-2178                     ; 644         TIM2->CCMR3 |= (uint8_t)TIM2_CCMR_OCxPE;
-2180  0256 72165309      	bset	21257,#3
-2183  025a 81            	ret	
-2184  025b               L5111:
-2185                     ; 648         TIM2->CCMR3 &= (uint8_t)(~TIM2_CCMR_OCxPE);
-2187  025b 72175309      	bres	21257,#3
-2188                     ; 650 }
-2191  025f 81            	ret	
-2264                     ; 663 void TIM2_GenerateEvent(TIM2_EventSource_TypeDef TIM2_EventSource)
-2264                     ; 664 {
-2265                     	switch	.text
-2266  0260               _TIM2_GenerateEvent:
-2270                     ; 666     assert_param(IS_TIM2_EVENT_SOURCE_OK(TIM2_EventSource));
-2272                     ; 669     TIM2->EGR = (uint8_t)TIM2_EventSource;
-2274  0260 c75306        	ld	21254,a
-2275                     ; 670 }
-2278  0263 81            	ret	
-2314                     ; 681 void TIM2_OC1PolarityConfig(TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
-2314                     ; 682 {
-2315                     	switch	.text
-2316  0264               _TIM2_OC1PolarityConfig:
-2320                     ; 684     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
-2322                     ; 687     if (TIM2_OCPolarity != TIM2_OCPOLARITY_HIGH)
-2324  0264 4d            	tnz	a
-2325  0265 2705          	jreq	L1711
-2326                     ; 689         TIM2->CCER1 |= (uint8_t)TIM2_CCER1_CC1P;
-2328  0267 7212530a      	bset	21258,#1
-2331  026b 81            	ret	
-2332  026c               L1711:
-2333                     ; 693         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1P);
-2335  026c 7213530a      	bres	21258,#1
-2336                     ; 695 }
-2339  0270 81            	ret	
-2375                     ; 706 void TIM2_OC2PolarityConfig(TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
-2375                     ; 707 {
-2376                     	switch	.text
-2377  0271               _TIM2_OC2PolarityConfig:
-2381                     ; 709     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
-2383                     ; 712     if (TIM2_OCPolarity != TIM2_OCPOLARITY_HIGH)
-2385  0271 4d            	tnz	a
-2386  0272 2705          	jreq	L3121
-2387                     ; 714         TIM2->CCER1 |= TIM2_CCER1_CC2P;
-2389  0274 721a530a      	bset	21258,#5
-2392  0278 81            	ret	
-2393  0279               L3121:
-2394                     ; 718         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2P);
-2396  0279 721b530a      	bres	21258,#5
-2397                     ; 720 }
-2400  027d 81            	ret	
-2436                     ; 731 void TIM2_OC3PolarityConfig(TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
-2436                     ; 732 {
-2437                     	switch	.text
-2438  027e               _TIM2_OC3PolarityConfig:
-2442                     ; 734     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
-2444                     ; 737     if (TIM2_OCPolarity != TIM2_OCPOLARITY_HIGH)
-2446  027e 4d            	tnz	a
-2447  027f 2705          	jreq	L5321
-2448                     ; 739         TIM2->CCER2 |= (uint8_t)TIM2_CCER2_CC3P;
-2450  0281 7212530b      	bset	21259,#1
-2453  0285 81            	ret	
-2454  0286               L5321:
-2455                     ; 743         TIM2->CCER2 &= (uint8_t)(~TIM2_CCER2_CC3P);
-2457  0286 7213530b      	bres	21259,#1
-2458                     ; 745 }
-2461  028a 81            	ret	
-2506                     ; 759 void TIM2_CCxCmd(TIM2_Channel_TypeDef TIM2_Channel, FunctionalState NewState)
-2506                     ; 760 {
-2507                     	switch	.text
-2508  028b               _TIM2_CCxCmd:
-2510  028b 89            	pushw	x
-2511       00000000      OFST:	set	0
-2514                     ; 762     assert_param(IS_TIM2_CHANNEL_OK(TIM2_Channel));
-2516                     ; 763     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-2518                     ; 765     if (TIM2_Channel == TIM2_CHANNEL_1)
-2520  028c 9e            	ld	a,xh
-2521  028d 4d            	tnz	a
-2522  028e 2610          	jrne	L3621
-2523                     ; 768         if (NewState != DISABLE)
-2525  0290 9f            	ld	a,xl
-2526  0291 4d            	tnz	a
-2527  0292 2706          	jreq	L5621
-2528                     ; 770             TIM2->CCER1 |= (uint8_t)TIM2_CCER1_CC1E;
-2530  0294 7210530a      	bset	21258,#0
-2532  0298 2029          	jra	L1721
-2533  029a               L5621:
-2534                     ; 774             TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1E);
-2536  029a 7211530a      	bres	21258,#0
-2537  029e 2023          	jra	L1721
-2538  02a0               L3621:
-2539                     ; 778     else if (TIM2_Channel == TIM2_CHANNEL_2)
-2541  02a0 7b01          	ld	a,(OFST+1,sp)
-2542  02a2 4a            	dec	a
-2543  02a3 2610          	jrne	L3721
-2544                     ; 781         if (NewState != DISABLE)
-2546  02a5 7b02          	ld	a,(OFST+2,sp)
-2547  02a7 2706          	jreq	L5721
-2548                     ; 783             TIM2->CCER1 |= (uint8_t)TIM2_CCER1_CC2E;
-2550  02a9 7218530a      	bset	21258,#4
-2552  02ad 2014          	jra	L1721
-2553  02af               L5721:
-2554                     ; 787             TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2E);
-2556  02af 7219530a      	bres	21258,#4
-2557  02b3 200e          	jra	L1721
-2558  02b5               L3721:
-2559                     ; 793         if (NewState != DISABLE)
-2561  02b5 7b02          	ld	a,(OFST+2,sp)
-2562  02b7 2706          	jreq	L3031
-2563                     ; 795             TIM2->CCER2 |= (uint8_t)TIM2_CCER2_CC3E;
-2565  02b9 7210530b      	bset	21259,#0
-2567  02bd 2004          	jra	L1721
-2568  02bf               L3031:
-2569                     ; 799             TIM2->CCER2 &= (uint8_t)(~TIM2_CCER2_CC3E);
-2571  02bf 7211530b      	bres	21259,#0
-2572  02c3               L1721:
-2573                     ; 802 }
-2576  02c3 85            	popw	x
-2577  02c4 81            	ret	
-2622                     ; 824 void TIM2_SelectOCxM(TIM2_Channel_TypeDef TIM2_Channel, TIM2_OCMode_TypeDef TIM2_OCMode)
-2622                     ; 825 {
-2623                     	switch	.text
-2624  02c5               _TIM2_SelectOCxM:
-2626  02c5 89            	pushw	x
-2627       00000000      OFST:	set	0
-2630                     ; 827     assert_param(IS_TIM2_CHANNEL_OK(TIM2_Channel));
-2632                     ; 828     assert_param(IS_TIM2_OCM_OK(TIM2_OCMode));
-2634                     ; 830     if (TIM2_Channel == TIM2_CHANNEL_1)
-2636  02c6 9e            	ld	a,xh
-2637  02c7 4d            	tnz	a
-2638  02c8 2610          	jrne	L1331
-2639                     ; 833         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1E);
-2641  02ca 7211530a      	bres	21258,#0
-2642                     ; 836         TIM2->CCMR1 = (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~TIM2_CCMR_OCM))
-2642                     ; 837                                | (uint8_t)TIM2_OCMode);
-2644  02ce c65307        	ld	a,21255
-2645  02d1 a48f          	and	a,#143
-2646  02d3 1a02          	or	a,(OFST+2,sp)
-2647  02d5 c75307        	ld	21255,a
-2649  02d8 2023          	jra	L3331
-2650  02da               L1331:
-2651                     ; 839     else if (TIM2_Channel == TIM2_CHANNEL_2)
-2653  02da 7b01          	ld	a,(OFST+1,sp)
-2654  02dc 4a            	dec	a
-2655  02dd 2610          	jrne	L5331
-2656                     ; 842         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2E);
-2658  02df 7219530a      	bres	21258,#4
-2659                     ; 845         TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~TIM2_CCMR_OCM))
-2659                     ; 846                                 | (uint8_t)TIM2_OCMode);
-2661  02e3 c65308        	ld	a,21256
-2662  02e6 a48f          	and	a,#143
-2663  02e8 1a02          	or	a,(OFST+2,sp)
-2664  02ea c75308        	ld	21256,a
-2666  02ed 200e          	jra	L3331
-2667  02ef               L5331:
-2668                     ; 851         TIM2->CCER2 &= (uint8_t)(~TIM2_CCER2_CC3E);
-2670  02ef 7211530b      	bres	21259,#0
-2671                     ; 854         TIM2->CCMR3 = (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~TIM2_CCMR_OCM))
-2671                     ; 855                                 | (uint8_t)TIM2_OCMode);
-2673  02f3 c65309        	ld	a,21257
-2674  02f6 a48f          	and	a,#143
-2675  02f8 1a02          	or	a,(OFST+2,sp)
-2676  02fa c75309        	ld	21257,a
-2677  02fd               L3331:
-2678                     ; 857 }
-2681  02fd 85            	popw	x
-2682  02fe 81            	ret	
-2716                     ; 866 void TIM2_SetCounter(uint16_t Counter)
-2716                     ; 867 {
-2717                     	switch	.text
-2718  02ff               _TIM2_SetCounter:
-2722                     ; 869     TIM2->CNTRH = (uint8_t)(Counter >> 8);
-2724  02ff 9e            	ld	a,xh
-2725  0300 c7530c        	ld	21260,a
-2726                     ; 870     TIM2->CNTRL = (uint8_t)(Counter);
-2728  0303 9f            	ld	a,xl
-2729  0304 c7530d        	ld	21261,a
-2730                     ; 872 }
-2733  0307 81            	ret	
-2767                     ; 881 void TIM2_SetAutoreload(uint16_t Autoreload)
-2767                     ; 882 {
-2768                     	switch	.text
-2769  0308               _TIM2_SetAutoreload:
-2773                     ; 885     TIM2->ARRH = (uint8_t)(Autoreload >> 8);
-2775  0308 9e            	ld	a,xh
-2776  0309 c7530f        	ld	21263,a
-2777                     ; 886     TIM2->ARRL = (uint8_t)(Autoreload);
-2779  030c 9f            	ld	a,xl
-2780  030d c75310        	ld	21264,a
-2781                     ; 888 }
-2784  0310 81            	ret	
-2818                     ; 897 void TIM2_SetCompare1(uint16_t Compare1)
-2818                     ; 898 {
-2819                     	switch	.text
-2820  0311               _TIM2_SetCompare1:
-2824                     ; 900     TIM2->CCR1H = (uint8_t)(Compare1 >> 8);
-2826  0311 9e            	ld	a,xh
-2827  0312 c75311        	ld	21265,a
-2828                     ; 901     TIM2->CCR1L = (uint8_t)(Compare1);
-2830  0315 9f            	ld	a,xl
-2831  0316 c75312        	ld	21266,a
-2832                     ; 903 }
-2835  0319 81            	ret	
-2869                     ; 912 void TIM2_SetCompare2(uint16_t Compare2)
-2869                     ; 913 {
-2870                     	switch	.text
-2871  031a               _TIM2_SetCompare2:
-2875                     ; 915     TIM2->CCR2H = (uint8_t)(Compare2 >> 8);
-2877  031a 9e            	ld	a,xh
-2878  031b c75313        	ld	21267,a
-2879                     ; 916     TIM2->CCR2L = (uint8_t)(Compare2);
-2881  031e 9f            	ld	a,xl
-2882  031f c75314        	ld	21268,a
-2883                     ; 918 }
-2886  0322 81            	ret	
-2920                     ; 927 void TIM2_SetCompare3(uint16_t Compare3)
-2920                     ; 928 {
-2921                     	switch	.text
-2922  0323               _TIM2_SetCompare3:
-2926                     ; 930     TIM2->CCR3H = (uint8_t)(Compare3 >> 8);
-2928  0323 9e            	ld	a,xh
-2929  0324 c75315        	ld	21269,a
-2930                     ; 931     TIM2->CCR3L = (uint8_t)(Compare3);
-2932  0327 9f            	ld	a,xl
-2933  0328 c75316        	ld	21270,a
-2934                     ; 933 }
-2937  032b 81            	ret	
-2973                     ; 946 void TIM2_SetIC1Prescaler(TIM2_ICPSC_TypeDef TIM2_IC1Prescaler)
-2973                     ; 947 {
-2974                     	switch	.text
-2975  032c               _TIM2_SetIC1Prescaler:
-2977  032c 88            	push	a
-2978       00000000      OFST:	set	0
-2981                     ; 949     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_IC1Prescaler));
-2983                     ; 952     TIM2->CCMR1 = (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~TIM2_CCMR_ICxPSC))
-2983                     ; 953                             | (uint8_t)TIM2_IC1Prescaler);
-2985  032d c65307        	ld	a,21255
-2986  0330 a4f3          	and	a,#243
-2987  0332 1a01          	or	a,(OFST+1,sp)
-2988  0334 c75307        	ld	21255,a
-2989                     ; 954 }
-2992  0337 84            	pop	a
-2993  0338 81            	ret	
-3029                     ; 966 void TIM2_SetIC2Prescaler(TIM2_ICPSC_TypeDef TIM2_IC2Prescaler)
-3029                     ; 967 {
-3030                     	switch	.text
-3031  0339               _TIM2_SetIC2Prescaler:
-3033  0339 88            	push	a
-3034       00000000      OFST:	set	0
-3037                     ; 969     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_IC2Prescaler));
-3039                     ; 972     TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~TIM2_CCMR_ICxPSC))
-3039                     ; 973                             | (uint8_t)TIM2_IC2Prescaler);
-3041  033a c65308        	ld	a,21256
-3042  033d a4f3          	and	a,#243
-3043  033f 1a01          	or	a,(OFST+1,sp)
-3044  0341 c75308        	ld	21256,a
-3045                     ; 974 }
-3048  0344 84            	pop	a
-3049  0345 81            	ret	
-3085                     ; 986 void TIM2_SetIC3Prescaler(TIM2_ICPSC_TypeDef TIM2_IC3Prescaler)
-3085                     ; 987 {
-3086                     	switch	.text
-3087  0346               _TIM2_SetIC3Prescaler:
-3089  0346 88            	push	a
-3090       00000000      OFST:	set	0
-3093                     ; 990     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_IC3Prescaler));
-3095                     ; 992     TIM2->CCMR3 = (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~TIM2_CCMR_ICxPSC))
-3095                     ; 993                             | (uint8_t)TIM2_IC3Prescaler);
-3097  0347 c65309        	ld	a,21257
-3098  034a a4f3          	and	a,#243
-3099  034c 1a01          	or	a,(OFST+1,sp)
-3100  034e c75309        	ld	21257,a
-3101                     ; 994 }
-3104  0351 84            	pop	a
-3105  0352 81            	ret	
-3157                     ; 1001 uint16_t TIM2_GetCapture1(void)
-3157                     ; 1002 {
-3158                     	switch	.text
-3159  0353               _TIM2_GetCapture1:
-3161  0353 5204          	subw	sp,#4
-3162       00000004      OFST:	set	4
-3165                     ; 1004     uint16_t tmpccr1 = 0;
-3167                     ; 1005     uint8_t tmpccr1l=0, tmpccr1h=0;
-3171                     ; 1007     tmpccr1h = TIM2->CCR1H;
-3173  0355 c65311        	ld	a,21265
-3174  0358 6b02          	ld	(OFST-2,sp),a
-3175                     ; 1008     tmpccr1l = TIM2->CCR1L;
-3177  035a c65312        	ld	a,21266
-3178  035d 6b01          	ld	(OFST-3,sp),a
-3179                     ; 1010     tmpccr1 = (uint16_t)(tmpccr1l);
-3181  035f 5f            	clrw	x
-3182  0360 97            	ld	xl,a
-3183  0361 1f03          	ldw	(OFST-1,sp),x
-3184                     ; 1011     tmpccr1 |= (uint16_t)((uint16_t)tmpccr1h << 8);
-3186  0363 5f            	clrw	x
-3187  0364 7b02          	ld	a,(OFST-2,sp)
-3188  0366 97            	ld	xl,a
-3189  0367 7b04          	ld	a,(OFST+0,sp)
-3190  0369 01            	rrwa	x,a
-3191  036a 1a03          	or	a,(OFST-1,sp)
-3192  036c 01            	rrwa	x,a
-3193                     ; 1013     return (uint16_t)tmpccr1;
-3197  036d 5b04          	addw	sp,#4
-3198  036f 81            	ret	
-3250                     ; 1021 uint16_t TIM2_GetCapture2(void)
-3250                     ; 1022 {
-3251                     	switch	.text
-3252  0370               _TIM2_GetCapture2:
-3254  0370 5204          	subw	sp,#4
-3255       00000004      OFST:	set	4
-3258                     ; 1024     uint16_t tmpccr2 = 0;
-3260                     ; 1025     uint8_t tmpccr2l=0, tmpccr2h=0;
-3264                     ; 1027     tmpccr2h = TIM2->CCR2H;
-3266  0372 c65313        	ld	a,21267
-3267  0375 6b02          	ld	(OFST-2,sp),a
-3268                     ; 1028     tmpccr2l = TIM2->CCR2L;
-3270  0377 c65314        	ld	a,21268
-3271  037a 6b01          	ld	(OFST-3,sp),a
-3272                     ; 1030     tmpccr2 = (uint16_t)(tmpccr2l);
-3274  037c 5f            	clrw	x
-3275  037d 97            	ld	xl,a
-3276  037e 1f03          	ldw	(OFST-1,sp),x
-3277                     ; 1031     tmpccr2 |= (uint16_t)((uint16_t)tmpccr2h << 8);
-3279  0380 5f            	clrw	x
-3280  0381 7b02          	ld	a,(OFST-2,sp)
-3281  0383 97            	ld	xl,a
-3282  0384 7b04          	ld	a,(OFST+0,sp)
-3283  0386 01            	rrwa	x,a
-3284  0387 1a03          	or	a,(OFST-1,sp)
-3285  0389 01            	rrwa	x,a
-3286                     ; 1033     return (uint16_t)tmpccr2;
-3290  038a 5b04          	addw	sp,#4
-3291  038c 81            	ret	
-3343                     ; 1041 uint16_t TIM2_GetCapture3(void)
-3343                     ; 1042 {
-3344                     	switch	.text
-3345  038d               _TIM2_GetCapture3:
-3347  038d 5204          	subw	sp,#4
-3348       00000004      OFST:	set	4
-3351                     ; 1044     uint16_t tmpccr3 = 0;
-3353                     ; 1045     uint8_t tmpccr3l=0, tmpccr3h=0;
-3357                     ; 1047     tmpccr3h = TIM2->CCR3H;
-3359  038f c65315        	ld	a,21269
-3360  0392 6b02          	ld	(OFST-2,sp),a
-3361                     ; 1048     tmpccr3l = TIM2->CCR3L;
-3363  0394 c65316        	ld	a,21270
-3364  0397 6b01          	ld	(OFST-3,sp),a
-3365                     ; 1050     tmpccr3 = (uint16_t)(tmpccr3l);
-3367  0399 5f            	clrw	x
-3368  039a 97            	ld	xl,a
-3369  039b 1f03          	ldw	(OFST-1,sp),x
-3370                     ; 1051     tmpccr3 |= (uint16_t)((uint16_t)tmpccr3h << 8);
-3372  039d 5f            	clrw	x
-3373  039e 7b02          	ld	a,(OFST-2,sp)
-3374  03a0 97            	ld	xl,a
-3375  03a1 7b04          	ld	a,(OFST+0,sp)
-3376  03a3 01            	rrwa	x,a
-3377  03a4 1a03          	or	a,(OFST-1,sp)
-3378  03a6 01            	rrwa	x,a
-3379                     ; 1053     return (uint16_t)tmpccr3;
-3383  03a7 5b04          	addw	sp,#4
-3384  03a9 81            	ret	
-3418                     ; 1061 uint16_t TIM2_GetCounter(void)
-3418                     ; 1062 {
-3419                     	switch	.text
-3420  03aa               _TIM2_GetCounter:
-3422  03aa 89            	pushw	x
-3423       00000002      OFST:	set	2
-3426                     ; 1063      uint16_t tmpcntr = 0;
-3428                     ; 1065     tmpcntr =  ((uint16_t)TIM2->CNTRH << 8);
-3430  03ab c6530c        	ld	a,21260
-3431  03ae 97            	ld	xl,a
-3432  03af 4f            	clr	a
-3433  03b0 02            	rlwa	x,a
-3434  03b1 1f01          	ldw	(OFST-1,sp),x
-3435                     ; 1067     return (uint16_t)( tmpcntr| (uint16_t)(TIM2->CNTRL));
-3437  03b3 5f            	clrw	x
-3438  03b4 c6530d        	ld	a,21261
-3439  03b7 97            	ld	xl,a
-3440  03b8 01            	rrwa	x,a
-3441  03b9 1a02          	or	a,(OFST+0,sp)
-3442  03bb 01            	rrwa	x,a
-3443  03bc 1a01          	or	a,(OFST-1,sp)
-3444  03be 01            	rrwa	x,a
-3447  03bf 5b02          	addw	sp,#2
-3448  03c1 81            	ret	
-3472                     ; 1076 TIM2_Prescaler_TypeDef TIM2_GetPrescaler(void)
-3472                     ; 1077 {
-3473                     	switch	.text
-3474  03c2               _TIM2_GetPrescaler:
-3478                     ; 1079     return (TIM2_Prescaler_TypeDef)(TIM2->PSCR);
-3480  03c2 c6530e        	ld	a,21262
-3483  03c5 81            	ret	
-3622                     ; 1096 FlagStatus TIM2_GetFlagStatus(TIM2_FLAG_TypeDef TIM2_FLAG)
-3622                     ; 1097 {
-3623                     	switch	.text
-3624  03c6               _TIM2_GetFlagStatus:
-3626  03c6 89            	pushw	x
-3627  03c7 89            	pushw	x
-3628       00000002      OFST:	set	2
-3631                     ; 1098     FlagStatus bitstatus = RESET;
-3633                     ; 1099     uint8_t tim2_flag_l = 0, tim2_flag_h = 0;
-3637                     ; 1102     assert_param(IS_TIM2_GET_FLAG_OK(TIM2_FLAG));
-3639                     ; 1104     tim2_flag_l = (uint8_t)(TIM2->SR1 & (uint8_t)TIM2_FLAG);
-3641  03c8 9f            	ld	a,xl
-3642  03c9 c45304        	and	a,21252
-3643  03cc 6b01          	ld	(OFST-1,sp),a
-3644                     ; 1105     tim2_flag_h = (uint8_t)((uint16_t)TIM2_FLAG >> 8);
-3646  03ce 7b03          	ld	a,(OFST+1,sp)
-3647  03d0 6b02          	ld	(OFST+0,sp),a
-3648                     ; 1107     if ((tim2_flag_l | (uint8_t)(TIM2->SR2 & tim2_flag_h)) != (uint8_t)RESET )
-3650  03d2 c45305        	and	a,21253
-3651  03d5 1a01          	or	a,(OFST-1,sp)
-3652  03d7 2702          	jreq	L5371
-3653                     ; 1109         bitstatus = SET;
-3655  03d9 a601          	ld	a,#1
-3657  03db               L5371:
-3658                     ; 1113         bitstatus = RESET;
-3660                     ; 1115     return (FlagStatus)bitstatus;
-3664  03db 5b04          	addw	sp,#4
-3665  03dd 81            	ret	
-3700                     ; 1132 void TIM2_ClearFlag(TIM2_FLAG_TypeDef TIM2_FLAG)
-3700                     ; 1133 {
-3701                     	switch	.text
-3702  03de               _TIM2_ClearFlag:
-3706                     ; 1135     assert_param(IS_TIM2_CLEAR_FLAG_OK(TIM2_FLAG));
-3708                     ; 1138     TIM2->SR1 = (uint8_t)(~((uint8_t)(TIM2_FLAG)));
-3710  03de 9f            	ld	a,xl
-3711  03df 43            	cpl	a
-3712  03e0 c75304        	ld	21252,a
-3713                     ; 1139     TIM2->SR2 = (uint8_t)(~((uint8_t)((uint8_t)TIM2_FLAG >> 8)));
-3715  03e3 35ff5305      	mov	21253,#255
-3716                     ; 1140 }
-3719  03e7 81            	ret	
-3783                     ; 1154 ITStatus TIM2_GetITStatus(TIM2_IT_TypeDef TIM2_IT)
-3783                     ; 1155 {
-3784                     	switch	.text
-3785  03e8               _TIM2_GetITStatus:
-3787  03e8 88            	push	a
-3788  03e9 89            	pushw	x
-3789       00000002      OFST:	set	2
-3792                     ; 1156     ITStatus bitstatus = RESET;
-3794                     ; 1157     uint8_t TIM2_itStatus = 0, TIM2_itEnable = 0;
-3798                     ; 1160     assert_param(IS_TIM2_GET_IT_OK(TIM2_IT));
-3800                     ; 1162     TIM2_itStatus = (uint8_t)(TIM2->SR1 & TIM2_IT);
-3802  03ea c45304        	and	a,21252
-3803  03ed 6b01          	ld	(OFST-1,sp),a
-3804                     ; 1164     TIM2_itEnable = (uint8_t)(TIM2->IER & TIM2_IT);
-3806  03ef c65303        	ld	a,21251
-3807  03f2 1403          	and	a,(OFST+1,sp)
-3808  03f4 6b02          	ld	(OFST+0,sp),a
-3809                     ; 1166     if ((TIM2_itStatus != (uint8_t)RESET ) && (TIM2_itEnable != (uint8_t)RESET ))
-3811  03f6 7b01          	ld	a,(OFST-1,sp)
-3812  03f8 2708          	jreq	L1102
-3814  03fa 7b02          	ld	a,(OFST+0,sp)
-3815  03fc 2704          	jreq	L1102
-3816                     ; 1168         bitstatus = SET;
-3818  03fe a601          	ld	a,#1
-3820  0400 2001          	jra	L3102
-3821  0402               L1102:
-3822                     ; 1172         bitstatus = RESET;
-3824  0402 4f            	clr	a
-3825  0403               L3102:
-3826                     ; 1174     return (ITStatus)(bitstatus);
-3830  0403 5b03          	addw	sp,#3
-3831  0405 81            	ret	
-3867                     ; 1188 void TIM2_ClearITPendingBit(TIM2_IT_TypeDef TIM2_IT)
-3867                     ; 1189 {
-3868                     	switch	.text
-3869  0406               _TIM2_ClearITPendingBit:
-3873                     ; 1191     assert_param(IS_TIM2_IT_OK(TIM2_IT));
-3875                     ; 1194     TIM2->SR1 = (uint8_t)(~TIM2_IT);
-3877  0406 43            	cpl	a
-3878  0407 c75304        	ld	21252,a
-3879                     ; 1195 }
-3882  040a 81            	ret	
-3934                     ; 1214 static void TI1_Config(uint8_t TIM2_ICPolarity,
-3934                     ; 1215                        uint8_t TIM2_ICSelection,
-3934                     ; 1216                        uint8_t TIM2_ICFilter)
-3934                     ; 1217 {
-3935                     	switch	.text
-3936  040b               L3_TI1_Config:
-3938  040b 89            	pushw	x
-3939       00000001      OFST:	set	1
-3942                     ; 1219     TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1E);
-3944  040c 7211530a      	bres	21258,#0
-3945  0410 88            	push	a
-3946                     ; 1222     TIM2->CCMR1  = (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~(uint8_t)( TIM2_CCMR_CCxS | TIM2_CCMR_ICxF )))
-3946                     ; 1223                              | (uint8_t)(((TIM2_ICSelection)) | ((uint8_t)( TIM2_ICFilter << 4))));
-3948  0411 7b06          	ld	a,(OFST+5,sp)
-3949  0413 97            	ld	xl,a
-3950  0414 a610          	ld	a,#16
-3951  0416 42            	mul	x,a
-3952  0417 9f            	ld	a,xl
-3953  0418 1a03          	or	a,(OFST+2,sp)
-3954  041a 6b01          	ld	(OFST+0,sp),a
-3955  041c c65307        	ld	a,21255
-3956  041f a40c          	and	a,#12
-3957  0421 1a01          	or	a,(OFST+0,sp)
-3958  0423 c75307        	ld	21255,a
-3959                     ; 1226     if (TIM2_ICPolarity != TIM2_ICPOLARITY_RISING)
-3961  0426 7b02          	ld	a,(OFST+1,sp)
-3962  0428 2706          	jreq	L1602
-3963                     ; 1228         TIM2->CCER1 |= TIM2_CCER1_CC1P;
-3965  042a 7212530a      	bset	21258,#1
-3967  042e 2004          	jra	L3602
-3968  0430               L1602:
-3969                     ; 1232         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1P);
-3971  0430 7213530a      	bres	21258,#1
-3972  0434               L3602:
-3973                     ; 1235     TIM2->CCER1 |= TIM2_CCER1_CC1E;
-3975  0434 7210530a      	bset	21258,#0
-3976                     ; 1236 }
-3979  0438 5b03          	addw	sp,#3
-3980  043a 81            	ret	
-4032                     ; 1255 static void TI2_Config(uint8_t TIM2_ICPolarity,
-4032                     ; 1256                        uint8_t TIM2_ICSelection,
-4032                     ; 1257                        uint8_t TIM2_ICFilter)
-4032                     ; 1258 {
-4033                     	switch	.text
-4034  043b               L5_TI2_Config:
-4036  043b 89            	pushw	x
-4037       00000001      OFST:	set	1
-4040                     ; 1260     TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2E);
-4042  043c 7219530a      	bres	21258,#4
-4043  0440 88            	push	a
-4044                     ; 1263     TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~(uint8_t)( TIM2_CCMR_CCxS | TIM2_CCMR_ICxF ))) 
-4044                     ; 1264                             | (uint8_t)(( (TIM2_ICSelection)) | ((uint8_t)( TIM2_ICFilter << 4))));
-4046  0441 7b06          	ld	a,(OFST+5,sp)
-4047  0443 97            	ld	xl,a
-4048  0444 a610          	ld	a,#16
-4049  0446 42            	mul	x,a
-4050  0447 9f            	ld	a,xl
-4051  0448 1a03          	or	a,(OFST+2,sp)
-4052  044a 6b01          	ld	(OFST+0,sp),a
-4053  044c c65308        	ld	a,21256
-4054  044f a40c          	and	a,#12
-4055  0451 1a01          	or	a,(OFST+0,sp)
-4056  0453 c75308        	ld	21256,a
-4057                     ; 1268     if (TIM2_ICPolarity != TIM2_ICPOLARITY_RISING)
-4059  0456 7b02          	ld	a,(OFST+1,sp)
-4060  0458 2706          	jreq	L3112
-4061                     ; 1270         TIM2->CCER1 |= TIM2_CCER1_CC2P;
-4063  045a 721a530a      	bset	21258,#5
-4065  045e 2004          	jra	L5112
-4066  0460               L3112:
-4067                     ; 1274         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2P);
-4069  0460 721b530a      	bres	21258,#5
-4070  0464               L5112:
-4071                     ; 1278     TIM2->CCER1 |= TIM2_CCER1_CC2E;
-4073  0464 7218530a      	bset	21258,#4
-4074                     ; 1280 }
-4077  0468 5b03          	addw	sp,#3
-4078  046a 81            	ret	
-4130                     ; 1296 static void TI3_Config(uint8_t TIM2_ICPolarity, uint8_t TIM2_ICSelection,
-4130                     ; 1297                        uint8_t TIM2_ICFilter)
-4130                     ; 1298 {
-4131                     	switch	.text
-4132  046b               L7_TI3_Config:
-4134  046b 89            	pushw	x
-4135       00000001      OFST:	set	1
-4138                     ; 1300     TIM2->CCER2 &=  (uint8_t)(~TIM2_CCER2_CC3E);
-4140  046c 7211530b      	bres	21259,#0
-4141  0470 88            	push	a
-4142                     ; 1303     TIM2->CCMR3 = (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~( TIM2_CCMR_CCxS | TIM2_CCMR_ICxF))) 
-4142                     ; 1304                             | (uint8_t)(( (TIM2_ICSelection)) | ((uint8_t)( TIM2_ICFilter << 4))));
-4144  0471 7b06          	ld	a,(OFST+5,sp)
-4145  0473 97            	ld	xl,a
-4146  0474 a610          	ld	a,#16
-4147  0476 42            	mul	x,a
-4148  0477 9f            	ld	a,xl
-4149  0478 1a03          	or	a,(OFST+2,sp)
-4150  047a 6b01          	ld	(OFST+0,sp),a
-4151  047c c65309        	ld	a,21257
-4152  047f a40c          	and	a,#12
-4153  0481 1a01          	or	a,(OFST+0,sp)
-4154  0483 c75309        	ld	21257,a
-4155                     ; 1308     if (TIM2_ICPolarity != TIM2_ICPOLARITY_RISING)
-4157  0486 7b02          	ld	a,(OFST+1,sp)
-4158  0488 2706          	jreq	L5412
-4159                     ; 1310         TIM2->CCER2 |= TIM2_CCER2_CC3P;
-4161  048a 7212530b      	bset	21259,#1
-4163  048e 2004          	jra	L7412
-4164  0490               L5412:
-4165                     ; 1314         TIM2->CCER2 &= (uint8_t)(~TIM2_CCER2_CC3P);
-4167  0490 7213530b      	bres	21259,#1
-4168  0494               L7412:
-4169                     ; 1317     TIM2->CCER2 |= TIM2_CCER2_CC3E;
-4171  0494 7210530b      	bset	21259,#0
-4172                     ; 1318 }
-4175  0498 5b03          	addw	sp,#3
-4176  049a 81            	ret	
-4189                     	xdef	_TIM2_ClearITPendingBit
-4190                     	xdef	_TIM2_GetITStatus
-4191                     	xdef	_TIM2_ClearFlag
-4192                     	xdef	_TIM2_GetFlagStatus
-4193                     	xdef	_TIM2_GetPrescaler
-4194                     	xdef	_TIM2_GetCounter
-4195                     	xdef	_TIM2_GetCapture3
-4196                     	xdef	_TIM2_GetCapture2
-4197                     	xdef	_TIM2_GetCapture1
-4198                     	xdef	_TIM2_SetIC3Prescaler
-4199                     	xdef	_TIM2_SetIC2Prescaler
-4200                     	xdef	_TIM2_SetIC1Prescaler
-4201                     	xdef	_TIM2_SetCompare3
-4202                     	xdef	_TIM2_SetCompare2
-4203                     	xdef	_TIM2_SetCompare1
-4204                     	xdef	_TIM2_SetAutoreload
-4205                     	xdef	_TIM2_SetCounter
-4206                     	xdef	_TIM2_SelectOCxM
-4207                     	xdef	_TIM2_CCxCmd
-4208                     	xdef	_TIM2_OC3PolarityConfig
-4209                     	xdef	_TIM2_OC2PolarityConfig
-4210                     	xdef	_TIM2_OC1PolarityConfig
-4211                     	xdef	_TIM2_GenerateEvent
-4212                     	xdef	_TIM2_OC3PreloadConfig
-4213                     	xdef	_TIM2_OC2PreloadConfig
-4214                     	xdef	_TIM2_OC1PreloadConfig
-4215                     	xdef	_TIM2_ARRPreloadConfig
-4216                     	xdef	_TIM2_ForcedOC3Config
-4217                     	xdef	_TIM2_ForcedOC2Config
-4218                     	xdef	_TIM2_ForcedOC1Config
-4219                     	xdef	_TIM2_PrescalerConfig
-4220                     	xdef	_TIM2_SelectOnePulseMode
-4221                     	xdef	_TIM2_UpdateRequestConfig
-4222                     	xdef	_TIM2_UpdateDisableConfig
-4223                     	xdef	_TIM2_ITConfig
-4224                     	xdef	_TIM2_Cmd
-4225                     	xdef	_TIM2_PWMIConfig
-4226                     	xdef	_TIM2_ICInit
-4227                     	xdef	_TIM2_OC3Init
-4228                     	xdef	_TIM2_OC2Init
-4229                     	xdef	_TIM2_OC1Init
-4230                     	xdef	_TIM2_TimeBaseInit
-4231                     	xdef	_TIM2_DeInit
-4250                     	end
+  48                     ; 46 void TIM2_DeInit(void)
+  48                     ; 47 {
+  50                     .text:	section	.text,new
+  51  0000               _TIM2_DeInit:
+  55                     ; 49     TIM2->CR1 = (uint8_t)TIM2_CR1_RESET_VALUE;
+  57  0000 725f5300      	clr	21248
+  58                     ; 50     TIM2->IER = (uint8_t)TIM2_IER_RESET_VALUE;
+  60  0004 725f5303      	clr	21251
+  61                     ; 51     TIM2->SR2 = (uint8_t)TIM2_SR2_RESET_VALUE;
+  63  0008 725f5305      	clr	21253
+  64                     ; 54     TIM2->CCER1 = (uint8_t)TIM2_CCER1_RESET_VALUE;
+  66  000c 725f530a      	clr	21258
+  67                     ; 55     TIM2->CCER2 = (uint8_t)TIM2_CCER2_RESET_VALUE;
+  69  0010 725f530b      	clr	21259
+  70                     ; 59     TIM2->CCER1 = (uint8_t)TIM2_CCER1_RESET_VALUE;
+  72  0014 725f530a      	clr	21258
+  73                     ; 60     TIM2->CCER2 = (uint8_t)TIM2_CCER2_RESET_VALUE;
+  75  0018 725f530b      	clr	21259
+  76                     ; 61     TIM2->CCMR1 = (uint8_t)TIM2_CCMR1_RESET_VALUE;
+  78  001c 725f5307      	clr	21255
+  79                     ; 62     TIM2->CCMR2 = (uint8_t)TIM2_CCMR2_RESET_VALUE;
+  81  0020 725f5308      	clr	21256
+  82                     ; 63     TIM2->CCMR3 = (uint8_t)TIM2_CCMR3_RESET_VALUE;
+  84  0024 725f5309      	clr	21257
+  85                     ; 64     TIM2->CNTRH = (uint8_t)TIM2_CNTRH_RESET_VALUE;
+  87  0028 725f530c      	clr	21260
+  88                     ; 65     TIM2->CNTRL = (uint8_t)TIM2_CNTRL_RESET_VALUE;
+  90  002c 725f530d      	clr	21261
+  91                     ; 66     TIM2->PSCR = (uint8_t)TIM2_PSCR_RESET_VALUE;
+  93  0030 725f530e      	clr	21262
+  94                     ; 67     TIM2->ARRH  = (uint8_t)TIM2_ARRH_RESET_VALUE;
+  96  0034 35ff530f      	mov	21263,#255
+  97                     ; 68     TIM2->ARRL  = (uint8_t)TIM2_ARRL_RESET_VALUE;
+  99  0038 35ff5310      	mov	21264,#255
+ 100                     ; 69     TIM2->CCR1H = (uint8_t)TIM2_CCR1H_RESET_VALUE;
+ 102  003c 725f5311      	clr	21265
+ 103                     ; 70     TIM2->CCR1L = (uint8_t)TIM2_CCR1L_RESET_VALUE;
+ 105  0040 725f5312      	clr	21266
+ 106                     ; 71     TIM2->CCR2H = (uint8_t)TIM2_CCR2H_RESET_VALUE;
+ 108  0044 725f5313      	clr	21267
+ 109                     ; 72     TIM2->CCR2L = (uint8_t)TIM2_CCR2L_RESET_VALUE;
+ 111  0048 725f5314      	clr	21268
+ 112                     ; 73     TIM2->CCR3H = (uint8_t)TIM2_CCR3H_RESET_VALUE;
+ 114  004c 725f5315      	clr	21269
+ 115                     ; 74     TIM2->CCR3L = (uint8_t)TIM2_CCR3L_RESET_VALUE;
+ 117  0050 725f5316      	clr	21270
+ 118                     ; 75     TIM2->SR1 = (uint8_t)TIM2_SR1_RESET_VALUE;
+ 120  0054 725f5304      	clr	21252
+ 121                     ; 76 }
+ 124  0058 81            	ret	
+ 292                     ; 85 void TIM2_TimeBaseInit( TIM2_Prescaler_TypeDef TIM2_Prescaler,
+ 292                     ; 86                         uint16_t TIM2_Period)
+ 292                     ; 87 {
+ 293                     .text:	section	.text,new
+ 294  0000               _TIM2_TimeBaseInit:
+ 296       00000000      OFST:	set	0
+ 299                     ; 89     TIM2->PSCR = (uint8_t)(TIM2_Prescaler);
+ 301  0000 c7530e        	ld	21262,a
+ 302  0003 88            	push	a
+ 303                     ; 91     TIM2->ARRH = (uint8_t)(TIM2_Period >> 8);
+ 305  0004 7b04          	ld	a,(OFST+4,sp)
+ 306  0006 c7530f        	ld	21263,a
+ 307                     ; 92     TIM2->ARRL = (uint8_t)(TIM2_Period);
+ 309  0009 7b05          	ld	a,(OFST+5,sp)
+ 310  000b c75310        	ld	21264,a
+ 311                     ; 93 }
+ 314  000e 84            	pop	a
+ 315  000f 81            	ret	
+ 472                     ; 104 void TIM2_OC1Init(TIM2_OCMode_TypeDef TIM2_OCMode,
+ 472                     ; 105                   TIM2_OutputState_TypeDef TIM2_OutputState,
+ 472                     ; 106                   uint16_t TIM2_Pulse,
+ 472                     ; 107                   TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
+ 472                     ; 108 {
+ 473                     .text:	section	.text,new
+ 474  0000               _TIM2_OC1Init:
+ 476  0000 89            	pushw	x
+ 477  0001 88            	push	a
+ 478       00000001      OFST:	set	1
+ 481                     ; 110     assert_param(IS_TIM2_OC_MODE_OK(TIM2_OCMode));
+ 483                     ; 111     assert_param(IS_TIM2_OUTPUT_STATE_OK(TIM2_OutputState));
+ 485                     ; 112     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
+ 487                     ; 115     TIM2->CCER1 &= (uint8_t)(~( TIM2_CCER1_CC1E | TIM2_CCER1_CC1P));
+ 489  0002 c6530a        	ld	a,21258
+ 490  0005 a4fc          	and	a,#252
+ 491  0007 c7530a        	ld	21258,a
+ 492                     ; 117     TIM2->CCER1 |= (uint8_t)((uint8_t)(TIM2_OutputState & TIM2_CCER1_CC1E ) | 
+ 492                     ; 118                              (uint8_t)(TIM2_OCPolarity & TIM2_CCER1_CC1P));
+ 494  000a 7b08          	ld	a,(OFST+7,sp)
+ 495  000c a402          	and	a,#2
+ 496  000e 6b01          	ld	(OFST+0,sp),a
+ 497  0010 9f            	ld	a,xl
+ 498  0011 a401          	and	a,#1
+ 499  0013 1a01          	or	a,(OFST+0,sp)
+ 500  0015 ca530a        	or	a,21258
+ 501  0018 c7530a        	ld	21258,a
+ 502                     ; 121     TIM2->CCMR1 = (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~TIM2_CCMR_OCM)) |
+ 502                     ; 122                             (uint8_t)TIM2_OCMode);
+ 504  001b c65307        	ld	a,21255
+ 505  001e a48f          	and	a,#143
+ 506  0020 1a02          	or	a,(OFST+1,sp)
+ 507  0022 c75307        	ld	21255,a
+ 508                     ; 125     TIM2->CCR1H = (uint8_t)(TIM2_Pulse >> 8);
+ 510  0025 7b06          	ld	a,(OFST+5,sp)
+ 511  0027 c75311        	ld	21265,a
+ 512                     ; 126     TIM2->CCR1L = (uint8_t)(TIM2_Pulse);
+ 514  002a 7b07          	ld	a,(OFST+6,sp)
+ 515  002c c75312        	ld	21266,a
+ 516                     ; 127 }
+ 519  002f 5b03          	addw	sp,#3
+ 520  0031 81            	ret	
+ 584                     ; 138 void TIM2_OC2Init(TIM2_OCMode_TypeDef TIM2_OCMode,
+ 584                     ; 139                   TIM2_OutputState_TypeDef TIM2_OutputState,
+ 584                     ; 140                   uint16_t TIM2_Pulse,
+ 584                     ; 141                   TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
+ 584                     ; 142 {
+ 585                     .text:	section	.text,new
+ 586  0000               _TIM2_OC2Init:
+ 588  0000 89            	pushw	x
+ 589  0001 88            	push	a
+ 590       00000001      OFST:	set	1
+ 593                     ; 144     assert_param(IS_TIM2_OC_MODE_OK(TIM2_OCMode));
+ 595                     ; 145     assert_param(IS_TIM2_OUTPUT_STATE_OK(TIM2_OutputState));
+ 597                     ; 146     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
+ 599                     ; 150     TIM2->CCER1 &= (uint8_t)(~( TIM2_CCER1_CC2E |  TIM2_CCER1_CC2P ));
+ 601  0002 c6530a        	ld	a,21258
+ 602  0005 a4cf          	and	a,#207
+ 603  0007 c7530a        	ld	21258,a
+ 604                     ; 152     TIM2->CCER1 |= (uint8_t)((uint8_t)(TIM2_OutputState  & TIM2_CCER1_CC2E ) |
+ 604                     ; 153                         (uint8_t)(TIM2_OCPolarity & TIM2_CCER1_CC2P));
+ 606  000a 7b08          	ld	a,(OFST+7,sp)
+ 607  000c a420          	and	a,#32
+ 608  000e 6b01          	ld	(OFST+0,sp),a
+ 609  0010 9f            	ld	a,xl
+ 610  0011 a410          	and	a,#16
+ 611  0013 1a01          	or	a,(OFST+0,sp)
+ 612  0015 ca530a        	or	a,21258
+ 613  0018 c7530a        	ld	21258,a
+ 614                     ; 157     TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~TIM2_CCMR_OCM)) | 
+ 614                     ; 158                             (uint8_t)TIM2_OCMode);
+ 616  001b c65308        	ld	a,21256
+ 617  001e a48f          	and	a,#143
+ 618  0020 1a02          	or	a,(OFST+1,sp)
+ 619  0022 c75308        	ld	21256,a
+ 620                     ; 162     TIM2->CCR2H = (uint8_t)(TIM2_Pulse >> 8);
+ 622  0025 7b06          	ld	a,(OFST+5,sp)
+ 623  0027 c75313        	ld	21267,a
+ 624                     ; 163     TIM2->CCR2L = (uint8_t)(TIM2_Pulse);
+ 626  002a 7b07          	ld	a,(OFST+6,sp)
+ 627  002c c75314        	ld	21268,a
+ 628                     ; 164 }
+ 631  002f 5b03          	addw	sp,#3
+ 632  0031 81            	ret	
+ 696                     ; 175 void TIM2_OC3Init(TIM2_OCMode_TypeDef TIM2_OCMode,
+ 696                     ; 176                   TIM2_OutputState_TypeDef TIM2_OutputState,
+ 696                     ; 177                   uint16_t TIM2_Pulse,
+ 696                     ; 178                   TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
+ 696                     ; 179 {
+ 697                     .text:	section	.text,new
+ 698  0000               _TIM2_OC3Init:
+ 700  0000 89            	pushw	x
+ 701  0001 88            	push	a
+ 702       00000001      OFST:	set	1
+ 705                     ; 181     assert_param(IS_TIM2_OC_MODE_OK(TIM2_OCMode));
+ 707                     ; 182     assert_param(IS_TIM2_OUTPUT_STATE_OK(TIM2_OutputState));
+ 709                     ; 183     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
+ 711                     ; 185     TIM2->CCER2 &= (uint8_t)(~( TIM2_CCER2_CC3E  | TIM2_CCER2_CC3P));
+ 713  0002 c6530b        	ld	a,21259
+ 714  0005 a4fc          	and	a,#252
+ 715  0007 c7530b        	ld	21259,a
+ 716                     ; 187     TIM2->CCER2 |= (uint8_t)((uint8_t)(TIM2_OutputState & TIM2_CCER2_CC3E) |  
+ 716                     ; 188                              (uint8_t)(TIM2_OCPolarity & TIM2_CCER2_CC3P));
+ 718  000a 7b08          	ld	a,(OFST+7,sp)
+ 719  000c a402          	and	a,#2
+ 720  000e 6b01          	ld	(OFST+0,sp),a
+ 721  0010 9f            	ld	a,xl
+ 722  0011 a401          	and	a,#1
+ 723  0013 1a01          	or	a,(OFST+0,sp)
+ 724  0015 ca530b        	or	a,21259
+ 725  0018 c7530b        	ld	21259,a
+ 726                     ; 191     TIM2->CCMR3 = (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~TIM2_CCMR_OCM)) |
+ 726                     ; 192                             (uint8_t)TIM2_OCMode);
+ 728  001b c65309        	ld	a,21257
+ 729  001e a48f          	and	a,#143
+ 730  0020 1a02          	or	a,(OFST+1,sp)
+ 731  0022 c75309        	ld	21257,a
+ 732                     ; 195     TIM2->CCR3H = (uint8_t)(TIM2_Pulse >> 8);
+ 734  0025 7b06          	ld	a,(OFST+5,sp)
+ 735  0027 c75315        	ld	21269,a
+ 736                     ; 196     TIM2->CCR3L = (uint8_t)(TIM2_Pulse);
+ 738  002a 7b07          	ld	a,(OFST+6,sp)
+ 739  002c c75316        	ld	21270,a
+ 740                     ; 198 }
+ 743  002f 5b03          	addw	sp,#3
+ 744  0031 81            	ret	
+ 937                     ; 210 void TIM2_ICInit(TIM2_Channel_TypeDef TIM2_Channel,
+ 937                     ; 211                  TIM2_ICPolarity_TypeDef TIM2_ICPolarity,
+ 937                     ; 212                  TIM2_ICSelection_TypeDef TIM2_ICSelection,
+ 937                     ; 213                  TIM2_ICPSC_TypeDef TIM2_ICPrescaler,
+ 937                     ; 214                  uint8_t TIM2_ICFilter)
+ 937                     ; 215 {
+ 938                     .text:	section	.text,new
+ 939  0000               _TIM2_ICInit:
+ 941  0000 89            	pushw	x
+ 942       00000000      OFST:	set	0
+ 945                     ; 217     assert_param(IS_TIM2_CHANNEL_OK(TIM2_Channel));
+ 947                     ; 218     assert_param(IS_TIM2_IC_POLARITY_OK(TIM2_ICPolarity));
+ 949                     ; 219     assert_param(IS_TIM2_IC_SELECTION_OK(TIM2_ICSelection));
+ 951                     ; 220     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_ICPrescaler));
+ 953                     ; 221     assert_param(IS_TIM2_IC_FILTER_OK(TIM2_ICFilter));
+ 955                     ; 223     if (TIM2_Channel == TIM2_CHANNEL_1)
+ 957  0001 9e            	ld	a,xh
+ 958  0002 4d            	tnz	a
+ 959  0003 2614          	jrne	L104
+ 960                     ; 226         TI1_Config((uint8_t)TIM2_ICPolarity,
+ 960                     ; 227                    (uint8_t)TIM2_ICSelection,
+ 960                     ; 228                    (uint8_t)TIM2_ICFilter);
+ 962  0005 7b07          	ld	a,(OFST+7,sp)
+ 963  0007 88            	push	a
+ 964  0008 7b06          	ld	a,(OFST+6,sp)
+ 965  000a 97            	ld	xl,a
+ 966  000b 7b03          	ld	a,(OFST+3,sp)
+ 967  000d 95            	ld	xh,a
+ 968  000e cd0000        	call	L3_TI1_Config
+ 970  0011 84            	pop	a
+ 971                     ; 231         TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
+ 973  0012 7b06          	ld	a,(OFST+6,sp)
+ 974  0014 cd0000        	call	_TIM2_SetIC1Prescaler
+ 977  0017 202b          	jra	L304
+ 978  0019               L104:
+ 979                     ; 233     else if (TIM2_Channel == TIM2_CHANNEL_2)
+ 981  0019 7b01          	ld	a,(OFST+1,sp)
+ 982  001b 4a            	dec	a
+ 983  001c 2614          	jrne	L504
+ 984                     ; 236         TI2_Config((uint8_t)TIM2_ICPolarity,
+ 984                     ; 237                    (uint8_t)TIM2_ICSelection,
+ 984                     ; 238                    (uint8_t)TIM2_ICFilter);
+ 986  001e 7b07          	ld	a,(OFST+7,sp)
+ 987  0020 88            	push	a
+ 988  0021 7b06          	ld	a,(OFST+6,sp)
+ 989  0023 97            	ld	xl,a
+ 990  0024 7b03          	ld	a,(OFST+3,sp)
+ 991  0026 95            	ld	xh,a
+ 992  0027 cd0000        	call	L5_TI2_Config
+ 994  002a 84            	pop	a
+ 995                     ; 241         TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
+ 997  002b 7b06          	ld	a,(OFST+6,sp)
+ 998  002d cd0000        	call	_TIM2_SetIC2Prescaler
+1001  0030 2012          	jra	L304
+1002  0032               L504:
+1003                     ; 246         TI3_Config((uint8_t)TIM2_ICPolarity,
+1003                     ; 247                    (uint8_t)TIM2_ICSelection,
+1003                     ; 248                    (uint8_t)TIM2_ICFilter);
+1005  0032 7b07          	ld	a,(OFST+7,sp)
+1006  0034 88            	push	a
+1007  0035 7b06          	ld	a,(OFST+6,sp)
+1008  0037 97            	ld	xl,a
+1009  0038 7b03          	ld	a,(OFST+3,sp)
+1010  003a 95            	ld	xh,a
+1011  003b cd0000        	call	L7_TI3_Config
+1013  003e 84            	pop	a
+1014                     ; 251         TIM2_SetIC3Prescaler(TIM2_ICPrescaler);
+1016  003f 7b06          	ld	a,(OFST+6,sp)
+1017  0041 cd0000        	call	_TIM2_SetIC3Prescaler
+1019  0044               L304:
+1020                     ; 253 }
+1023  0044 85            	popw	x
+1024  0045 81            	ret	
+1120                     ; 265 void TIM2_PWMIConfig(TIM2_Channel_TypeDef TIM2_Channel,
+1120                     ; 266                      TIM2_ICPolarity_TypeDef TIM2_ICPolarity,
+1120                     ; 267                      TIM2_ICSelection_TypeDef TIM2_ICSelection,
+1120                     ; 268                      TIM2_ICPSC_TypeDef TIM2_ICPrescaler,
+1120                     ; 269                      uint8_t TIM2_ICFilter)
+1120                     ; 270 {
+1121                     .text:	section	.text,new
+1122  0000               _TIM2_PWMIConfig:
+1124  0000 89            	pushw	x
+1125  0001 89            	pushw	x
+1126       00000002      OFST:	set	2
+1129                     ; 271     uint8_t icpolarity = (uint8_t)TIM2_ICPOLARITY_RISING;
+1131                     ; 272     uint8_t icselection = (uint8_t)TIM2_ICSELECTION_DIRECTTI;
+1133                     ; 275     assert_param(IS_TIM2_PWMI_CHANNEL_OK(TIM2_Channel));
+1135                     ; 276     assert_param(IS_TIM2_IC_POLARITY_OK(TIM2_ICPolarity));
+1137                     ; 277     assert_param(IS_TIM2_IC_SELECTION_OK(TIM2_ICSelection));
+1139                     ; 278     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_ICPrescaler));
+1141                     ; 281     if (TIM2_ICPolarity != TIM2_ICPOLARITY_FALLING)
+1143  0002 9f            	ld	a,xl
+1144  0003 a144          	cp	a,#68
+1145  0005 2706          	jreq	L754
+1146                     ; 283         icpolarity = (uint8_t)TIM2_ICPOLARITY_FALLING;
+1148  0007 a644          	ld	a,#68
+1149  0009 6b01          	ld	(OFST-1,sp),a
+1151  000b 2002          	jra	L164
+1152  000d               L754:
+1153                     ; 287         icpolarity = (uint8_t)TIM2_ICPOLARITY_RISING;
+1155  000d 0f01          	clr	(OFST-1,sp)
+1156  000f               L164:
+1157                     ; 291     if (TIM2_ICSelection == TIM2_ICSELECTION_DIRECTTI)
+1159  000f 7b07          	ld	a,(OFST+5,sp)
+1160  0011 4a            	dec	a
+1161  0012 2604          	jrne	L364
+1162                     ; 293         icselection = (uint8_t)TIM2_ICSELECTION_INDIRECTTI;
+1164  0014 a602          	ld	a,#2
+1166  0016 2002          	jra	L564
+1167  0018               L364:
+1168                     ; 297         icselection = (uint8_t)TIM2_ICSELECTION_DIRECTTI;
+1170  0018 a601          	ld	a,#1
+1171  001a               L564:
+1172  001a 6b02          	ld	(OFST+0,sp),a
+1173                     ; 300     if (TIM2_Channel == TIM2_CHANNEL_1)
+1175  001c 7b03          	ld	a,(OFST+1,sp)
+1176  001e 2626          	jrne	L764
+1177                     ; 303         TI1_Config((uint8_t)TIM2_ICPolarity, (uint8_t)TIM2_ICSelection,
+1177                     ; 304                    (uint8_t)TIM2_ICFilter);
+1179  0020 7b09          	ld	a,(OFST+7,sp)
+1180  0022 88            	push	a
+1181  0023 7b08          	ld	a,(OFST+6,sp)
+1182  0025 97            	ld	xl,a
+1183  0026 7b05          	ld	a,(OFST+3,sp)
+1184  0028 95            	ld	xh,a
+1185  0029 cd0000        	call	L3_TI1_Config
+1187  002c 84            	pop	a
+1188                     ; 307         TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
+1190  002d 7b08          	ld	a,(OFST+6,sp)
+1191  002f cd0000        	call	_TIM2_SetIC1Prescaler
+1193                     ; 310         TI2_Config(icpolarity, icselection, TIM2_ICFilter);
+1195  0032 7b09          	ld	a,(OFST+7,sp)
+1196  0034 88            	push	a
+1197  0035 7b03          	ld	a,(OFST+1,sp)
+1198  0037 97            	ld	xl,a
+1199  0038 7b02          	ld	a,(OFST+0,sp)
+1200  003a 95            	ld	xh,a
+1201  003b cd0000        	call	L5_TI2_Config
+1203  003e 84            	pop	a
+1204                     ; 313         TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
+1206  003f 7b08          	ld	a,(OFST+6,sp)
+1207  0041 cd0000        	call	_TIM2_SetIC2Prescaler
+1210  0044 2024          	jra	L174
+1211  0046               L764:
+1212                     ; 318         TI2_Config((uint8_t)TIM2_ICPolarity, (uint8_t)TIM2_ICSelection,
+1212                     ; 319                    (uint8_t)TIM2_ICFilter);
+1214  0046 7b09          	ld	a,(OFST+7,sp)
+1215  0048 88            	push	a
+1216  0049 7b08          	ld	a,(OFST+6,sp)
+1217  004b 97            	ld	xl,a
+1218  004c 7b05          	ld	a,(OFST+3,sp)
+1219  004e 95            	ld	xh,a
+1220  004f cd0000        	call	L5_TI2_Config
+1222  0052 84            	pop	a
+1223                     ; 322         TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
+1225  0053 7b08          	ld	a,(OFST+6,sp)
+1226  0055 cd0000        	call	_TIM2_SetIC2Prescaler
+1228                     ; 325         TI1_Config((uint8_t)icpolarity, icselection, (uint8_t)TIM2_ICFilter);
+1230  0058 7b09          	ld	a,(OFST+7,sp)
+1231  005a 88            	push	a
+1232  005b 7b03          	ld	a,(OFST+1,sp)
+1233  005d 97            	ld	xl,a
+1234  005e 7b02          	ld	a,(OFST+0,sp)
+1235  0060 95            	ld	xh,a
+1236  0061 cd0000        	call	L3_TI1_Config
+1238  0064 84            	pop	a
+1239                     ; 328         TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
+1241  0065 7b08          	ld	a,(OFST+6,sp)
+1242  0067 cd0000        	call	_TIM2_SetIC1Prescaler
+1244  006a               L174:
+1245                     ; 330 }
+1248  006a 5b04          	addw	sp,#4
+1249  006c 81            	ret	
+1304                     ; 339 void TIM2_Cmd(FunctionalState NewState)
+1304                     ; 340 {
+1305                     .text:	section	.text,new
+1306  0000               _TIM2_Cmd:
+1310                     ; 342     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+1312                     ; 345     if (NewState != DISABLE)
+1314  0000 4d            	tnz	a
+1315  0001 2705          	jreq	L125
+1316                     ; 347         TIM2->CR1 |= (uint8_t)TIM2_CR1_CEN;
+1318  0003 72105300      	bset	21248,#0
+1321  0007 81            	ret	
+1322  0008               L125:
+1323                     ; 351         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_CEN);
+1325  0008 72115300      	bres	21248,#0
+1326                     ; 353 }
+1329  000c 81            	ret	
+1408                     ; 369 void TIM2_ITConfig(TIM2_IT_TypeDef TIM2_IT, FunctionalState NewState)
+1408                     ; 370 {
+1409                     .text:	section	.text,new
+1410  0000               _TIM2_ITConfig:
+1412  0000 89            	pushw	x
+1413       00000000      OFST:	set	0
+1416                     ; 372     assert_param(IS_TIM2_IT_OK(TIM2_IT));
+1418                     ; 373     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+1420                     ; 375     if (NewState != DISABLE)
+1422  0001 9f            	ld	a,xl
+1423  0002 4d            	tnz	a
+1424  0003 2706          	jreq	L365
+1425                     ; 378         TIM2->IER |= (uint8_t)TIM2_IT;
+1427  0005 9e            	ld	a,xh
+1428  0006 ca5303        	or	a,21251
+1430  0009 2006          	jra	L565
+1431  000b               L365:
+1432                     ; 383         TIM2->IER &= (uint8_t)(~TIM2_IT);
+1434  000b 7b01          	ld	a,(OFST+1,sp)
+1435  000d 43            	cpl	a
+1436  000e c45303        	and	a,21251
+1437  0011               L565:
+1438  0011 c75303        	ld	21251,a
+1439                     ; 385 }
+1442  0014 85            	popw	x
+1443  0015 81            	ret	
+1479                     ; 394 void TIM2_UpdateDisableConfig(FunctionalState NewState)
+1479                     ; 395 {
+1480                     .text:	section	.text,new
+1481  0000               _TIM2_UpdateDisableConfig:
+1485                     ; 397     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+1487                     ; 400     if (NewState != DISABLE)
+1489  0000 4d            	tnz	a
+1490  0001 2705          	jreq	L506
+1491                     ; 402         TIM2->CR1 |= (uint8_t)TIM2_CR1_UDIS;
+1493  0003 72125300      	bset	21248,#1
+1496  0007 81            	ret	
+1497  0008               L506:
+1498                     ; 406         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_UDIS);
+1500  0008 72135300      	bres	21248,#1
+1501                     ; 408 }
+1504  000c 81            	ret	
+1562                     ; 418 void TIM2_UpdateRequestConfig(TIM2_UpdateSource_TypeDef TIM2_UpdateSource)
+1562                     ; 419 {
+1563                     .text:	section	.text,new
+1564  0000               _TIM2_UpdateRequestConfig:
+1568                     ; 421     assert_param(IS_TIM2_UPDATE_SOURCE_OK(TIM2_UpdateSource));
+1570                     ; 424     if (TIM2_UpdateSource != TIM2_UPDATESOURCE_GLOBAL)
+1572  0000 4d            	tnz	a
+1573  0001 2705          	jreq	L736
+1574                     ; 426         TIM2->CR1 |= (uint8_t)TIM2_CR1_URS;
+1576  0003 72145300      	bset	21248,#2
+1579  0007 81            	ret	
+1580  0008               L736:
+1581                     ; 430         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_URS);
+1583  0008 72155300      	bres	21248,#2
+1584                     ; 432 }
+1587  000c 81            	ret	
+1644                     ; 443 void TIM2_SelectOnePulseMode(TIM2_OPMode_TypeDef TIM2_OPMode)
+1644                     ; 444 {
+1645                     .text:	section	.text,new
+1646  0000               _TIM2_SelectOnePulseMode:
+1650                     ; 446     assert_param(IS_TIM2_OPM_MODE_OK(TIM2_OPMode));
+1652                     ; 449     if (TIM2_OPMode != TIM2_OPMODE_REPETITIVE)
+1654  0000 4d            	tnz	a
+1655  0001 2705          	jreq	L176
+1656                     ; 451         TIM2->CR1 |= (uint8_t)TIM2_CR1_OPM;
+1658  0003 72165300      	bset	21248,#3
+1661  0007 81            	ret	
+1662  0008               L176:
+1663                     ; 455         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_OPM);
+1665  0008 72175300      	bres	21248,#3
+1666                     ; 458 }
+1669  000c 81            	ret	
+1737                     ; 489 void TIM2_PrescalerConfig(TIM2_Prescaler_TypeDef Prescaler,
+1737                     ; 490                           TIM2_PSCReloadMode_TypeDef TIM2_PSCReloadMode)
+1737                     ; 491 {
+1738                     .text:	section	.text,new
+1739  0000               _TIM2_PrescalerConfig:
+1743                     ; 493     assert_param(IS_TIM2_PRESCALER_RELOAD_OK(TIM2_PSCReloadMode));
+1745                     ; 494     assert_param(IS_TIM2_PRESCALER_OK(Prescaler));
+1747                     ; 497     TIM2->PSCR = (uint8_t)Prescaler;
+1749  0000 9e            	ld	a,xh
+1750  0001 c7530e        	ld	21262,a
+1751                     ; 500     TIM2->EGR = (uint8_t)TIM2_PSCReloadMode;
+1753  0004 9f            	ld	a,xl
+1754  0005 c75306        	ld	21254,a
+1755                     ; 501 }
+1758  0008 81            	ret	
+1816                     ; 512 void TIM2_ForcedOC1Config(TIM2_ForcedAction_TypeDef TIM2_ForcedAction)
+1816                     ; 513 {
+1817                     .text:	section	.text,new
+1818  0000               _TIM2_ForcedOC1Config:
+1820  0000 88            	push	a
+1821       00000000      OFST:	set	0
+1824                     ; 515     assert_param(IS_TIM2_FORCED_ACTION_OK(TIM2_ForcedAction));
+1826                     ; 518     TIM2->CCMR1  =  (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~TIM2_CCMR_OCM))  
+1826                     ; 519                               | (uint8_t)TIM2_ForcedAction);
+1828  0001 c65307        	ld	a,21255
+1829  0004 a48f          	and	a,#143
+1830  0006 1a01          	or	a,(OFST+1,sp)
+1831  0008 c75307        	ld	21255,a
+1832                     ; 520 }
+1835  000b 84            	pop	a
+1836  000c 81            	ret	
+1872                     ; 531 void TIM2_ForcedOC2Config(TIM2_ForcedAction_TypeDef TIM2_ForcedAction)
+1872                     ; 532 {
+1873                     .text:	section	.text,new
+1874  0000               _TIM2_ForcedOC2Config:
+1876  0000 88            	push	a
+1877       00000000      OFST:	set	0
+1880                     ; 534     assert_param(IS_TIM2_FORCED_ACTION_OK(TIM2_ForcedAction));
+1882                     ; 537     TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~TIM2_CCMR_OCM))  
+1882                     ; 538                             | (uint8_t)TIM2_ForcedAction);
+1884  0001 c65308        	ld	a,21256
+1885  0004 a48f          	and	a,#143
+1886  0006 1a01          	or	a,(OFST+1,sp)
+1887  0008 c75308        	ld	21256,a
+1888                     ; 539 }
+1891  000b 84            	pop	a
+1892  000c 81            	ret	
+1928                     ; 550 void TIM2_ForcedOC3Config(TIM2_ForcedAction_TypeDef TIM2_ForcedAction)
+1928                     ; 551 {
+1929                     .text:	section	.text,new
+1930  0000               _TIM2_ForcedOC3Config:
+1932  0000 88            	push	a
+1933       00000000      OFST:	set	0
+1936                     ; 553     assert_param(IS_TIM2_FORCED_ACTION_OK(TIM2_ForcedAction));
+1938                     ; 556     TIM2->CCMR3  =  (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~TIM2_CCMR_OCM))
+1938                     ; 557                               | (uint8_t)TIM2_ForcedAction);
+1940  0001 c65309        	ld	a,21257
+1941  0004 a48f          	and	a,#143
+1942  0006 1a01          	or	a,(OFST+1,sp)
+1943  0008 c75309        	ld	21257,a
+1944                     ; 558 }
+1947  000b 84            	pop	a
+1948  000c 81            	ret	
+1984                     ; 567 void TIM2_ARRPreloadConfig(FunctionalState NewState)
+1984                     ; 568 {
+1985                     .text:	section	.text,new
+1986  0000               _TIM2_ARRPreloadConfig:
+1990                     ; 570     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+1992                     ; 573     if (NewState != DISABLE)
+1994  0000 4d            	tnz	a
+1995  0001 2705          	jreq	L7201
+1996                     ; 575         TIM2->CR1 |= (uint8_t)TIM2_CR1_ARPE;
+1998  0003 721e5300      	bset	21248,#7
+2001  0007 81            	ret	
+2002  0008               L7201:
+2003                     ; 579         TIM2->CR1 &= (uint8_t)(~TIM2_CR1_ARPE);
+2005  0008 721f5300      	bres	21248,#7
+2006                     ; 581 }
+2009  000c 81            	ret	
+2045                     ; 590 void TIM2_OC1PreloadConfig(FunctionalState NewState)
+2045                     ; 591 {
+2046                     .text:	section	.text,new
+2047  0000               _TIM2_OC1PreloadConfig:
+2051                     ; 593     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+2053                     ; 596     if (NewState != DISABLE)
+2055  0000 4d            	tnz	a
+2056  0001 2705          	jreq	L1501
+2057                     ; 598         TIM2->CCMR1 |= (uint8_t)TIM2_CCMR_OCxPE;
+2059  0003 72165307      	bset	21255,#3
+2062  0007 81            	ret	
+2063  0008               L1501:
+2064                     ; 602         TIM2->CCMR1 &= (uint8_t)(~TIM2_CCMR_OCxPE);
+2066  0008 72175307      	bres	21255,#3
+2067                     ; 604 }
+2070  000c 81            	ret	
+2106                     ; 613 void TIM2_OC2PreloadConfig(FunctionalState NewState)
+2106                     ; 614 {
+2107                     .text:	section	.text,new
+2108  0000               _TIM2_OC2PreloadConfig:
+2112                     ; 616     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+2114                     ; 619     if (NewState != DISABLE)
+2116  0000 4d            	tnz	a
+2117  0001 2705          	jreq	L3701
+2118                     ; 621         TIM2->CCMR2 |= (uint8_t)TIM2_CCMR_OCxPE;
+2120  0003 72165308      	bset	21256,#3
+2123  0007 81            	ret	
+2124  0008               L3701:
+2125                     ; 625         TIM2->CCMR2 &= (uint8_t)(~TIM2_CCMR_OCxPE);
+2127  0008 72175308      	bres	21256,#3
+2128                     ; 627 }
+2131  000c 81            	ret	
+2167                     ; 636 void TIM2_OC3PreloadConfig(FunctionalState NewState)
+2167                     ; 637 {
+2168                     .text:	section	.text,new
+2169  0000               _TIM2_OC3PreloadConfig:
+2173                     ; 639     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+2175                     ; 642     if (NewState != DISABLE)
+2177  0000 4d            	tnz	a
+2178  0001 2705          	jreq	L5111
+2179                     ; 644         TIM2->CCMR3 |= (uint8_t)TIM2_CCMR_OCxPE;
+2181  0003 72165309      	bset	21257,#3
+2184  0007 81            	ret	
+2185  0008               L5111:
+2186                     ; 648         TIM2->CCMR3 &= (uint8_t)(~TIM2_CCMR_OCxPE);
+2188  0008 72175309      	bres	21257,#3
+2189                     ; 650 }
+2192  000c 81            	ret	
+2265                     ; 663 void TIM2_GenerateEvent(TIM2_EventSource_TypeDef TIM2_EventSource)
+2265                     ; 664 {
+2266                     .text:	section	.text,new
+2267  0000               _TIM2_GenerateEvent:
+2271                     ; 666     assert_param(IS_TIM2_EVENT_SOURCE_OK(TIM2_EventSource));
+2273                     ; 669     TIM2->EGR = (uint8_t)TIM2_EventSource;
+2275  0000 c75306        	ld	21254,a
+2276                     ; 670 }
+2279  0003 81            	ret	
+2315                     ; 681 void TIM2_OC1PolarityConfig(TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
+2315                     ; 682 {
+2316                     .text:	section	.text,new
+2317  0000               _TIM2_OC1PolarityConfig:
+2321                     ; 684     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
+2323                     ; 687     if (TIM2_OCPolarity != TIM2_OCPOLARITY_HIGH)
+2325  0000 4d            	tnz	a
+2326  0001 2705          	jreq	L1711
+2327                     ; 689         TIM2->CCER1 |= (uint8_t)TIM2_CCER1_CC1P;
+2329  0003 7212530a      	bset	21258,#1
+2332  0007 81            	ret	
+2333  0008               L1711:
+2334                     ; 693         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1P);
+2336  0008 7213530a      	bres	21258,#1
+2337                     ; 695 }
+2340  000c 81            	ret	
+2376                     ; 706 void TIM2_OC2PolarityConfig(TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
+2376                     ; 707 {
+2377                     .text:	section	.text,new
+2378  0000               _TIM2_OC2PolarityConfig:
+2382                     ; 709     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
+2384                     ; 712     if (TIM2_OCPolarity != TIM2_OCPOLARITY_HIGH)
+2386  0000 4d            	tnz	a
+2387  0001 2705          	jreq	L3121
+2388                     ; 714         TIM2->CCER1 |= TIM2_CCER1_CC2P;
+2390  0003 721a530a      	bset	21258,#5
+2393  0007 81            	ret	
+2394  0008               L3121:
+2395                     ; 718         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2P);
+2397  0008 721b530a      	bres	21258,#5
+2398                     ; 720 }
+2401  000c 81            	ret	
+2437                     ; 731 void TIM2_OC3PolarityConfig(TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
+2437                     ; 732 {
+2438                     .text:	section	.text,new
+2439  0000               _TIM2_OC3PolarityConfig:
+2443                     ; 734     assert_param(IS_TIM2_OC_POLARITY_OK(TIM2_OCPolarity));
+2445                     ; 737     if (TIM2_OCPolarity != TIM2_OCPOLARITY_HIGH)
+2447  0000 4d            	tnz	a
+2448  0001 2705          	jreq	L5321
+2449                     ; 739         TIM2->CCER2 |= (uint8_t)TIM2_CCER2_CC3P;
+2451  0003 7212530b      	bset	21259,#1
+2454  0007 81            	ret	
+2455  0008               L5321:
+2456                     ; 743         TIM2->CCER2 &= (uint8_t)(~TIM2_CCER2_CC3P);
+2458  0008 7213530b      	bres	21259,#1
+2459                     ; 745 }
+2462  000c 81            	ret	
+2507                     ; 759 void TIM2_CCxCmd(TIM2_Channel_TypeDef TIM2_Channel, FunctionalState NewState)
+2507                     ; 760 {
+2508                     .text:	section	.text,new
+2509  0000               _TIM2_CCxCmd:
+2511  0000 89            	pushw	x
+2512       00000000      OFST:	set	0
+2515                     ; 762     assert_param(IS_TIM2_CHANNEL_OK(TIM2_Channel));
+2517                     ; 763     assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+2519                     ; 765     if (TIM2_Channel == TIM2_CHANNEL_1)
+2521  0001 9e            	ld	a,xh
+2522  0002 4d            	tnz	a
+2523  0003 2610          	jrne	L3621
+2524                     ; 768         if (NewState != DISABLE)
+2526  0005 9f            	ld	a,xl
+2527  0006 4d            	tnz	a
+2528  0007 2706          	jreq	L5621
+2529                     ; 770             TIM2->CCER1 |= (uint8_t)TIM2_CCER1_CC1E;
+2531  0009 7210530a      	bset	21258,#0
+2533  000d 2029          	jra	L1721
+2534  000f               L5621:
+2535                     ; 774             TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1E);
+2537  000f 7211530a      	bres	21258,#0
+2538  0013 2023          	jra	L1721
+2539  0015               L3621:
+2540                     ; 778     else if (TIM2_Channel == TIM2_CHANNEL_2)
+2542  0015 7b01          	ld	a,(OFST+1,sp)
+2543  0017 4a            	dec	a
+2544  0018 2610          	jrne	L3721
+2545                     ; 781         if (NewState != DISABLE)
+2547  001a 7b02          	ld	a,(OFST+2,sp)
+2548  001c 2706          	jreq	L5721
+2549                     ; 783             TIM2->CCER1 |= (uint8_t)TIM2_CCER1_CC2E;
+2551  001e 7218530a      	bset	21258,#4
+2553  0022 2014          	jra	L1721
+2554  0024               L5721:
+2555                     ; 787             TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2E);
+2557  0024 7219530a      	bres	21258,#4
+2558  0028 200e          	jra	L1721
+2559  002a               L3721:
+2560                     ; 793         if (NewState != DISABLE)
+2562  002a 7b02          	ld	a,(OFST+2,sp)
+2563  002c 2706          	jreq	L3031
+2564                     ; 795             TIM2->CCER2 |= (uint8_t)TIM2_CCER2_CC3E;
+2566  002e 7210530b      	bset	21259,#0
+2568  0032 2004          	jra	L1721
+2569  0034               L3031:
+2570                     ; 799             TIM2->CCER2 &= (uint8_t)(~TIM2_CCER2_CC3E);
+2572  0034 7211530b      	bres	21259,#0
+2573  0038               L1721:
+2574                     ; 802 }
+2577  0038 85            	popw	x
+2578  0039 81            	ret	
+2623                     ; 824 void TIM2_SelectOCxM(TIM2_Channel_TypeDef TIM2_Channel, TIM2_OCMode_TypeDef TIM2_OCMode)
+2623                     ; 825 {
+2624                     .text:	section	.text,new
+2625  0000               _TIM2_SelectOCxM:
+2627  0000 89            	pushw	x
+2628       00000000      OFST:	set	0
+2631                     ; 827     assert_param(IS_TIM2_CHANNEL_OK(TIM2_Channel));
+2633                     ; 828     assert_param(IS_TIM2_OCM_OK(TIM2_OCMode));
+2635                     ; 830     if (TIM2_Channel == TIM2_CHANNEL_1)
+2637  0001 9e            	ld	a,xh
+2638  0002 4d            	tnz	a
+2639  0003 2610          	jrne	L1331
+2640                     ; 833         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1E);
+2642  0005 7211530a      	bres	21258,#0
+2643                     ; 836         TIM2->CCMR1 = (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~TIM2_CCMR_OCM))
+2643                     ; 837                                | (uint8_t)TIM2_OCMode);
+2645  0009 c65307        	ld	a,21255
+2646  000c a48f          	and	a,#143
+2647  000e 1a02          	or	a,(OFST+2,sp)
+2648  0010 c75307        	ld	21255,a
+2650  0013 2023          	jra	L3331
+2651  0015               L1331:
+2652                     ; 839     else if (TIM2_Channel == TIM2_CHANNEL_2)
+2654  0015 7b01          	ld	a,(OFST+1,sp)
+2655  0017 4a            	dec	a
+2656  0018 2610          	jrne	L5331
+2657                     ; 842         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2E);
+2659  001a 7219530a      	bres	21258,#4
+2660                     ; 845         TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~TIM2_CCMR_OCM))
+2660                     ; 846                                 | (uint8_t)TIM2_OCMode);
+2662  001e c65308        	ld	a,21256
+2663  0021 a48f          	and	a,#143
+2664  0023 1a02          	or	a,(OFST+2,sp)
+2665  0025 c75308        	ld	21256,a
+2667  0028 200e          	jra	L3331
+2668  002a               L5331:
+2669                     ; 851         TIM2->CCER2 &= (uint8_t)(~TIM2_CCER2_CC3E);
+2671  002a 7211530b      	bres	21259,#0
+2672                     ; 854         TIM2->CCMR3 = (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~TIM2_CCMR_OCM))
+2672                     ; 855                                 | (uint8_t)TIM2_OCMode);
+2674  002e c65309        	ld	a,21257
+2675  0031 a48f          	and	a,#143
+2676  0033 1a02          	or	a,(OFST+2,sp)
+2677  0035 c75309        	ld	21257,a
+2678  0038               L3331:
+2679                     ; 857 }
+2682  0038 85            	popw	x
+2683  0039 81            	ret	
+2717                     ; 866 void TIM2_SetCounter(uint16_t Counter)
+2717                     ; 867 {
+2718                     .text:	section	.text,new
+2719  0000               _TIM2_SetCounter:
+2723                     ; 869     TIM2->CNTRH = (uint8_t)(Counter >> 8);
+2725  0000 9e            	ld	a,xh
+2726  0001 c7530c        	ld	21260,a
+2727                     ; 870     TIM2->CNTRL = (uint8_t)(Counter);
+2729  0004 9f            	ld	a,xl
+2730  0005 c7530d        	ld	21261,a
+2731                     ; 872 }
+2734  0008 81            	ret	
+2768                     ; 881 void TIM2_SetAutoreload(uint16_t Autoreload)
+2768                     ; 882 {
+2769                     .text:	section	.text,new
+2770  0000               _TIM2_SetAutoreload:
+2774                     ; 885     TIM2->ARRH = (uint8_t)(Autoreload >> 8);
+2776  0000 9e            	ld	a,xh
+2777  0001 c7530f        	ld	21263,a
+2778                     ; 886     TIM2->ARRL = (uint8_t)(Autoreload);
+2780  0004 9f            	ld	a,xl
+2781  0005 c75310        	ld	21264,a
+2782                     ; 888 }
+2785  0008 81            	ret	
+2819                     ; 897 void TIM2_SetCompare1(uint16_t Compare1)
+2819                     ; 898 {
+2820                     .text:	section	.text,new
+2821  0000               _TIM2_SetCompare1:
+2825                     ; 900     TIM2->CCR1H = (uint8_t)(Compare1 >> 8);
+2827  0000 9e            	ld	a,xh
+2828  0001 c75311        	ld	21265,a
+2829                     ; 901     TIM2->CCR1L = (uint8_t)(Compare1);
+2831  0004 9f            	ld	a,xl
+2832  0005 c75312        	ld	21266,a
+2833                     ; 903 }
+2836  0008 81            	ret	
+2870                     ; 912 void TIM2_SetCompare2(uint16_t Compare2)
+2870                     ; 913 {
+2871                     .text:	section	.text,new
+2872  0000               _TIM2_SetCompare2:
+2876                     ; 915     TIM2->CCR2H = (uint8_t)(Compare2 >> 8);
+2878  0000 9e            	ld	a,xh
+2879  0001 c75313        	ld	21267,a
+2880                     ; 916     TIM2->CCR2L = (uint8_t)(Compare2);
+2882  0004 9f            	ld	a,xl
+2883  0005 c75314        	ld	21268,a
+2884                     ; 918 }
+2887  0008 81            	ret	
+2921                     ; 927 void TIM2_SetCompare3(uint16_t Compare3)
+2921                     ; 928 {
+2922                     .text:	section	.text,new
+2923  0000               _TIM2_SetCompare3:
+2927                     ; 930     TIM2->CCR3H = (uint8_t)(Compare3 >> 8);
+2929  0000 9e            	ld	a,xh
+2930  0001 c75315        	ld	21269,a
+2931                     ; 931     TIM2->CCR3L = (uint8_t)(Compare3);
+2933  0004 9f            	ld	a,xl
+2934  0005 c75316        	ld	21270,a
+2935                     ; 933 }
+2938  0008 81            	ret	
+2974                     ; 946 void TIM2_SetIC1Prescaler(TIM2_ICPSC_TypeDef TIM2_IC1Prescaler)
+2974                     ; 947 {
+2975                     .text:	section	.text,new
+2976  0000               _TIM2_SetIC1Prescaler:
+2978  0000 88            	push	a
+2979       00000000      OFST:	set	0
+2982                     ; 949     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_IC1Prescaler));
+2984                     ; 952     TIM2->CCMR1 = (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~TIM2_CCMR_ICxPSC))
+2984                     ; 953                             | (uint8_t)TIM2_IC1Prescaler);
+2986  0001 c65307        	ld	a,21255
+2987  0004 a4f3          	and	a,#243
+2988  0006 1a01          	or	a,(OFST+1,sp)
+2989  0008 c75307        	ld	21255,a
+2990                     ; 954 }
+2993  000b 84            	pop	a
+2994  000c 81            	ret	
+3030                     ; 966 void TIM2_SetIC2Prescaler(TIM2_ICPSC_TypeDef TIM2_IC2Prescaler)
+3030                     ; 967 {
+3031                     .text:	section	.text,new
+3032  0000               _TIM2_SetIC2Prescaler:
+3034  0000 88            	push	a
+3035       00000000      OFST:	set	0
+3038                     ; 969     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_IC2Prescaler));
+3040                     ; 972     TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~TIM2_CCMR_ICxPSC))
+3040                     ; 973                             | (uint8_t)TIM2_IC2Prescaler);
+3042  0001 c65308        	ld	a,21256
+3043  0004 a4f3          	and	a,#243
+3044  0006 1a01          	or	a,(OFST+1,sp)
+3045  0008 c75308        	ld	21256,a
+3046                     ; 974 }
+3049  000b 84            	pop	a
+3050  000c 81            	ret	
+3086                     ; 986 void TIM2_SetIC3Prescaler(TIM2_ICPSC_TypeDef TIM2_IC3Prescaler)
+3086                     ; 987 {
+3087                     .text:	section	.text,new
+3088  0000               _TIM2_SetIC3Prescaler:
+3090  0000 88            	push	a
+3091       00000000      OFST:	set	0
+3094                     ; 990     assert_param(IS_TIM2_IC_PRESCALER_OK(TIM2_IC3Prescaler));
+3096                     ; 992     TIM2->CCMR3 = (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~TIM2_CCMR_ICxPSC))
+3096                     ; 993                             | (uint8_t)TIM2_IC3Prescaler);
+3098  0001 c65309        	ld	a,21257
+3099  0004 a4f3          	and	a,#243
+3100  0006 1a01          	or	a,(OFST+1,sp)
+3101  0008 c75309        	ld	21257,a
+3102                     ; 994 }
+3105  000b 84            	pop	a
+3106  000c 81            	ret	
+3158                     ; 1001 uint16_t TIM2_GetCapture1(void)
+3158                     ; 1002 {
+3159                     .text:	section	.text,new
+3160  0000               _TIM2_GetCapture1:
+3162  0000 5204          	subw	sp,#4
+3163       00000004      OFST:	set	4
+3166                     ; 1004     uint16_t tmpccr1 = 0;
+3168                     ; 1005     uint8_t tmpccr1l=0, tmpccr1h=0;
+3172                     ; 1007     tmpccr1h = TIM2->CCR1H;
+3174  0002 c65311        	ld	a,21265
+3175  0005 6b02          	ld	(OFST-2,sp),a
+3176                     ; 1008     tmpccr1l = TIM2->CCR1L;
+3178  0007 c65312        	ld	a,21266
+3179  000a 6b01          	ld	(OFST-3,sp),a
+3180                     ; 1010     tmpccr1 = (uint16_t)(tmpccr1l);
+3182  000c 5f            	clrw	x
+3183  000d 97            	ld	xl,a
+3184  000e 1f03          	ldw	(OFST-1,sp),x
+3185                     ; 1011     tmpccr1 |= (uint16_t)((uint16_t)tmpccr1h << 8);
+3187  0010 5f            	clrw	x
+3188  0011 7b02          	ld	a,(OFST-2,sp)
+3189  0013 97            	ld	xl,a
+3190  0014 7b04          	ld	a,(OFST+0,sp)
+3191  0016 01            	rrwa	x,a
+3192  0017 1a03          	or	a,(OFST-1,sp)
+3193  0019 01            	rrwa	x,a
+3194                     ; 1013     return (uint16_t)tmpccr1;
+3198  001a 5b04          	addw	sp,#4
+3199  001c 81            	ret	
+3251                     ; 1021 uint16_t TIM2_GetCapture2(void)
+3251                     ; 1022 {
+3252                     .text:	section	.text,new
+3253  0000               _TIM2_GetCapture2:
+3255  0000 5204          	subw	sp,#4
+3256       00000004      OFST:	set	4
+3259                     ; 1024     uint16_t tmpccr2 = 0;
+3261                     ; 1025     uint8_t tmpccr2l=0, tmpccr2h=0;
+3265                     ; 1027     tmpccr2h = TIM2->CCR2H;
+3267  0002 c65313        	ld	a,21267
+3268  0005 6b02          	ld	(OFST-2,sp),a
+3269                     ; 1028     tmpccr2l = TIM2->CCR2L;
+3271  0007 c65314        	ld	a,21268
+3272  000a 6b01          	ld	(OFST-3,sp),a
+3273                     ; 1030     tmpccr2 = (uint16_t)(tmpccr2l);
+3275  000c 5f            	clrw	x
+3276  000d 97            	ld	xl,a
+3277  000e 1f03          	ldw	(OFST-1,sp),x
+3278                     ; 1031     tmpccr2 |= (uint16_t)((uint16_t)tmpccr2h << 8);
+3280  0010 5f            	clrw	x
+3281  0011 7b02          	ld	a,(OFST-2,sp)
+3282  0013 97            	ld	xl,a
+3283  0014 7b04          	ld	a,(OFST+0,sp)
+3284  0016 01            	rrwa	x,a
+3285  0017 1a03          	or	a,(OFST-1,sp)
+3286  0019 01            	rrwa	x,a
+3287                     ; 1033     return (uint16_t)tmpccr2;
+3291  001a 5b04          	addw	sp,#4
+3292  001c 81            	ret	
+3344                     ; 1041 uint16_t TIM2_GetCapture3(void)
+3344                     ; 1042 {
+3345                     .text:	section	.text,new
+3346  0000               _TIM2_GetCapture3:
+3348  0000 5204          	subw	sp,#4
+3349       00000004      OFST:	set	4
+3352                     ; 1044     uint16_t tmpccr3 = 0;
+3354                     ; 1045     uint8_t tmpccr3l=0, tmpccr3h=0;
+3358                     ; 1047     tmpccr3h = TIM2->CCR3H;
+3360  0002 c65315        	ld	a,21269
+3361  0005 6b02          	ld	(OFST-2,sp),a
+3362                     ; 1048     tmpccr3l = TIM2->CCR3L;
+3364  0007 c65316        	ld	a,21270
+3365  000a 6b01          	ld	(OFST-3,sp),a
+3366                     ; 1050     tmpccr3 = (uint16_t)(tmpccr3l);
+3368  000c 5f            	clrw	x
+3369  000d 97            	ld	xl,a
+3370  000e 1f03          	ldw	(OFST-1,sp),x
+3371                     ; 1051     tmpccr3 |= (uint16_t)((uint16_t)tmpccr3h << 8);
+3373  0010 5f            	clrw	x
+3374  0011 7b02          	ld	a,(OFST-2,sp)
+3375  0013 97            	ld	xl,a
+3376  0014 7b04          	ld	a,(OFST+0,sp)
+3377  0016 01            	rrwa	x,a
+3378  0017 1a03          	or	a,(OFST-1,sp)
+3379  0019 01            	rrwa	x,a
+3380                     ; 1053     return (uint16_t)tmpccr3;
+3384  001a 5b04          	addw	sp,#4
+3385  001c 81            	ret	
+3419                     ; 1061 uint16_t TIM2_GetCounter(void)
+3419                     ; 1062 {
+3420                     .text:	section	.text,new
+3421  0000               _TIM2_GetCounter:
+3423  0000 89            	pushw	x
+3424       00000002      OFST:	set	2
+3427                     ; 1063      uint16_t tmpcntr = 0;
+3429                     ; 1065     tmpcntr =  ((uint16_t)TIM2->CNTRH << 8);
+3431  0001 c6530c        	ld	a,21260
+3432  0004 97            	ld	xl,a
+3433  0005 4f            	clr	a
+3434  0006 02            	rlwa	x,a
+3435  0007 1f01          	ldw	(OFST-1,sp),x
+3436                     ; 1067     return (uint16_t)( tmpcntr| (uint16_t)(TIM2->CNTRL));
+3438  0009 5f            	clrw	x
+3439  000a c6530d        	ld	a,21261
+3440  000d 97            	ld	xl,a
+3441  000e 01            	rrwa	x,a
+3442  000f 1a02          	or	a,(OFST+0,sp)
+3443  0011 01            	rrwa	x,a
+3444  0012 1a01          	or	a,(OFST-1,sp)
+3445  0014 01            	rrwa	x,a
+3448  0015 5b02          	addw	sp,#2
+3449  0017 81            	ret	
+3473                     ; 1076 TIM2_Prescaler_TypeDef TIM2_GetPrescaler(void)
+3473                     ; 1077 {
+3474                     .text:	section	.text,new
+3475  0000               _TIM2_GetPrescaler:
+3479                     ; 1079     return (TIM2_Prescaler_TypeDef)(TIM2->PSCR);
+3481  0000 c6530e        	ld	a,21262
+3484  0003 81            	ret	
+3623                     ; 1096 FlagStatus TIM2_GetFlagStatus(TIM2_FLAG_TypeDef TIM2_FLAG)
+3623                     ; 1097 {
+3624                     .text:	section	.text,new
+3625  0000               _TIM2_GetFlagStatus:
+3627  0000 89            	pushw	x
+3628  0001 89            	pushw	x
+3629       00000002      OFST:	set	2
+3632                     ; 1098     FlagStatus bitstatus = RESET;
+3634                     ; 1099     uint8_t tim2_flag_l = 0, tim2_flag_h = 0;
+3638                     ; 1102     assert_param(IS_TIM2_GET_FLAG_OK(TIM2_FLAG));
+3640                     ; 1104     tim2_flag_l = (uint8_t)(TIM2->SR1 & (uint8_t)TIM2_FLAG);
+3642  0002 9f            	ld	a,xl
+3643  0003 c45304        	and	a,21252
+3644  0006 6b01          	ld	(OFST-1,sp),a
+3645                     ; 1105     tim2_flag_h = (uint8_t)((uint16_t)TIM2_FLAG >> 8);
+3647  0008 7b03          	ld	a,(OFST+1,sp)
+3648  000a 6b02          	ld	(OFST+0,sp),a
+3649                     ; 1107     if ((tim2_flag_l | (uint8_t)(TIM2->SR2 & tim2_flag_h)) != (uint8_t)RESET )
+3651  000c c45305        	and	a,21253
+3652  000f 1a01          	or	a,(OFST-1,sp)
+3653  0011 2702          	jreq	L5371
+3654                     ; 1109         bitstatus = SET;
+3656  0013 a601          	ld	a,#1
+3658  0015               L5371:
+3659                     ; 1113         bitstatus = RESET;
+3661                     ; 1115     return (FlagStatus)bitstatus;
+3665  0015 5b04          	addw	sp,#4
+3666  0017 81            	ret	
+3701                     ; 1132 void TIM2_ClearFlag(TIM2_FLAG_TypeDef TIM2_FLAG)
+3701                     ; 1133 {
+3702                     .text:	section	.text,new
+3703  0000               _TIM2_ClearFlag:
+3707                     ; 1135     assert_param(IS_TIM2_CLEAR_FLAG_OK(TIM2_FLAG));
+3709                     ; 1138     TIM2->SR1 = (uint8_t)(~((uint8_t)(TIM2_FLAG)));
+3711  0000 9f            	ld	a,xl
+3712  0001 43            	cpl	a
+3713  0002 c75304        	ld	21252,a
+3714                     ; 1139     TIM2->SR2 = (uint8_t)(~((uint8_t)((uint8_t)TIM2_FLAG >> 8)));
+3716  0005 35ff5305      	mov	21253,#255
+3717                     ; 1140 }
+3720  0009 81            	ret	
+3784                     ; 1154 ITStatus TIM2_GetITStatus(TIM2_IT_TypeDef TIM2_IT)
+3784                     ; 1155 {
+3785                     .text:	section	.text,new
+3786  0000               _TIM2_GetITStatus:
+3788  0000 88            	push	a
+3789  0001 89            	pushw	x
+3790       00000002      OFST:	set	2
+3793                     ; 1156     ITStatus bitstatus = RESET;
+3795                     ; 1157     uint8_t TIM2_itStatus = 0, TIM2_itEnable = 0;
+3799                     ; 1160     assert_param(IS_TIM2_GET_IT_OK(TIM2_IT));
+3801                     ; 1162     TIM2_itStatus = (uint8_t)(TIM2->SR1 & TIM2_IT);
+3803  0002 c45304        	and	a,21252
+3804  0005 6b01          	ld	(OFST-1,sp),a
+3805                     ; 1164     TIM2_itEnable = (uint8_t)(TIM2->IER & TIM2_IT);
+3807  0007 c65303        	ld	a,21251
+3808  000a 1403          	and	a,(OFST+1,sp)
+3809  000c 6b02          	ld	(OFST+0,sp),a
+3810                     ; 1166     if ((TIM2_itStatus != (uint8_t)RESET ) && (TIM2_itEnable != (uint8_t)RESET ))
+3812  000e 7b01          	ld	a,(OFST-1,sp)
+3813  0010 2708          	jreq	L1102
+3815  0012 7b02          	ld	a,(OFST+0,sp)
+3816  0014 2704          	jreq	L1102
+3817                     ; 1168         bitstatus = SET;
+3819  0016 a601          	ld	a,#1
+3821  0018 2001          	jra	L3102
+3822  001a               L1102:
+3823                     ; 1172         bitstatus = RESET;
+3825  001a 4f            	clr	a
+3826  001b               L3102:
+3827                     ; 1174     return (ITStatus)(bitstatus);
+3831  001b 5b03          	addw	sp,#3
+3832  001d 81            	ret	
+3868                     ; 1188 void TIM2_ClearITPendingBit(TIM2_IT_TypeDef TIM2_IT)
+3868                     ; 1189 {
+3869                     .text:	section	.text,new
+3870  0000               _TIM2_ClearITPendingBit:
+3874                     ; 1191     assert_param(IS_TIM2_IT_OK(TIM2_IT));
+3876                     ; 1194     TIM2->SR1 = (uint8_t)(~TIM2_IT);
+3878  0000 43            	cpl	a
+3879  0001 c75304        	ld	21252,a
+3880                     ; 1195 }
+3883  0004 81            	ret	
+3935                     ; 1214 static void TI1_Config(uint8_t TIM2_ICPolarity,
+3935                     ; 1215                        uint8_t TIM2_ICSelection,
+3935                     ; 1216                        uint8_t TIM2_ICFilter)
+3935                     ; 1217 {
+3936                     .text:	section	.text,new
+3937  0000               L3_TI1_Config:
+3939  0000 89            	pushw	x
+3940       00000001      OFST:	set	1
+3943                     ; 1219     TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1E);
+3945  0001 7211530a      	bres	21258,#0
+3946  0005 88            	push	a
+3947                     ; 1222     TIM2->CCMR1  = (uint8_t)((uint8_t)(TIM2->CCMR1 & (uint8_t)(~(uint8_t)( TIM2_CCMR_CCxS | TIM2_CCMR_ICxF )))
+3947                     ; 1223                              | (uint8_t)(((TIM2_ICSelection)) | ((uint8_t)( TIM2_ICFilter << 4))));
+3949  0006 7b06          	ld	a,(OFST+5,sp)
+3950  0008 97            	ld	xl,a
+3951  0009 a610          	ld	a,#16
+3952  000b 42            	mul	x,a
+3953  000c 9f            	ld	a,xl
+3954  000d 1a03          	or	a,(OFST+2,sp)
+3955  000f 6b01          	ld	(OFST+0,sp),a
+3956  0011 c65307        	ld	a,21255
+3957  0014 a40c          	and	a,#12
+3958  0016 1a01          	or	a,(OFST+0,sp)
+3959  0018 c75307        	ld	21255,a
+3960                     ; 1226     if (TIM2_ICPolarity != TIM2_ICPOLARITY_RISING)
+3962  001b 7b02          	ld	a,(OFST+1,sp)
+3963  001d 2706          	jreq	L1602
+3964                     ; 1228         TIM2->CCER1 |= TIM2_CCER1_CC1P;
+3966  001f 7212530a      	bset	21258,#1
+3968  0023 2004          	jra	L3602
+3969  0025               L1602:
+3970                     ; 1232         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC1P);
+3972  0025 7213530a      	bres	21258,#1
+3973  0029               L3602:
+3974                     ; 1235     TIM2->CCER1 |= TIM2_CCER1_CC1E;
+3976  0029 7210530a      	bset	21258,#0
+3977                     ; 1236 }
+3980  002d 5b03          	addw	sp,#3
+3981  002f 81            	ret	
+4033                     ; 1255 static void TI2_Config(uint8_t TIM2_ICPolarity,
+4033                     ; 1256                        uint8_t TIM2_ICSelection,
+4033                     ; 1257                        uint8_t TIM2_ICFilter)
+4033                     ; 1258 {
+4034                     .text:	section	.text,new
+4035  0000               L5_TI2_Config:
+4037  0000 89            	pushw	x
+4038       00000001      OFST:	set	1
+4041                     ; 1260     TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2E);
+4043  0001 7219530a      	bres	21258,#4
+4044  0005 88            	push	a
+4045                     ; 1263     TIM2->CCMR2 = (uint8_t)((uint8_t)(TIM2->CCMR2 & (uint8_t)(~(uint8_t)( TIM2_CCMR_CCxS | TIM2_CCMR_ICxF ))) 
+4045                     ; 1264                             | (uint8_t)(( (TIM2_ICSelection)) | ((uint8_t)( TIM2_ICFilter << 4))));
+4047  0006 7b06          	ld	a,(OFST+5,sp)
+4048  0008 97            	ld	xl,a
+4049  0009 a610          	ld	a,#16
+4050  000b 42            	mul	x,a
+4051  000c 9f            	ld	a,xl
+4052  000d 1a03          	or	a,(OFST+2,sp)
+4053  000f 6b01          	ld	(OFST+0,sp),a
+4054  0011 c65308        	ld	a,21256
+4055  0014 a40c          	and	a,#12
+4056  0016 1a01          	or	a,(OFST+0,sp)
+4057  0018 c75308        	ld	21256,a
+4058                     ; 1268     if (TIM2_ICPolarity != TIM2_ICPOLARITY_RISING)
+4060  001b 7b02          	ld	a,(OFST+1,sp)
+4061  001d 2706          	jreq	L3112
+4062                     ; 1270         TIM2->CCER1 |= TIM2_CCER1_CC2P;
+4064  001f 721a530a      	bset	21258,#5
+4066  0023 2004          	jra	L5112
+4067  0025               L3112:
+4068                     ; 1274         TIM2->CCER1 &= (uint8_t)(~TIM2_CCER1_CC2P);
+4070  0025 721b530a      	bres	21258,#5
+4071  0029               L5112:
+4072                     ; 1278     TIM2->CCER1 |= TIM2_CCER1_CC2E;
+4074  0029 7218530a      	bset	21258,#4
+4075                     ; 1280 }
+4078  002d 5b03          	addw	sp,#3
+4079  002f 81            	ret	
+4131                     ; 1296 static void TI3_Config(uint8_t TIM2_ICPolarity, uint8_t TIM2_ICSelection,
+4131                     ; 1297                        uint8_t TIM2_ICFilter)
+4131                     ; 1298 {
+4132                     .text:	section	.text,new
+4133  0000               L7_TI3_Config:
+4135  0000 89            	pushw	x
+4136       00000001      OFST:	set	1
+4139                     ; 1300     TIM2->CCER2 &=  (uint8_t)(~TIM2_CCER2_CC3E);
+4141  0001 7211530b      	bres	21259,#0
+4142  0005 88            	push	a
+4143                     ; 1303     TIM2->CCMR3 = (uint8_t)((uint8_t)(TIM2->CCMR3 & (uint8_t)(~( TIM2_CCMR_CCxS | TIM2_CCMR_ICxF))) 
+4143                     ; 1304                             | (uint8_t)(( (TIM2_ICSelection)) | ((uint8_t)( TIM2_ICFilter << 4))));
+4145  0006 7b06          	ld	a,(OFST+5,sp)
+4146  0008 97            	ld	xl,a
+4147  0009 a610          	ld	a,#16
+4148  000b 42            	mul	x,a
+4149  000c 9f            	ld	a,xl
+4150  000d 1a03          	or	a,(OFST+2,sp)
+4151  000f 6b01          	ld	(OFST+0,sp),a
+4152  0011 c65309        	ld	a,21257
+4153  0014 a40c          	and	a,#12
+4154  0016 1a01          	or	a,(OFST+0,sp)
+4155  0018 c75309        	ld	21257,a
+4156                     ; 1308     if (TIM2_ICPolarity != TIM2_ICPOLARITY_RISING)
+4158  001b 7b02          	ld	a,(OFST+1,sp)
+4159  001d 2706          	jreq	L5412
+4160                     ; 1310         TIM2->CCER2 |= TIM2_CCER2_CC3P;
+4162  001f 7212530b      	bset	21259,#1
+4164  0023 2004          	jra	L7412
+4165  0025               L5412:
+4166                     ; 1314         TIM2->CCER2 &= (uint8_t)(~TIM2_CCER2_CC3P);
+4168  0025 7213530b      	bres	21259,#1
+4169  0029               L7412:
+4170                     ; 1317     TIM2->CCER2 |= TIM2_CCER2_CC3E;
+4172  0029 7210530b      	bset	21259,#0
+4173                     ; 1318 }
+4176  002d 5b03          	addw	sp,#3
+4177  002f 81            	ret	
+4190                     	xdef	_TIM2_ClearITPendingBit
+4191                     	xdef	_TIM2_GetITStatus
+4192                     	xdef	_TIM2_ClearFlag
+4193                     	xdef	_TIM2_GetFlagStatus
+4194                     	xdef	_TIM2_GetPrescaler
+4195                     	xdef	_TIM2_GetCounter
+4196                     	xdef	_TIM2_GetCapture3
+4197                     	xdef	_TIM2_GetCapture2
+4198                     	xdef	_TIM2_GetCapture1
+4199                     	xdef	_TIM2_SetIC3Prescaler
+4200                     	xdef	_TIM2_SetIC2Prescaler
+4201                     	xdef	_TIM2_SetIC1Prescaler
+4202                     	xdef	_TIM2_SetCompare3
+4203                     	xdef	_TIM2_SetCompare2
+4204                     	xdef	_TIM2_SetCompare1
+4205                     	xdef	_TIM2_SetAutoreload
+4206                     	xdef	_TIM2_SetCounter
+4207                     	xdef	_TIM2_SelectOCxM
+4208                     	xdef	_TIM2_CCxCmd
+4209                     	xdef	_TIM2_OC3PolarityConfig
+4210                     	xdef	_TIM2_OC2PolarityConfig
+4211                     	xdef	_TIM2_OC1PolarityConfig
+4212                     	xdef	_TIM2_GenerateEvent
+4213                     	xdef	_TIM2_OC3PreloadConfig
+4214                     	xdef	_TIM2_OC2PreloadConfig
+4215                     	xdef	_TIM2_OC1PreloadConfig
+4216                     	xdef	_TIM2_ARRPreloadConfig
+4217                     	xdef	_TIM2_ForcedOC3Config
+4218                     	xdef	_TIM2_ForcedOC2Config
+4219                     	xdef	_TIM2_ForcedOC1Config
+4220                     	xdef	_TIM2_PrescalerConfig
+4221                     	xdef	_TIM2_SelectOnePulseMode
+4222                     	xdef	_TIM2_UpdateRequestConfig
+4223                     	xdef	_TIM2_UpdateDisableConfig
+4224                     	xdef	_TIM2_ITConfig
+4225                     	xdef	_TIM2_Cmd
+4226                     	xdef	_TIM2_PWMIConfig
+4227                     	xdef	_TIM2_ICInit
+4228                     	xdef	_TIM2_OC3Init
+4229                     	xdef	_TIM2_OC2Init
+4230                     	xdef	_TIM2_OC1Init
+4231                     	xdef	_TIM2_TimeBaseInit
+4232                     	xdef	_TIM2_DeInit
+4251                     	end
