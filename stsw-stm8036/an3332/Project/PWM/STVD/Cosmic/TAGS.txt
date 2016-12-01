@@ -751,13 +751,13 @@ CSR	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	366;"	member	struct
 CSR	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	416;"	member	struct:AWU_struct
 CSR	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	456;"	member	struct:BEEP_struct
 CSSR	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	492;"	member	struct:CLK_struct
-CheckUartRxI2cAddr	..\..\src\main.c	346;"	function	signature:(void)
+CheckUartRxI2cAddr	..\..\src\main.c	347;"	function	signature:(void)
 CheckUartRxI2cAddr	..\..\src\main.c	83;"	prototype	file:	signature:(void)
-Check_I2c_Data	..\..\src\main.c	407;"	function	signature:(void)
+Check_I2c_Data	..\..\src\main.c	408;"	function	signature:(void)
 Check_I2c_Data	..\..\src\main.c	76;"	prototype	file:	signature:(void)
 ChgBit	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2660;"	macro
 ClrBit	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2658;"	macro
-CmdDeal	..\..\src\main.c	448;"	function	signature:(void)
+CmdDeal	..\..\src\main.c	518;"	function	signature:(void)
 CmdDeal	..\..\src\main.c	77;"	prototype	file:	signature:(void)
 CmdPosition	..\..\src\main.c	66;"	variable
 CmdTime	..\..\src\main.c	67;"	variable
@@ -1643,7 +1643,7 @@ MTSRH	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2198;"	member	str
 MTSRL	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2069;"	member	struct:__anon5::__anon6::__anon7
 MTSRL	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2197;"	member	struct:__anon5::__anon6::__anon13
 MessageBegin	..\..\src\i2c_slave_interrupt.c	12;"	variable
-Moto_Init	..\..\src\main.c	438;"	function	signature:(void)
+Moto_Init	..\..\src\main.c	508;"	function	signature:(void)
 Moto_Init	..\..\src\main.c	78;"	prototype	file:	signature:(void)
 MskBit	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2664;"	macro
 MultipleChannelGetADValue	..\..\inc\adc.h	45;"	prototype	signature:(void)
@@ -1746,10 +1746,10 @@ RST_SR_WWDGF	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	1659;"	mac
 RST_TypeDef	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	1649;"	typedef	typeref:struct:RST_struct
 RST_struct	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	1645;"	struct
 RXCRCR	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	1678;"	member	struct:SPI_struct
-ReadBuffer	..\..\src\main.c	384;"	variable
+ReadBuffer	..\..\src\main.c	385;"	variable
 ReadMultiBlockByte	..\..\inc\flash_eeprom.h	72;"	prototype	signature:(BlockStartAddress_TypeDef BlockStartAddress,uint8_t BlockNum, uint8_t ReadBlockByte[])
 ReadMultiBlockByte	..\..\src\flash_eeprom.c	88;"	function	signature:(BlockStartAddress_TypeDef BlockStartAddress,uint8_t BlockNum, uint8_t ReadBlockByte[])
-ReadSysId	..\..\src\main.c	385;"	function	signature:(void)
+ReadSysId	..\..\src\main.c	386;"	function	signature:(void)
 ReadSysId	..\..\src\main.c	74;"	prototype	file:	signature:(void)
 Reserved1	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2171;"	member	struct:__anon5::__anon6::__anon12
 Reserved2	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2177;"	member	struct:__anon5::__anon6::__anon12
@@ -1903,20 +1903,20 @@ SUCCESS	..\..\inc\stm8s_type.h	83;"	enumerator	enum:__anon41
 SWCR	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	489;"	member	struct:CLK_struct
 SWIMCCR	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	497;"	member	struct:CLK_struct
 SWR	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	488;"	member	struct:CLK_struct
-SaveSysId	..\..\src\main.c	391;"	function	signature:(unsigned char id)
+SaveSysId	..\..\src\main.c	392;"	function	signature:(unsigned char id)
 SaveSysId	..\..\src\main.c	75;"	prototype	file:	signature:(unsigned char id)
 Send_ADC_Value	..\..\inc\adc.h	44;"	prototype	signature:(u16 AD_Value)
 Send_ADC_Value	..\..\src\adc.c	84;"	function	signature:(u16 AD_Value)
 SetBit	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	2657;"	macro
 SetLedOFF	..\..\inc\led.h	65;"	prototype	signature:(void)
 SetLedOFF	..\..\src\led.c	54;"	function	signature:(void)
-SetMotoForward	..\..\src\main.c	521;"	function	signature:(unsigned char pwm)
+SetMotoForward	..\..\src\main.c	579;"	function	signature:(unsigned char pwm)
 SetMotoForward	..\..\src\main.c	79;"	prototype	file:	signature:(unsigned char pwm)
-SetMotoReverse	..\..\src\main.c	526;"	function	signature:(unsigned char pwm)
+SetMotoReverse	..\..\src\main.c	584;"	function	signature:(unsigned char pwm)
 SetMotoReverse	..\..\src\main.c	80;"	prototype	file:	signature:(unsigned char pwm)
-SetMotoSleep	..\..\src\main.c	535;"	function	signature:(void)
+SetMotoSleep	..\..\src\main.c	593;"	function	signature:(void)
 SetMotoSleep	..\..\src\main.c	82;"	prototype	file:	signature:(void)
-SetMotoStop	..\..\src\main.c	531;"	function	signature:(void)
+SetMotoStop	..\..\src\main.c	589;"	function	signature:(void)
 SetMotoStop	..\..\src\main.c	81;"	prototype	file:	signature:(void)
 Set_Pwm_Channel1	..\..\inc\pwm.h	5;"	prototype	signature:(unsigned char pwm)
 Set_Pwm_Channel1	..\..\src\pwm.c	42;"	function	signature:(unsigned char pwm)
@@ -3235,7 +3235,7 @@ __UART1_H	..\..\inc\uart1.h	22;"	macro
 _stext	..\..\inc\stm8s_it.h	34;"	prototype	signature:(void)
 _vectab	..\..\src\stm8_interrupt_vector.c	32;"	variable
 assert_failed	..\..\inc\stm8s_conf.h	96;"	prototype	signature:(uint8_t* file, uint32_t line)
-assert_failed	..\..\src\main.c	334;"	function	signature:(u8* file, u32 line)
+assert_failed	..\..\src\main.c	335;"	function	signature:(u8* file, u32 line)
 assert_param	..\..\inc\stm8s_conf.h	94;"	macro
 assert_param	..\..\inc\stm8s_conf.h	98;"	macro
 bool	..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h	210;"	typedef	typeref:enum:__anon1

@@ -61,6 +61,7 @@ unsigned short ADC_BUF[ADC_FILTER_LENGTH]={0};
 unsigned char AdcBufCnt=0;
 uint16_t AdcValue=0;
 unsigned int AdcSum=0;
+unsigned short AdcPosition=0;
 
 //for slave iic cmd
 unsigned short CmdPosition=0;
@@ -162,10 +163,10 @@ CLK_Configuration();
 	//SaveSysId(0x51);
 	//Systemid=ReadSysId();
 	
-	Systemid=0x51;//lefthand
+//	Systemid=0x51;//lefthand
 //	Systemid=0x52;//righthand
 //	Systemid=0x53;//left-right-head
-//	Systemid=0x54;//up-down-head	
+	Systemid=0x54;//up-down-head	
 	
 	UART1_printf("Read Sysid is:%d\r\n",Systemid);//for 16bits printf
 
@@ -312,6 +313,8 @@ CLK_Configuration();
 			{
 				LED_Reverse(LED_3);
 				UART1_printf("The Adc Is:%d\r\n",AdcValue);
+				AdcPosition=(float)AdcValue/2.844;
+				UART1_printf("The Position Is:%d\r\n",AdcPosition);
 			}
 			else
 			{
@@ -418,8 +421,7 @@ void Check_I2c_Data(void)
 			UART1_printf("Receive a null cmd (0)\r\n");
 			break;
 			case 0x01:
-			//cmd buf (-180,180)->CmdPosition (0-360) 
-			CmdPosition=180;
+		
 			
 			if(IIC_BUF[1]==0x00)//shunshizhen
 			{
@@ -429,7 +431,7 @@ void Check_I2c_Data(void)
 			else if(IIC_BUF[1]==0x01)//nishizhen
 			{
 				if(IIC_BUF[2]<=180)
-				CmdPosition=IIC_BUF[2];
+				CmdPosition=180-IIC_BUF[2];
 			}
 			else{
 		
@@ -438,6 +440,8 @@ void Check_I2c_Data(void)
 			if(CmdPosition>360)
 			CmdPosition=360;
 			CmdTime=IIC_BUF[3]*256+IIC_BUF[4];
+			UART1_printf("Receive a Position Change Cmd\r\n");
+			UART1_printf("The CmdPosition is:%d,The CmdTime is:%d\r\n",CmdPosition,CmdTime);				
 			
 			//adc 
 			//nishizhen 512->1024
@@ -448,47 +452,51 @@ void Check_I2c_Data(void)
 			//toushangxia->shang:20 xia:15
 			
 			//left hand
-			//nishizhen->qian-120->110
-			//shunshizhen->hou->60->50
+			//nishizhen->hou->60->50
+			//shunshizhen-> qian-120->110
 			if(Systemid==0x51){
-				if(CmdPosition<(180-110)||CmdPosition>(180+50))
+				if(CmdPosition<(180-50)||CmdPosition>(180+110))
 				{
-					return;
+					UART1_printf("Left Hand Cmd erro out of(70-230)\r\n");
+					CmdPosition=180;
+					NewI2cCmd=0;
 				}				
 			}
 			//right hand
-			//nishizhen->hou->60->50 
-			//shunshizhen->qian-120->110
+			//nishizhen->qian-120->110
+			//shunshizhen->hou->60->50 
 			else if(Systemid==0x52){
-				if(CmdPosition<(180-50)||CmdPosition>(180+110))
+				if(CmdPosition<(180-110)||CmdPosition>(180+50))
 				{
-					return;
+					UART1_printf("Right Hand Cmd erro out of(130-290)\r\n");
+					CmdPosition=180;NewI2cCmd=0;
 				}				
 			}
 			//left-right-head
 			//nishizhen->left->90->80 
 			//shunshizhen->right-90->80
 			else if(Systemid==0x53){
-				if(CmdPosition<(180-90)||CmdPosition>(180+90))
+				if(CmdPosition<(180-80)||CmdPosition>(180+80))
 				{
-					return;
+					UART1_printf("left-right-head Cmd erro out of(100-260)\r\n");
+					CmdPosition=180;NewI2cCmd=0;
 				}						
 			}
 			//up-down-head
-			//nishizhen->up->20->15 
-			//shunshizhen->down-15->10			
+			//nishizhen->down->15->10 
+			//shunshizhen->up-20->15			
 			else if(Systemid==0x54){
-				if(CmdPosition<(180-15)||CmdPosition>(180+10))
+				if(CmdPosition<(180-10)||CmdPosition>(180+15))
 				{
-					return;
+					UART1_printf("up-down-head Cmd erro out of(165-190)\r\n");
+					CmdPosition=180;NewI2cCmd=0;
 				}						
 			}
 			else
 			{
-				return;
+				CmdPosition=180;NewI2cCmd=0;
 			}
-			UART1_printf("Receive a Position Change Cmd\r\n");
-			UART1_printf("The CmdPosition is:%d,The CmdTime is:%d\r\n",CmdPosition,CmdTime);			
+
 			break;
 			case 0x02:
 			UART1_printf("Receive stop Cmd\r\n");
@@ -519,37 +527,39 @@ void CmdDeal(void)
 	if(NewI2cCmd!=0){
 		if(NewI2cCmd==0x01)//position change
 		{
-			if(CmdPosition>360)
+			if(CmdPosition>330)
 			return;
 			
-			temp=CmdPosition*1024/360;
+			//temp=CmdPosition*1024/330;
+			temp=CmdPosition*2.844;
 			CmdAdc=temp;
 			
 			if(CmdAdc>(AdcValue+10))
 			{
 				temp=(CmdAdc-AdcValue);
-				if(temp>100)
+				if(temp>50)
 				{
 					pwm=95;
 				}
 				else{
 					//pwm=temp*0.09765*p+d;
-					pwm=70;
+					pwm=50;
 				}				
-				SetMotoForward(pwm);
+				SetMotoReverse(pwm);
+				
 			}
 			else if((CmdAdc+10)<AdcValue)
 			{
 				temp=(AdcValue-CmdAdc);
-				if(temp>100)
+				if(temp>50)
 				{
 					pwm=95;
 				}
 				else{
 					//pwm=temp*0.09765*p+d;
-					pwm=70;
+					pwm=50;
 				}				
-				SetMotoReverse(pwm);
+				SetMotoForward(pwm);
 			}
 			else
 			{
