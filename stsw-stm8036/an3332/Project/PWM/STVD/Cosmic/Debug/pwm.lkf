@@ -38,7 +38,8 @@
 +seg .share -a .bit -n .share -is
 # Segment Ram:
 +seg .data -b 0x100 -m 0x100 -n .data
-+seg .bss -a .data -n .bss
++seg .FLASH_CODE -a .data -n .FLASH_CODE
++seg .bss -a .FLASH_CODE -n .bss
 #<END SEGMENT_CONF>
 
 
@@ -58,6 +59,7 @@ Debug\stm8s_tim1.o
 Debug\stm8s_tim2.o
 Debug\stm8s_uart1.o
 Debug\adc.o
+Debug\flash_eeprom.o
 Debug\i2c_slave_interrupt.o
 Debug\led.o
 Debug\main.o

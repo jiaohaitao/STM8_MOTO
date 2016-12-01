@@ -41,7 +41,7 @@
 void LED_Init(void)
 {
 	GPIO_Init(LED_PORTC, LED_3, GPIO_MODE_OUT_PP_HIGH_FAST );	
-	GPIO_Init(LED_PORTD,(LED_1|LED_2), GPIO_MODE_OUT_PP_HIGH_FAST );		//定义LED的管脚为输出模式
+//	GPIO_Init(LED_PORTD,(LED_1|LED_2), GPIO_MODE_OUT_PP_HIGH_FAST );		//定义LED的管脚为输出模式
 }
 
 /*******************************************************************************
@@ -54,8 +54,8 @@ void LED_Init(void)
 void SetLedOFF(void)
 {
 	GPIO_WriteHigh(LED_PORTC, LED_3);
-	GPIO_WriteHigh(LED_PORTD, LED_1);
-	GPIO_WriteHigh(LED_PORTD, LED_2);
+//	GPIO_WriteHigh(LED_PORTD, LED_1);
+//	GPIO_WriteHigh(LED_PORTD, LED_2);
 }
 
 /*******************************************************************************
@@ -70,22 +70,24 @@ void LED_Operation(GPIO_Pin_TypeDef ledx, u8 state)
 {
 	if(ON == state) {
 	  	switch (ledx) {
+/*				
 			case LED_1: 
 			case LED_2:
 		  		GPIO_WriteLow(LED_PORTD, ledx);
 			break;
-			
+*/			
 			case LED_3:
 		  		GPIO_WriteLow(LED_PORTC, ledx);
 			break;
 	  	}
 	} else {
 	  	switch (ledx) {
+/*				
 			case LED_1: 
 			case LED_2:
 		  		GPIO_WriteHigh(LED_PORTD, ledx);
 			break;
-			
+*/			
 			case LED_3:
 		  		GPIO_WriteHigh(LED_PORTC, ledx);
 			break;
@@ -103,11 +105,12 @@ void LED_Operation(GPIO_Pin_TypeDef ledx, u8 state)
 void LED_Reverse(GPIO_Pin_TypeDef ledx)
 {
 	switch (ledx) {
+/*		
 		case LED_1: 
 		case LED_2:
 			GPIO_WriteReverse(LED_PORTD, ledx);
 		break;
-		
+*/		
 		case LED_3:
 			GPIO_WriteReverse(LED_PORTC, ledx);
 		break;
@@ -123,16 +126,16 @@ void LED_Reverse(GPIO_Pin_TypeDef ledx)
  ******************************************************************************/
 void LED_ShowOneToOne(void)
 {
-    LED_Operation(LED_1, ON);
-    LED_Operation(LED_2, OFF);
+//    LED_Operation(LED_1, ON);
+//    LED_Operation(LED_2, OFF);
     LED_Operation(LED_3, OFF);
     Delay(0x1ffff);
-    LED_Operation(LED_1, OFF);
-    LED_Operation(LED_2, ON);
+//    LED_Operation(LED_1, OFF);
+//    LED_Operation(LED_2, ON);
     LED_Operation(LED_3, OFF);
     Delay(0x1ffff);
-    LED_Operation(LED_1, OFF);
-    LED_Operation(LED_2, OFF);
+//    LED_Operation(LED_1, OFF);
+//    LED_Operation(LED_2, OFF);
     LED_Operation(LED_3, ON);
     Delay(0x1ffff);
 

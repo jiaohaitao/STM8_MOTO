@@ -1,4 +1,5 @@
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s.h
+..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_flash.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_gpio.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_tim2.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_adc1.c
@@ -9,6 +10,7 @@
 ..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_tim2.c
 ..\..\..\..\libraries\stm8s_stdperiph_driver\src\stm8s_uart1.c
 ..\..\src\adc.c
+..\..\src\flash_eeprom.c
 ..\..\src\i2c_slave_interrupt.c
 ..\..\src\led.c
 ..\..\src\main.c
@@ -19,6 +21,7 @@
 ..\..\src\tim1.c
 ..\..\src\uart1.c
 ..\..\inc\adc.h
+..\..\inc\flash_eeprom.h
 ..\..\inc\i2c_slave_interrupt.h
 ..\..\inc\led.h
 ..\..\inc\pwm.h
@@ -33,7 +36,6 @@
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_beep.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_clk.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_exti.h
-..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_flash.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_i2c.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_itc.h
 ..\..\..\..\libraries\stm8s_stdperiph_driver\inc\stm8s_iwdg.h

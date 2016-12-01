@@ -58,6 +58,7 @@ Release\stm8s_tim1.o
 Release\stm8s_tim2.o
 Release\stm8s_uart1.o
 Release\adc.o
+Release\flash_eeprom.o
 Release\i2c_slave_interrupt.o
 Release\led.o
 Release\main.o

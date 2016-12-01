@@ -36,7 +36,7 @@
 /* LED灯所接的GPIO引脚定义 */
 #define LED_1     	GPIO_PIN_1
 #define LED_2       GPIO_PIN_5
-#define LED_3       GPIO_PIN_3
+#define LED_3       GPIO_PIN_7
 
 
 #define ON  0		/* 定义LED灯亮 -- 低电平*/

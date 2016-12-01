@@ -18,7 +18,7 @@ static void HSE_ClockStartUpConfiguration(HSE_Clock_TypeDef HSE_Clock,HSE_ClockS
 /* 自定义新类型 */
 
 /* 自定义宏 */
-#define DEBUG  0
+#define DEBUG  1
 /*******************************************************************************
  * 名称: HSE_ClockStartUpConfiguration
  * 功能: 时钟的选择，可以实现外部的时钟切换

@@ -30,6 +30,7 @@
 /* 全局变量定义 */
 u16 TimingDelay; 
 
+__IO u8 Sys_10ms_Flag=0;
 __IO u8 Sys_20ms_Flag=0;
 __IO u8 Sys_50ms_Flag=0;
 __IO u8 Sys_100ms_Flag=0;
@@ -63,6 +64,7 @@ void Tim1_Init(void)
  ******************************************************************************/
 void TimingDelay_Decrement(void)
 {
+	static u16 sys_10ms_cnt=0;
 	static u16 sys_20ms_cnt=0;
 	static u16 sys_50ms_cnt=0;
 	static u16 sys_100ms_cnt=0;
@@ -73,13 +75,20 @@ void TimingDelay_Decrement(void)
 //--------for delay 1ms--	
 	TimingDelay--;
 	
-//-----------sys 1ms cnt------	
+//-----------sys 1ms cnt------
+	sys_10ms_cnt++;
 	sys_20ms_cnt++;
 	sys_50ms_cnt++;
 	sys_100ms_cnt++;
 	sys_200ms_cnt++;
 	sys_500ms_cnt++;
 	sys_1000ms_cnt++;
+	//for 10ms cyc
+	if(sys_10ms_cnt>10)
+	{
+		sys_10ms_cnt=0;
+		Sys_10ms_Flag=1;
+	}
 	//for 20ms cyc
 	if(sys_20ms_cnt>20){
 		sys_20ms_cnt=0;

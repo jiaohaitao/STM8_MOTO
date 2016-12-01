@@ -22,6 +22,7 @@
 	#define I2C_slave_7Bits_Address
 
 	/* Define Slave Address  -----------------------------------------------------*/
+	/*
 	#ifdef I2C_slave_10Bits_Address
 		#define SLAVE_ADDRESS 0x3F0
 	#endif 
@@ -29,7 +30,7 @@
 	#ifdef I2C_slave_7Bits_Address
 		#define SLAVE_ADDRESS 0x51
 	#endif
-
+*/
 	
 #endif /*__I2C_SLAVE_H*/
 

@@ -19,12 +19,12 @@ void Pwm_Init()
 
  
 	/* Channel 1 PWM configuration */ 
-  TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR1_Val, TIM2_OCPOLARITY_LOW ); 
-  TIM2_OC1PreloadConfig(ENABLE);
+//  TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR1_Val, TIM2_OCPOLARITY_LOW ); 
+//  TIM2_OC1PreloadConfig(ENABLE);
   
 	/* Channel 2 PWM configuration */
-  TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR2_Val, TIM2_OCPOLARITY_LOW );
-  TIM2_OC2PreloadConfig(ENABLE);
+//  TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR2_Val, TIM2_OCPOLARITY_LOW );
+//  TIM2_OC2PreloadConfig(ENABLE);
 	
 	/* Channel 3 PWM configuration */
 	TIM2_OC3Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,CCR3_Val, TIM2_OCPOLARITY_LOW );
@@ -42,8 +42,8 @@ void Pwm_Init()
 void Set_Pwm_Channel1(unsigned char pwm)
 {
 		/* Channel 1 PWM configuration */ 
-  TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm, TIM2_OCPOLARITY_LOW ); 
-  TIM2_OC1PreloadConfig(ENABLE);
+//  TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm, TIM2_OCPOLARITY_LOW ); 
+//  TIM2_OC1PreloadConfig(ENABLE);
 }
 //----------------------------------------------------------------
 
@@ -53,8 +53,8 @@ void Set_Pwm_Channel1(unsigned char pwm)
 void Set_Pwm_Channel2(unsigned char pwm)
 {
 	/* Channel 2 PWM configuration */
-  TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm, TIM2_OCPOLARITY_LOW );
-  TIM2_OC2PreloadConfig(ENABLE);
+//  TIM2_OC2Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE,pwm, TIM2_OCPOLARITY_LOW );
+//  TIM2_OC2PreloadConfig(ENABLE);
 }
 //----------------------------------------------------------------
 

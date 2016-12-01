@@ -45,5 +45,5 @@ void Send_ADC_Value(u16 AD_Value);
 void MultipleChannelGetADValue(void);
 uint16_t OneChannelGetADValue(ADC1_Channel_TypeDef ADC1_Channel,\
                                      ADC1_SchmittTrigg_TypeDef ADC1_SchmittTriggerChannel);
-
+uint16_t GetMotoADValue(void);
 #endif

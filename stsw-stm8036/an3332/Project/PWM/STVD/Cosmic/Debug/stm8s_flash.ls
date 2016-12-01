@@ -349,7 +349,7 @@
 1303  000a 81            	ret	
 1388                     ; 531 IN_RAM(FLASH_Status_TypeDef FLASH_WaitForLastOperation(FLASH_MemType_TypeDef FLASH_MemType)) 
 1388                     ; 532 {
-1389                     .text:	section	.text,new
+1389                     .FLASH_CODE:	section	.text,new
 1390  0000               _FLASH_WaitForLastOperation:
 1392  0000 5205          	subw	sp,#5
 1393       00000005      OFST:	set	5
@@ -395,7 +395,7 @@
 1450  0038 81            	ret	
 1513                     ; 581 IN_RAM(void FLASH_EraseBlock(uint16_t BlockNum, FLASH_MemType_TypeDef FLASH_MemType))
 1513                     ; 582 {
-1514                     .text:	section	.text,new
+1514                     .FLASH_CODE:	section	.text,new
 1515  0000               _FLASH_EraseBlock:
 1517  0000 89            	pushw	x
 1518  0001 5206          	subw	sp,#6
@@ -443,7 +443,7 @@
 1681                     ; 634 IN_RAM(void FLASH_ProgramBlock(uint16_t BlockNum, FLASH_MemType_TypeDef FLASH_MemType, 
 1681                     ; 635                         FLASH_ProgramMode_TypeDef FLASH_ProgMode, uint8_t *Buffer))
 1681                     ; 636 {
-1682                     .text:	section	.text,new
+1682                     .FLASH_CODE:	section	.text,new
 1683  0000               _FLASH_ProgramBlock:
 1685  0000 89            	pushw	x
 1686  0001 5206          	subw	sp,#6

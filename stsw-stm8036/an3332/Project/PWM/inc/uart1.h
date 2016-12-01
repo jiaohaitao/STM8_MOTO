@@ -22,6 +22,8 @@
 #define __UART1_H
 
 
+#define DEBUG_PRINTF
+
 /* 包含自定义头文件 */
 #include "stm8s.h"
 
@@ -63,5 +65,5 @@ void UART1_SendByte(u8 data);
  * 说明: 无 
  ******************************************************************************/
 void UART1_SendString(u8* Data);
-
+void UART1_printf( uint8_t *Data,...);
 #endif
