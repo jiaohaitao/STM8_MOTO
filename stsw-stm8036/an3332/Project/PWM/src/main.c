@@ -70,6 +70,16 @@ unsigned char  NewI2cCmd=0;
 
 __IO uint16_t Systemid=0;
 __IO uint16_t SystemStatus=0;//0->ok 1->system id error
+
+
+//for motor
+//PC4->nFAULT PC6->VISEN
+//nFAULT->Low :过热 过流 过电压 需要立即停止驱动工作
+//VISEN->Low  :电机过流，配合电路设置过流大小
+__IO unsigned char Moto_nFAULT_Error=1;//=0异常
+__IO unsigned char Moto_VISEN_Error=1;//=0异常
+
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 unsigned char ReadSysId(void);
@@ -82,6 +92,7 @@ void SetMotoReverse(unsigned char pwm);
 void SetMotoStop(void);
 void SetMotoSleep(void);
 void CheckUartRxI2cAddr(void);
+void MotoStatusCheck(void);
 /**
   * @brief Example firmware main entry point.
   * @par Parameters:
@@ -90,39 +101,6 @@ void CheckUartRxI2cAddr(void);
   * None
   */
 	//本文选择16M内部RC震荡，分频为1 即系统时钟为16M
-#if 0
-void CLK_HSICmd(FunctionalState NewState)
-{
-
-	/* Check the parameters */
-	assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-
-	if (NewState != DISABLE)
-	{
-		/* Set HSIEN bit */
-		CLK->ICKR |= CLK_ICKR_HSIEN;
-	}
-	else
-	{
-		/* Reset HSIEN bit */
-		CLK->ICKR &= (u8)(~CLK_ICKR_HSIEN);
-	}
-
-}
-void CLK_HSIPrescalerConfig(CLK_Prescaler_TypeDef HSIPrescaler)
-{
-
-	/* check the parameters */
-	assert_param(IS_CLK_HSIPRESCALER_OK(HSIPrescaler));
-
-	/* Clear High speed internal clock prescaler */
-	CLK->CKDIVR &= (u8)(~CLK_CKDIVR_HSIDIV);
-
-	/* Set High speed internal clock prescaler */
-	CLK->CKDIVR |= (u8)HSIPrescaler;
-
-}
-#endif
 void CLK_Configuration(void)
 {
    CLK_HSICmd(ENABLE);/* Set HSIEN bit */
@@ -138,18 +116,18 @@ void main(void)
 	
 	unsigned char pwm=0,i=0;
 	//初始化时，调用以下函数即可：
-CLK_Configuration();
-//	SystemClock_Init(HSI_Clock);
-	LED_Init();//led3->PC3
-	
+  CLK_Configuration();
+
 	//init the value
 	Systemid=0;
 	SystemStatus=0;//system init ok
+	Moto_nFAULT_Error=1;//=0异常
+  Moto_VISEN_Error=1;//=0异常	
 	
 	NewI2cCmd=1;//开机执行一次命令，回到中间位置
 	CmdPosition=180;//中间位置(0-360)
 	CmdTime=1000;//默认1000ms，暂时没有使用
-	
+
 	Moto_Init();//PC5->M_PHA PC3->M_nSLEEP PC4->nFAULT PC6->VISEN
 	LED_Init();//led3->PC3
 	Tim1_Init();	
@@ -164,9 +142,9 @@ CLK_Configuration();
 	//Systemid=ReadSysId();
 	
 //	Systemid=0x51;//lefthand
-//	Systemid=0x52;//righthand
+	Systemid=0x52;//righthand
 //	Systemid=0x53;//left-right-head
-	Systemid=0x54;//up-down-head	
+//	Systemid=0x54;//up-down-head	
 	
 	UART1_printf("Read Sysid is:%d\r\n",Systemid);//for 16bits printf
 
@@ -211,8 +189,21 @@ CLK_Configuration();
 		if(Sys_10ms_Flag==1)
 		{
 			Sys_10ms_Flag=0;
-			Check_I2c_Data();
-			CmdDeal();
+			
+			if(SystemStatus==0)
+			{
+				Check_I2c_Data();
+				MotoStatusCheck();
+				if(Moto_nFAULT_Error==1&&Moto_VISEN_Error==1)//=1 ok
+				{
+					CmdDeal();
+				}			
+				else
+				{
+					NewI2cCmd=0;
+					SetMotoStop();
+				}
+			}
 		}
 		if(Sys_20ms_Flag==1)
 		{
@@ -260,15 +251,7 @@ CLK_Configuration();
 			
 			if(SystemStatus==0)
 			{
-/*				
-				pwm+=10;
-				if(pwm>100)
-				pwm=0;
 			
-				Set_Pwm_Channel1(pwm);
-				Set_Pwm_Channel2(pwm);
-				Set_Pwm_Channel3(pwm);
-*/				
 			}
 			else
 			{
@@ -298,6 +281,11 @@ CLK_Configuration();
 			
 			if(SystemStatus==0)
 			{
+				if(Moto_nFAULT_Error==0||Moto_VISEN_Error==0)//=1 ok
+				{
+					LED_Reverse(LED_3);
+					UART1_SendString("Motor Driver error....\r\n");
+				}
 			}
 			else
 			{
@@ -483,10 +471,10 @@ void Check_I2c_Data(void)
 				}						
 			}
 			//up-down-head
-			//nishizhen->down->15->10 
-			//shunshizhen->up-20->15			
+			//nishizhen->down->15->15
+			//shunshizhen->up-20->25			
 			else if(Systemid==0x54){
-				if(CmdPosition<(180-10)||CmdPosition>(180+15))
+				if(CmdPosition<(180-15)||CmdPosition>(180+25))
 				{
 					UART1_printf("up-down-head Cmd erro out of(165-190)\r\n");
 					CmdPosition=180;NewI2cCmd=0;
@@ -510,12 +498,77 @@ void Check_I2c_Data(void)
 
 void Moto_Init(void)
 {
-	// PC3->M_nSLEEP PC4->nFAULT PC5->M_PHA PC6->VISEN
-	GPIO_Init(GPIOC,GPIO_PIN_3|GPIO_PIN_5|GPIO_PIN_4|GPIO_PIN_6, GPIO_MODE_OUT_PP_HIGH_FAST );	
+	//output pin
+	//PC3->M_nSLEEP PC5->M_PHA 
+	GPIO_Init(GPIOC,GPIO_PIN_3|GPIO_PIN_5, GPIO_MODE_OUT_PP_HIGH_FAST );
+	
+	//input pin
+	//PC4->nFAULT PC6->VISEN
+  GPIO_Init(GPIOC,GPIO_PIN_4|GPIO_PIN_6, GPIO_MODE_IN_PU_NO_IT );	
 	
 	GPIO_WriteHigh(GPIOC, GPIO_PIN_5);//init to high
 	GPIO_WriteHigh(GPIOC, GPIO_PIN_3);//low->sleep, init to high not sleep
 	
+}
+//10ms cyc
+//PC4->nFAULT PC6->VISEN
+//nFAULT->Low :过热 过流 过电压 需要立即停止驱动工作
+//VISEN->Low  :电机过流，配合电路设置过流大小
+//__IO unsigned char Moto_nFAULT_Error=1;//=0异常
+//__IO unsigned char Moto_VISEN_Error=1;//=0异常
+void MotoStatusCheck(void)
+{
+	static unsigned char nFAULT_Cnt=0;
+	static unsigned char Old_nFAULT=1;
+	static unsigned char VISEN_Cnt=0;
+	static unsigned char Old_VISEN=1;
+	unsigned char New_nFAULT=0,New_VISEN=0;
+	
+	if(RESET==GPIO_ReadInputPin(GPIOC, GPIO_PIN_4))
+	New_nFAULT=0;//PC4->nFAULT 
+	else
+	New_nFAULT=1;//PC4->nFAULT 
+	
+	if(RESET==GPIO_ReadInputPin(GPIOC, GPIO_PIN_6))
+	New_VISEN=0;//PC6->VISEN 
+	else
+	New_VISEN=1;//PC6->VISEN 
+	
+	if(New_nFAULT!=Old_nFAULT)
+	{
+		Old_nFAULT=New_nFAULT;
+		nFAULT_Cnt=0;
+	}
+	else{
+		if(nFAULT_Cnt<10)//10*20=200ms 
+		{
+			nFAULT_Cnt++;
+		}
+		else{
+			if(Moto_nFAULT_Error!=Old_nFAULT){
+				Moto_nFAULT_Error=Old_nFAULT;
+				UART1_printf("Motor Driver nFAULT Change,nFAULT:%d",Moto_nFAULT_Error);
+			}
+		}
+	}
+	
+	if(New_VISEN!=Old_VISEN)
+	{
+		Old_VISEN=New_VISEN;
+		VISEN_Cnt=0;
+	}
+	else{
+		if(VISEN_Cnt<=10)//10*20=200ms 
+		{
+			VISEN_Cnt++;
+		}
+		else{
+			if(Moto_VISEN_Error!=Old_VISEN){
+				Moto_VISEN_Error=Old_VISEN;
+				UART1_printf("Motor Driver VISEN Change,VISEN:%d",Moto_VISEN_Error);
+			}
+		}
+	}	
 }
 
 void CmdDeal(void)
@@ -539,11 +592,11 @@ void CmdDeal(void)
 				temp=(CmdAdc-AdcValue);
 				if(temp>50)
 				{
-					pwm=95;
+					pwm=75;
 				}
 				else{
 					//pwm=temp*0.09765*p+d;
-					pwm=50;
+					pwm=65;
 				}				
 				SetMotoReverse(pwm);
 				
@@ -553,11 +606,11 @@ void CmdDeal(void)
 				temp=(AdcValue-CmdAdc);
 				if(temp>50)
 				{
-					pwm=95;
+					pwm=75;
 				}
 				else{
 					//pwm=temp*0.09765*p+d;
-					pwm=50;
+					pwm=65;
 				}				
 				SetMotoForward(pwm);
 			}
